@@ -1,0 +1,389 @@
+---
+title: "Annotation Table Script for Australian Human Gut Metabolome Database AHGMD"
+author: "M S Cowled"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(tidyr)
+library(stringr)
+library(readr)
+```
+
+After importing files associated with GNPS, SIRIUS, MS2QUERY, and MZMINE:
+
+```{r, include=FALSE}
+
+# mzmine:
+mzmine.data <- read.csv("~/ms1_and_ms2.csv")
+mzmine.data <- select(mzmine.data, "id", "rt", "mz", "ion_identities.iin_id", 
+                               "compound_db_identity.compound_name",
+                               "compound_db_identity.compound_annotation_score",
+                               "compound_db_identity.smiles",
+                               "compound_db_identity.mz_diff_ppm") %>%
+  mutate(across(everything(), as.character)) %>%
+  mutate(across(everything(), ~ na_if(., "")))
+names(mzmine.data) <- c('feature.ID', "rt", "mz", "ion.identity.ID", 
+                        "ms1.compound.name", "ms1.annotation.score", "ms1.smiles", 
+                        "ms1.diff.ppm")
+mzmine.data$feature.ID <- as.numeric(mzmine.data$feature.ID)            
+
+# Tidying up table
+clean_values <- function(x) {
+  x %>%
+    str_remove_all('c\\(|\\)') %>%  # Remove 'c(' and ')'
+    str_remove_all('"')             # Remove double quotes
+}
+
+mzmine.data.tidied <- mzmine.data %>%                                           #Need to work on a bit more before including
+  mutate(ms1.compound.name = clean_values(ms1.compound.name))
+
+# GNPS2:
+gnps.annotation.data <- read_tsv('~/gnps_library_results.tsv')
+gnps.annotation.data <- gnps.annotation.data[, c(2, 4, 5, 8, 9, 15, 27, 35, 43, 45)]
+names(gnps.annotation.data) <- c("feature.ID", "gnps.library.name", "gnps.cosine.score", 
+                                 "gnps.diff.ppm", "gnps.shared.peaks", "gnps.compound.name", 
+                                 "gnps.smiles", "gnps.library.quality", "gnps.NPC.superclass", "gnps.NPC.pathway")
+gnps.annotation.data <- gnps.annotation.data[, c(1, 6, 7, 3:5, 2, 8, 10, 9)] #Reorders columns
+
+gnps.cluster.data <- read_tsv('~/cluster_summary.tsv')
+gnps.cluster.data <- select(gnps.cluster.data,  'cluster index', 'component')
+names(gnps.cluster.data) <- c('feature.ID', "gnps.cluster.ID")     #Add annotation score at some point
+
+gnps.data <- gnps.cluster.data %>%
+  full_join(gnps.annotation.data, by = "feature.ID")
+
+gnps.cluster.pairs <- read_tsv('~/filtered_pairs.tsv')  #To be used for propagation of annotations
+
+# SIRIUS:
+canopus.data <- read_tsv('~/canopus_structure_summary.tsv')
+canopus.data <- canopus.data[, c(5:8, 26)]
+names(canopus.data) <- c("canopus.NPC.pathway", "canopus.NPC.pathway.probability", 
+                         "canopus.NPC.superclass", "canopus.NPC.superclass.probability", 
+                         'feature.ID')
+
+csi.data <- read_tsv('~/compound_identifications.tsv')
+csi.data <- csi.data[, c(6, 14, 15, 23)]
+names(csi.data) <- c("csi.compound.score", "csi.compound.name", "csi.smiles", 'feature.ID')
+csi.data <- csi.data[, c(2, 1, 3:ncol(csi.data))] #Swap cols 1 and 2
+
+zodiac.data <- read_tsv('~/formula_identifications.tsv')
+zodiac.data  <- zodiac.data[, c(2, 5, 18)]
+names(zodiac.data) <- c("zodiac.formula", "zodiac.score", 'feature.ID')
+
+# MS2QUERY:
+ms2query.data <- read.csv("~/ms2query.csv")
+ms2query.data  <- ms2query.data[, c(2, 3, 7, 8, 10, 17, 18)]
+names(ms2query.data) <- c("ms2query.score", "ms2query.mzdiff", 
+                          "ms2query.analogue.compound.name", "ms2query.smiles", 
+                          'feature.ID', "ms2query.NPC.superclass", "ms2query.NPC.pathway")
+ms2query.data <- ms2query.data[, c(3, 1, 2, 4, 5, 7, 6)] #Reorders columns
+
+```
+
+## Merging Annotations into a single table
+
+```{r}
+## Merge annotations into one big table                                      
+full.annotation.data <- mzmine.data.tidied %>%
+  full_join(gnps.data, by = "feature.ID") %>%
+  full_join(canopus.data, by = "feature.ID") %>%
+  full_join(csi.data, by = "feature.ID") %>%
+  full_join(zodiac.data, by = "feature.ID") %>%
+  full_join(ms2query.data, by = "feature.ID")
+View(full.annotation.data)
+
+#Example Query
+t(filter(full.annotation.data, feature.ID == 167)) 
+```
+
+## Propagation of Annotations
+1. Creates a summary table with "bad" annotations removed
+2. Creates new columns in our annotation table for which the propagated annotations and relevant metadata will be entered into.
+
+
+```{r}
+##1. Create a summary.annotation.data table, that is filtered for all annotations satisfying a certain degree of confidence
+summary.annotation.data <- full.annotation.data
+#Apply the conditions
+summary.annotation.data$canopus.NPC.pathway[summary.annotation.data$canopus.pathway.probability < 0.7] <- NA
+summary.annotation.data$csi.compound.name[summary.annotation.data$csi.compound.score < 0.8863] <- NA
+summary.annotation.data$ms2query.analogue.compound.name[summary.annotation.data$ms2query.score < 0.6] <- NA
+
+##2 Initialize columns in a new df: propagated.annotation.data
+propagated.annotation.data <- full.annotation.data %>%
+  mutate(
+    Probable.Analogue.Of = NA,
+    Propagated.Feature.ID = NA,
+    Propagated.Annotation.Type = NA  # Initialize the new column
+  )
+```
+
+3. Function: 'get_result' - Returns the annotation of a feature suspected to be an analogue
+If the given feature has multiple annotations associated with it, the function will prioritise annotations from certain sources first: gnps > csi:fingerID (SIRIUS) > ms2query analogues > canopus (SIRIUS).
+Once standards have been added to the mix, these will be of the highest confidence here.
+Now returns the type of annotation used for propapation also (e.g. "GNPS").
+
+```{r}
+# Function to get the first non-NA value from specified columns and the column name
+get_result <- function(paired_value, summary_data) {
+  # Define the columns to check for non-NA values
+  columns_to_check <- c("gnps.compound.name", "csi.compound.name", 
+                        "ms2query.analogue.compound.name", "canopus.NPC.pathway")
+  
+  # Filter the relevant row and select the columns
+  data_subset <- summary_data %>%
+    filter(feature.ID == paired_value) %>%
+    select(all_of(columns_to_check), csi.smiles)
+  
+  # Find the first non-NA and non-'null' value
+  result <- NA
+  column_name <- NA
+  for (col in columns_to_check) {
+    value <- data_subset[[col]]
+    if (!is.na(value) && value != 'null') {
+      result <- value
+      column_name <- col
+      break
+    }
+  }
+  
+  # If no valid result is found, fallback to 'csi.smiles'
+  if (is.na(result) || result == 'null') {
+    csi_value <- data_subset$csi.smiles
+    if (!is.na(csi_value) && csi_value != 'null') {
+      result <- csi_value
+      column_name <- "csi.smiles"
+    }
+  }
+  
+  # Return the result and corresponding column name
+  list(value = result, column = column_name)
+}
+
+get_result(77, full.annotation.data) ##Returns the result for paired feature 77, for feature without an annotation, feature 167.
+```
+
+4. Function 2: 'paired.feature.finder' - From those features without an annotation, we check if they belong to a cluster with a feature already annotated. We then check which features are linked by an edge, and the associated COSINE score for that particular connection.
+
+```{r}
+## Function: Finds the features linked by an edge in a GNPS cluster
+paired.feature.finder <- function(ID) {
+  filtered_pairs <- gnps.cluster.pairs %>%
+    filter(CLUSTERID1 == ID | CLUSTERID2 == ID) %>%
+    arrange(desc(Cosine))  # Sort by decreasing Cosine
+  
+  # Extract paired values
+  paired_values <- filtered_pairs %>%
+    mutate(paired_value = ifelse(CLUSTERID1 == ID, CLUSTERID2, CLUSTERID1)) %>%
+    pull(paired_value)
+  
+  return(paired_values)
+}
+print(paired.feature.finder(167))
+```
+
+5. Finds the features without a "good" annotation
+
+```{r}
+# Identify the rows where all specified columns contain NA
+na.rows <- summary.annotation.data %>%
+  filter(
+    is.na(gnps.compound.name) &
+      is.na(csi.compound.name) &
+      is.na(ms2query.analogue.compound.name) &
+      is.na(canopus.NPC.pathway)
+  )
+
+# Extract the 'feature.ID' column from these rows
+na.feature.ids <- na.rows$feature.ID
+length(na.feature.ids)
+```
+
+6. Cycling through from highest to lowest cosine score, an annotation using the previous get-result function is returned.
+
+```{r}
+# Iterate over na.feature.ids to populate propagated.annotation.data
+for (i in na.feature.ids) {
+  paired_values <- paired.feature.finder(i)
+  
+  # Initialize variables to store results and corresponding paired value
+  result_data <- list(value = NA, column = NA)
+  selected_paired_value <- NA
+  
+  for (value in paired_values) {
+    result_data <- get_result(value, full.annotation.data)
+    if (!is.na(result_data$value)) {
+      selected_paired_value <- value  # Store the paired value used for the result
+      break  # Exit the loop if a valid result is found
+    }
+  }
+  
+  # Update the new columns in propagated.annotation.data
+  propagated.annotation.data <- propagated.annotation.data %>%
+    mutate(
+      Probable.Analogue.Of = case_when(
+        feature.ID == i ~ result_data$value,
+        TRUE ~ Probable.Analogue.Of
+      ),
+      Propagated.Feature.ID = case_when(
+        feature.ID == i ~ selected_paired_value,
+        TRUE ~ Propagated.Feature.ID
+      ),
+      Propagated.Annotation.Type = case_when(
+        feature.ID == i ~ result_data$column,
+        TRUE ~ Propagated.Annotation.Type
+      )
+    )
+}
+
+print(select(propagated.annotation.data, feature.ID, Probable.Analogue.Of, Propagated.Feature.ID, Propagated.Annotation.Type) %>%
+        filter(feature.ID < 20))
+```
+
+## Extraction of the samples pertaining to each feature
+
+7. Import sample data (the list of all ms1 and ms2 features from MZMine), extracts the relevant columns (i.e. peak areas), and performs tidying of filenames.
+
+```{r}
+##Now to append sample.list corresponding to each feature
+# Import Quant data
+sample.data <- read.csv("~/ms1_and_ms2.csv")
+
+# Select columns containing ".area" and rename the first column
+sample.data <- sample.data %>%
+  select(id, contains(".area"))
+
+# Rename the first column to "feature.ID"
+colnames(sample.data)[1] <- "feature.ID"
+
+# Get the column names of the data frame
+colnames_sample <- colnames(sample.data)
+
+# Remove the prefix "datafile." and the suffix ".mzML.Peak.area" if present
+colnames_sample <- sub("^datafile\\.", "", colnames_sample)  # Remove the prefix
+colnames_sample <- sub("\\.mzML\\.area$", "", colnames_sample)  # Remove the suffix
+```
+
+8. Converts data to presence/absence (1/0).
+9. Collapses data into lists of samples if present, separated by semicolons, and appends new column to annotation table.
+
+```{r}
+# Replace all positive areas with 1 i.e. presence.absence
+colnames(sample.data) <- colnames_sample
+sample.data[, 2:ncol(sample.data)] <- lapply(sample.data[, 2:ncol(sample.data)], function(x) {
+  x[x > 0] <- 1
+  return(x)
+})
+
+# Create a new column with presence list separated by semicolons
+sample.data$Samples <- apply(sample.data[, 2:ncol(sample.data)], 1, function(row) {
+  paste(colnames(sample.data[, 2:ncol(sample.data)])[which(row == 1)], collapse = "; ")
+})
+
+# Select only the first and the last columns (which includes the new 'Samples' column)
+sample.data <- sample.data[, c(1, ncol(sample.data))]
+
+#Append Sample data
+propagated.annotation.data.with.samples <- propagated.annotation.data %>%
+  full_join(sample.data, by = "feature.ID") 
+print(select(propagated.annotation.data.with.samples, feature.ID, Samples) %>%
+        filter(feature.ID < 20))
+```
+## Collapsing features to compounds by ion identity networking
+
+11. Find which features have ion identity networking
+
+```{r}
+##Collapsing Ion Identity Networks - performed in such a way to retain the best annotation (if multiple)
+
+#A new editing df where features are sequentially removed:
+final.annotation.df <- propagated.annotation.data.with.samples
+
+#A new df with "good" annotations extracted in a similar manner to unpropagated version.
+new.summary.annotation.data <- propagated.annotation.data.with.samples
+#Apply the conditions
+new.summary.annotation.data$canopus.NPC.pathway[new.summary.annotation.data$canopus.pathway.probability < 0.7] <- NA
+new.summary.annotation.data$csi.compound.name[new.summary.annotation.data$csi.compound.score < 0.8863] <- NA
+new.summary.annotation.data$ms2query.analogue.compound.name[new.summary.annotation.data$ms2query.score < 0.6] <- NA
+
+iin.features <- filter(new.summary.annotation.data, !is.na(ion.identity.ID))
+print(iin.features$ ion.identity.ID)
+```
+
+12. Function 3: 'process_iin_group - This function is a bit complex, but rather than follow whatever logic is used by GNPS to collapse IIN, I want to retain the feature with the best annotation (if there is one). If there is no feature, then the lowest m/z feature will be retained.
+
+```{r}
+# Define a function to process each IIN group
+process_iin_group <- function(group_data, feature_columns) {
+  # Initialize a vector to track which rows to retain
+  rows_to_retain <- logical(nrow(group_data))
+  
+  for (col in feature_columns) {
+    if (any(!is.na(group_data[[col]]))) {
+      values <- group_data$feature.ID[!is.na(group_data[[col]])]
+      if (length(values) > 1) {
+        # Multiple values meet the condition, retain the lowest values
+        highest_value <- max(values, na.rm = TRUE)
+        rows_to_retain <- group_data$feature.ID %in% values & group_data$feature.ID != highest_value
+      } else {
+        # Only one value meets the condition, retain this row
+        rows_to_retain <- group_data$feature.ID == values
+      }
+      break  # Exit loop once a condition is met
+    }
+  }
+  
+  if (all(!rows_to_retain)) {
+    # No rows were marked to retain, so retain the one with the minimum feature.ID for fallback
+    rows_to_retain <- group_data$feature.ID == min(group_data$feature.ID, na.rm = TRUE)
+  }
+  
+  return(group_data[rows_to_retain, ])
+}
+```
+
+13. Function 4: 'update_data_frame' removes features that are not the "best" annotation (or if not possible, the lowest m/z feature).
+14. Function 5: 'process_all_features': adds extra elements onto the 'process_iin_group' function.
+
+```{r}
+# Define a function to update the main data frame
+update_data_frame <- function(df, results, id_column) {
+  df_non_na <- df %>% filter(!is.na(!!sym(id_column)))
+  results_df <- bind_rows(results)
+  
+  updated_df <- df_non_na %>% filter(feature.ID %in% results_df$feature.ID)
+  df_na <- df %>% filter(is.na(!!sym(id_column)))
+  
+  final_df <- bind_rows(updated_df, df_na)
+  return(final_df)
+}
+
+# Main processing function
+process_all_features <- function(data, id_column, feature_columns) {
+  unique_ids <- unique(data[[id_column]][!is.na(data[[id_column]])])
+  results <- lapply(unique_ids, function(id) {
+    group_data <- filter(data, !!sym(id_column) == id)
+    process_iin_group(group_data, feature_columns)
+  })
+  names(results) <- as.character(unique_ids)
+  return(results)
+}
+```
+
+15. Using the same priorty of annotations as used to propagate annotations, with the additional column pertaining to the propagated annotation, we combine all 3 functions to create the final annotation table.
+
+```{r}
+# Priority of annotations
+feature_columns_to_check <- c("gnps.compound.name", "csi.smiles", "ms2query.analogue.compound.name", "canopus.NPC.pathway", "Probable.Analogue.Of")
+results <- process_all_features(iin.features, "ion.identity.ID", feature_columns_to_check)
+
+# Update final.annotation.df by removing rows based on results and retaining NA IDs
+final.annotation.df <- update_data_frame(final.annotation.df, results, "ion.identity.ID")
+
+iin.features <- filter(final.annotation.df, !is.na(ion.identity.ID))
+print(iin.features$ ion.identity.ID)
+```
