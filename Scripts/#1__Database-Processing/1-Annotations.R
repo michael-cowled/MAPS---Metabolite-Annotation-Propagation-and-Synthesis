@@ -29,10 +29,34 @@ rt.tol <- 0.1               # Default is 0.1 min for C18 (use 0.2 min for HILIC)
 #------------------------------------------------------------------------------#
 
 
-## 1. Loading libraries and Cache
-required_packages <- c("dplyr", "tidyr", "stringr", "readr", "reshape2", "ggplot2", 
-                       "svglite", "readxl", "openxlsx", "tidyverse", "rvest", "jsonlite", "xml2")
-check_and_install(required_packages)
+## 1. check_and_install
+# Function to check, install, and load required packages
+check_and_install <- function(packages, github_packages = list()) {
+  # Install 'remotes' if needed for GitHub installs
+  if (!requireNamespace("remotes", quietly = TRUE)) {
+    install.packages("remotes")
+  }
+  
+  for (pkg in packages) {
+    if (!requireNamespace(pkg, quietly = TRUE)) {
+      if (pkg %in% names(github_packages)) {
+        message(paste("Installing", pkg, "from GitHub:", github_packages[[pkg]]))
+        remotes::install_github(github_packages[[pkg]])
+      } else {
+        message(paste("Installing", pkg, "from CRAN"))
+        install.packages(pkg, dependencies = TRUE)
+      }
+    }
+    suppressPackageStartupMessages(library(pkg, character.only = TRUE))
+  }
+}
+
+required_packages <- c("MAPS.Package", "dplyr", "tidyr", "stringr", "readr", 
+                       "reshape2", "ggplot2", "svglite", "readxl", "data.table", 
+                       "openxlsx", "tidyverse", "rvest", "jsonlite", "xml2")
+
+github_packages <- list("MAPS.Package" = "michael-cowled/MAPS-Package-Public")
+check_and_install(required_packages, github_packages)
 
 # --- Load or Initialize Cache ---
 cid_cache_file <- "cid_cache.csv"
@@ -92,18 +116,19 @@ if (dir.exists(folder)) {
 ## 4. Processed Data Check
 #Check if all data is present in folder with correct naming conventions         ###CHECK SPELLING!!!!###
 #Folder with mzmine, ms2query, sirius and gnps results
-folder <- dataset$Processed.Data.Folder[1]  ##Determines folder to process based on dataset.id ---->Put as required user-input information
+folder <- dataset$Processed.Data.Folder[1]
 
-# Construct the full paths for each data file
-mzmine.data <- paste0(folder, "/mzmine/ms1-and-ms2.csv")
-mzmine.annotations <- paste0(folder, "/mzmine/data_annotations.csv")
-canopus.data <- paste0(folder, "/sirius/canopus_structure_summary.tsv")
-csi.data <- paste0(folder, "/sirius/structure_identifications_top-100.tsv")
-zodiac.data <- paste0(folder, "/sirius/formula_identifications.tsv")
-ms2query.data <- paste0(folder, "/ms2query/ms2query.csv")
-cytoscape <- paste0(folder, "/gnps/cytoscape.csv")
+# Run validation and collect paths
+paths <- validate_and_get_paths(folder)
 
-validate_and_get_paths(folder)
+# Access each file path as needed
+mzmine.data <- paths$mzmine_data
+mzmine.annotations <- paths$mzmine_annotations
+canopus.data <- paths$canopus_data
+csi.data <- paths$csi_data
+zodiac.data <- paths$zodiac_data
+ms2query.data <- paths$ms2query_data
+cytoscape <- paths$cytoscape
 
 ## 5. Load in MZMINE data
 mzmine.annotations <- read.csv(mzmine.annotations) %>%

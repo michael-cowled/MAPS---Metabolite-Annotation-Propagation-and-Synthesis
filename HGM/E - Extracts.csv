@@ -1,0 +1,402 @@
+"HGME.ID","Parent Code","Book No.","Extract No.","Sample No.","Expt Date","Extraction Solvents","Replicate","Internal Standards?","Crude Wt / g","Tare / g","Final / g","Extract Wt / mg","Storage Location","Other Identifiers?","Notes"
+"HGME_0001","HGMH_0001","MC01-01","A1","MC01-01-A1",2024-01-31,"MeOH","1","Yes",0.1,NA,NA,"0",NA,NA,NA
+"HGME_0002","HGMH_0001","MC01-01","A2","MC01-01-A2",2024-01-31,"MeOH","2","Yes",0.1,NA,NA,"0",NA,NA,NA
+"HGME_0003","HGMH_0001","MC01-01","A3","MC01-01-A3",2024-01-31,"MeOH","3","Yes",0.1,NA,NA,"0",NA,NA,NA
+"HGME_0004","HGMH_0001","MC01-01","B1","MC01-01-B1",2024-01-31,"IPA","1","Yes",0.1,NA,NA,"0",NA,NA,NA
+"HGME_0005","HGMH_0001","MC01-01","B2","MC01-01-B2",2024-01-31,"IPA","2","Yes",0.1,NA,NA,"0",NA,NA,NA
+"HGME_0006","HGMH_0001","MC01-01","B3","MC01-01-B3",2024-01-31,"IPA","3","Yes",0.1,NA,NA,"0",NA,NA,NA
+"HGME_0007","HGMH_0001","MC01-01","C1","MC01-01-C1",2024-01-31,"MeOH/H2O (3:1)","1","Yes",0.1,NA,NA,"0",NA,NA,NA
+"HGME_0008","HGMH_0001","MC01-01","C2","MC01-01-C2",2024-01-31,"MeOH/H2O (3:1)","2","Yes",0.1,NA,NA,"0",NA,NA,NA
+"HGME_0009","HGMH_0001","MC01-01","C3","MC01-01-C3",2024-01-31,"MeOH/H2O (3:1)","3","Yes",0.1,NA,NA,"0",NA,NA,NA
+"HGME_0010","HGMH_0001","MC01-01","D1","MC01-01-D1",2024-01-31,"EtOAc/IPA (3:1) + 1% FA","1","Yes",0.1,NA,NA,"0",NA,NA,NA
+"HGME_0011","HGMH_0001","MC01-01","D2","MC01-01-D2",2024-01-31,"EtOAc/IPA (3:1) + 1% FA","2","Yes",0.1,NA,NA,"0",NA,NA,NA
+"HGME_0012","HGMH_0001","MC01-01","D3","MC01-01-D3",2024-01-31,"EtOAc/IPA (3:1) + 1% FA","3","Yes",0.1,NA,NA,"0",NA,NA,NA
+"HGME_0013","HGMH_0001","MC01-01","E1","MC01-01-E1",2024-01-31,"MeOH/H2O/DCM","1","Yes",0.1,NA,NA,"0",NA,NA,NA
+"HGME_0014","HGMH_0001","MC01-01","E2","MC01-01-E2",2024-01-31,"MeOH/H2O/DCM","2","Yes",0.1,NA,NA,"0",NA,NA,NA
+"HGME_0015","HGMH_0001","MC01-01","E3","MC01-01-E3",2024-01-31,"MeOH/H2O/DCM","3","Yes",0.1,NA,NA,"0",NA,NA,NA
+"HGME_0016","HGMH_0002","PR01-08","2","PR01-08-2",2024-02-26,"MeOH","NA","No",40,21.55954,22.54371,"984.17000000000246",NA,NA,NA
+"HGME_0017","HGMH_0002","PR01-08","1","PR01-08-1",2024-02-26,"Acetone","NA","No",40,21.25805,23.54613,"2288.0800000000008",NA,NA,NA
+"HGME_0018","HGMH_0002","PR01-08","3","PR01-08-3",2024-02-26,"3:1 MeOH/DCM","NA","No",40,21.63355,23.5461,"1912.5499999999995",NA,NA,NA
+"HGME_0019","HGME_0017","PR01-11","AQ","PR01-11-AQ",2024-03-12,"Water","NA","No",NA,NA,NA,NA,NA,NA,"Water"
+"HGME_0020","HGME_0017","PR01-17","01","PR01-17-01",2024-05-02,"Butanol","NA","No",NA,NA,NA,"1.0999999999999999E-2",NA,NA,"Butanol (top layer)"
+"HGME_0021","HGME_0017","PR01-17","02","PR01-17-02",2024-05-02,"Water","NA","No",NA,NA,NA,"4.8000000000000001E-2",NA,NA,"Water (bottom layer)"
+"HGME_0022","HGMB_0016","MC01-22","CON-1","MC01-22-CON-1",2024-06-17,"MeOH/H2O (3:1)","1","Yes",NA,NA,NA,"0","Fr1-Bx13-C3",NA,NA
+"HGME_0023","HGMB_0017","MC01-22","CON-2","MC01-22-CON-2",2024-06-17,"MeOH/H2O (3:1)","2","Yes",NA,NA,NA,"0","Fr1-Bx13-C4",NA,NA
+"HGME_0024","HGMB_0018","MC01-22","CON-3","MC01-22-CON-3",2024-06-17,"MeOH/H2O (3:1)","3","Yes",NA,NA,NA,"0","Fr1-Bx13-C5",NA,NA
+"HGME_0025","HGMB_0001","MC01-22","614-1","MC01-22-614-1",2024-06-17,"MeOH/H2O (3:1)","1","Yes",NA,NA,NA,"0","Fr1-Bx14-E5",NA,NA
+"HGME_0026","HGMB_0002","MC01-22","614-2","MC01-22-614-2",2024-06-17,"MeOH/H2O (3:1)","2","Yes",NA,NA,NA,"0","Fr1-Bx14-E6",NA,NA
+"HGME_0027","HGMB_0003","MC01-22","614-3","MC01-22-614-3",2024-06-17,"MeOH/H2O (3:1)","3","Yes",NA,NA,NA,"0","Fr1-Bx14-E7",NA,NA
+"HGME_0028","HGMB_0001","MC01-22","614S-1","MC01-22-614S-1",2024-06-17,"MeOH/H2O (3:1)","1","Yes",NA,NA,NA,"0","Fr1-Bx13-C6",NA,NA
+"HGME_0029","HGMB_0002","MC01-22","614S-2","MC01-22-614S-2",2024-06-17,"MeOH/H2O (3:1)","2","Yes",NA,NA,NA,"0","Fr1-Bx13-C7",NA,NA
+"HGME_0030","HGMB_0003","MC01-22","614S-3","MC01-22-614S-3",2024-06-17,"MeOH/H2O (3:1)","3","Yes",NA,NA,NA,"0","Fr1-Bx13-C8",NA,NA
+"HGME_0031","HGMB_0004","MC01-22","64-1","MC01-22-64-1",2024-06-17,"MeOH/H2O (3:1)","1","Yes",NA,NA,NA,"0","Fr1-Bx14-E8",NA,NA
+"HGME_0032","HGMB_0005","MC01-22","64-2","MC01-22-64-2",2024-06-17,"MeOH/H2O (3:1)","2","Yes",NA,NA,NA,"0","Fr1-Bx14-E9",NA,NA
+"HGME_0033","HGMB_0006","MC01-22","64-3","MC01-22-64-3",2024-06-17,"MeOH/H2O (3:1)","3","Yes",NA,NA,NA,"0","Fr1-Bx14-E10",NA,NA
+"HGME_0034","HGMB_0004","MC01-22","64S-1","MC01-22-64S-1",2024-06-17,"MeOH/H2O (3:1)","1","Yes",NA,NA,NA,"0","Fr1-Bx13-C9",NA,NA
+"HGME_0035","HGMB_0005","MC01-22","64S-2","MC01-22-64S-2",2024-06-17,"MeOH/H2O (3:1)","2","Yes",NA,NA,NA,"0","Fr1-Bx13-D1",NA,NA
+"HGME_0036","HGMB_0006","MC01-22","64S-3","MC01-22-64S-3",2024-06-17,"MeOH/H2O (3:1)","3","Yes",NA,NA,NA,"0","Fr1-Bx13-D2",NA,NA
+"HGME_0037","HGMB_0010","MC01-22","301-1","MC01-22-301-1",2024-06-17,"MeOH/H2O (3:1)","1","Yes",NA,NA,NA,"0","Fr1-Bx14-F1",NA,NA
+"HGME_0038","HGMB_0011","MC01-22","301-2","MC01-22-301-2",2024-06-17,"MeOH/H2O (3:1)","2","Yes",NA,NA,NA,"0","Fr1-Bx14-F2",NA,NA
+"HGME_0039","HGMB_0012","MC01-22","301-3","MC01-22-301-3",2024-06-17,"MeOH/H2O (3:1)","3","Yes",NA,NA,NA,"0","Fr1-Bx14-F3",NA,NA
+"HGME_0040","HGMB_0010","MC01-22","301S-1","MC01-22-301S-1",2024-06-17,"MeOH/H2O (3:1)","1","Yes",NA,NA,NA,"0","Fr1-Bx13-D3",NA,NA
+"HGME_0041","HGMB_0011","MC01-22","301S-2","MC01-22-301S-2",2024-06-17,"MeOH/H2O (3:1)","2","Yes",NA,NA,NA,"0","Fr1-Bx13-D4",NA,NA
+"HGME_0042","HGMB_0012","MC01-22","301S-3","MC01-22-301S-3",2024-06-17,"MeOH/H2O (3:1)","3","Yes",NA,NA,NA,"0","Fr1-Bx13-D5",NA,NA
+"HGME_0043","HGMB_0007","MC01-22","86-1","MC01-22-86-1",2024-06-17,"MeOH/H2O (3:1)","1","Yes",NA,NA,NA,"0","Fr1-Bx14-F4",NA,NA
+"HGME_0044","HGMB_0008","MC01-22","86-2","MC01-22-86-2",2024-06-17,"MeOH/H2O (3:1)","2","Yes",NA,NA,NA,"0","Fr1-Bx14-F5",NA,NA
+"HGME_0045","HGMB_0009","MC01-22","86-3","MC01-22-86-3",2024-06-17,"MeOH/H2O (3:1)","3","Yes",NA,NA,NA,"0","Fr1-Bx14-F6",NA,NA
+"HGME_0046","HGMB_0007","MC01-22","86S-1","MC01-22-86S-1",2024-06-17,"MeOH/H2O (3:1)","1","Yes",NA,NA,NA,"0","Fr1-Bx13-D6",NA,NA
+"HGME_0047","HGMB_0008","MC01-22","86S-2","MC01-22-86S-2",2024-06-17,"MeOH/H2O (3:1)","2","Yes",NA,NA,NA,"0","Fr1-Bx13-D7",NA,NA
+"HGME_0048","HGMB_0009","MC01-22","86S-3","MC01-22-86S-3",2024-06-17,"MeOH/H2O (3:1)","3","Yes",NA,NA,NA,"0","Fr1-Bx13-D8",NA,NA
+"HGME_0049","HGMB_0013","MC01-22","565-1","MC01-22-565-1",2024-06-17,"MeOH/H2O (3:1)","1","Yes",NA,NA,NA,"0","Fr1-Bx14-F7",NA,NA
+"HGME_0050","HGMB_0014","MC01-22","565-2","MC01-22-565-2",2024-06-17,"MeOH/H2O (3:1)","2","Yes",NA,NA,NA,"0","Fr1-Bx14-F8",NA,NA
+"HGME_0051","HGMB_0015","MC01-22","565-3","MC01-22-565-3",2024-06-17,"MeOH/H2O (3:1)","3","Yes",NA,NA,NA,"0","Fr1-Bx14-F9",NA,NA
+"HGME_0052","HGMB_0013","MC01-22","565S-1","MC01-22-565S-1",2024-06-17,"MeOH/H2O (3:1)","1","Yes",NA,NA,NA,"0","Fr1-Bx13-D9",NA,NA
+"HGME_0053","HGMB_0014","MC01-22","565S-2","MC01-22-565S-2",2024-06-17,"MeOH/H2O (3:1)","2","Yes",NA,NA,NA,"0","Fr1-Bx13-E1",NA,NA
+"HGME_0054","HGMB_0015","MC01-22","565S-3","MC01-22-565S-3",2024-06-17,"MeOH/H2O (3:1)","3","Yes",NA,NA,NA,"0","Fr1-Bx13-E2",NA,NA
+"HGME_0055","HGMB_0001","PR01-23","614_1","PR01-23-614_1",2024-06-25,NA,"1",NA,NA,NA,NA,"0",NA,NA,"MA PROT 4.1.1 Sample preparation for VOCs analysis"
+"HGME_0056","HGMB_0002","PR01-23","614_2","PR01-23-614_2",2024-06-25,NA,"2",NA,NA,NA,NA,"0",NA,NA,"MA PROT 4.1.1 Sample preparation for VOCs analysis"
+"HGME_0057","HGMB_0003","PR01-23","614_3","PR01-23-614_3",2024-06-25,NA,"3",NA,NA,NA,NA,"0",NA,NA,"MA PROT 4.1.1 Sample preparation for VOCs analysis"
+"HGME_0058","HGMB_0004","PR01-23","64_1","PR01-23-64_1",2024-06-25,NA,"1",NA,NA,NA,NA,"0",NA,NA,"MA PROT 4.1.1 Sample preparation for VOCs analysis"
+"HGME_0059","HGMB_0005","PR01-23","64_2","PR01-23-64_2",2024-06-25,NA,"2",NA,NA,NA,NA,"0",NA,NA,"MA PROT 4.1.1 Sample preparation for VOCs analysis"
+"HGME_0060","HGMB_0006","PR01-23","64_3","PR01-23-64_3",2024-06-25,NA,"3",NA,NA,NA,NA,"0",NA,NA,"MA PROT 4.1.1 Sample preparation for VOCs analysis"
+"HGME_0061","HGMB_0007","PR01-23","86_1","PR01-23-86_1",2024-06-25,NA,"1",NA,NA,NA,NA,"0",NA,NA,"MA PROT 4.1.1 Sample preparation for VOCs analysis"
+"HGME_0062","HGMB_0008","PR01-23","86_2","PR01-23-86_2",2024-06-25,NA,"2",NA,NA,NA,NA,"0",NA,NA,"MA PROT 4.1.1 Sample preparation for VOCs analysis"
+"HGME_0063","HGMB_0009","PR01-23","86_3","PR01-23-86_3",2024-06-25,NA,"3",NA,NA,NA,NA,"0",NA,NA,"MA PROT 4.1.1 Sample preparation for VOCs analysis"
+"HGME_0064","HGMB_0010","PR01-23","301_1","PR01-23-301_1",2024-06-25,NA,"1",NA,NA,NA,NA,"0",NA,NA,"MA PROT 4.1.1 Sample preparation for VOCs analysis"
+"HGME_0065","HGMB_0011","PR01-23","301_2","PR01-23-301_2",2024-06-25,NA,"2",NA,NA,NA,NA,"0",NA,NA,"MA PROT 4.1.1 Sample preparation for VOCs analysis"
+"HGME_0066","HGMB_0012","PR01-23","301_3","PR01-23-301_3",2024-06-25,NA,"3",NA,NA,NA,NA,"0",NA,NA,"MA PROT 4.1.1 Sample preparation for VOCs analysis"
+"HGME_0067","HGMB_0013","PR01-23","565_1","PR01-23-565_1",2024-06-25,NA,"1",NA,NA,NA,NA,"0",NA,NA,"MA PROT 4.1.1 Sample preparation for VOCs analysis"
+"HGME_0068","HGMB_0014","PR01-23","565_2","PR01-23-565_2",2024-06-25,NA,"2",NA,NA,NA,NA,"0",NA,NA,"MA PROT 4.1.1 Sample preparation for VOCs analysis"
+"HGME_0069","HGMB_0015","PR01-23","565_3","PR01-23-565_3",2024-06-25,NA,"3",NA,NA,NA,NA,"0",NA,NA,"MA PROT 4.1.1 Sample preparation for VOCs analysis"
+"HGME_0070","HGMB_0016","PR01-23","Con_1","PR01-23-Con_1",2024-06-25,NA,"1",NA,NA,NA,NA,"0",NA,NA,"MA PROT 4.1.1 Sample preparation for VOCs analysis"
+"HGME_0071","HGMB_0017","PR01-23","Con_2","PR01-23-Con_2",2024-06-25,NA,"2",NA,NA,NA,NA,"0",NA,NA,"MA PROT 4.1.1 Sample preparation for VOCs analysis"
+"HGME_0072","HGMB_0018","PR01-23","Con_3","PR01-23-Con_3",2024-06-25,NA,"3",NA,NA,NA,NA,"0",NA,NA,"MA PROT 4.1.1 Sample preparation for VOCs analysis"
+"HGME_0073","HGMB_0001","MC01-24","614_1p","MC01-24-614_1p",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","1","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0074","HGMB_0002","MC01-24","614_2p","MC01-24-614_2p",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","2","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0075","HGMB_0003","MC01-24","614_3p","MC01-24-614_3p",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","3","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0076","HGMB_0004","MC01-24","64_1p","MC01-24-64_1p",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","1","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0077","HGMB_0005","MC01-24","64_2p","MC01-24-64_2p",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","2","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0078","HGMB_0006","MC01-24","64_3p","MC01-24-64_3p",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","3","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0079","HGMB_0007","MC01-24","86_1p","MC01-24-86_1p",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","1","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0080","HGMB_0008","MC01-24","86_2p","MC01-24-86_2p",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","2","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0081","HGMB_0009","MC01-24","86_3p","MC01-24-86_3p",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","3","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0082","HGMB_0010","MC01-24","301_1p","MC01-24-301_1p",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","1","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0083","HGMB_0011","MC01-24","301_2p","MC01-24-301_2p",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","2","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0084","HGMB_0012","MC01-24","301_3p","MC01-24-301_3p",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","3","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0085","HGMB_0013","MC01-24","565_1p","MC01-24-565_1p",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","1","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0086","HGMB_0014","MC01-24","565_2p","MC01-24-565_2p",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","2","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0087","HGMB_0015","MC01-24","565_3p","MC01-24-565_3p",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","3","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0088","HGMB_0016","MC01-24","Con_1p","MC01-24-Con_1p",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","1","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0089","HGMB_0017","MC01-24","Con_2p","MC01-24-Con_2p",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","2","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0090","HGMB_0018","MC01-24","Con_3p","MC01-24-Con_3p",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","3","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0091","HGMB_0001","MC01-24","614_1n","MC01-24-614_1n",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","1","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0092","HGMB_0002","MC01-24","614_2n","MC01-24-614_2n",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","2","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0093","HGMB_0003","MC01-24","614_3n","MC01-24-614_3n",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","3","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0094","HGMB_0004","MC01-24","64_1n","MC01-24-64_1n",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","1","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0095","HGMB_0005","MC01-24","64_2n","MC01-24-64_2n",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","2","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0096","HGMB_0006","MC01-24","64_3n","MC01-24-64_3n",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","3","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0097","HGMB_0007","MC01-24","86_1n","MC01-24-86_1n",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","1","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0098","HGMB_0008","MC01-24","86_2n","MC01-24-86_2n",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","2","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0099","HGMB_0009","MC01-24","86_3n","MC01-24-86_3n",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","3","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0100","HGMB_0010","MC01-24","301_1n","MC01-24-301_1n",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","1","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0101","HGMB_0011","MC01-24","301_2n","MC01-24-301_2n",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","2","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0102","HGMB_0012","MC01-24","301_3n","MC01-24-301_3n",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","3","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0103","HGMB_0013","MC01-24","565_1n","MC01-24-565_1n",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","1","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0104","HGMB_0014","MC01-24","565_2n","MC01-24-565_2n",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","2","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0105","HGMB_0015","MC01-24","565_3n","MC01-24-565_3n",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","3","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0106","HGMB_0016","MC01-24","Con_1n","MC01-24-Con_1n",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","1","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0107","HGMB_0017","MC01-24","Con_2n","MC01-24-Con_2n",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","2","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0108","HGMB_0018","MC01-24","Con_3n","MC01-24-Con_3n",2024-06-24,"MeOH/MTBE/H2O (2:2:1)","3","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  but note: no visible layers were formed"
+"HGME_0109","HGMB_0001","MC01-26","614_1p","MC01-26-614_1p",2024-06-24,"EtOAc/IPA + 1% HCOOH","1","No",NA,NA,NA,"0","Fr1-Bx2-A1",NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0110","HGMB_0002","MC01-26","614_2p","MC01-26-614_2p",2024-06-24,"EtOAc/IPA + 1% HCOOH","2","No",NA,NA,NA,"0","Fr1-Bx2-A2",NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0111","HGMB_0003","MC01-26","614_3p","MC01-26-614_3p",2024-06-24,"EtOAc/IPA + 1% HCOOH","3","No",NA,NA,NA,"0","Fr1-Bx2-A3",NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0112","HGMB_0004","MC01-26","64_1p","MC01-26-64_1p",2024-06-24,"EtOAc/IPA + 1% HCOOH","1","No",NA,NA,NA,"0","Fr1-Bx2-A4",NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0113","HGMB_0005","MC01-26","64_2p","MC01-26-64_2p",2024-06-24,"EtOAc/IPA + 1% HCOOH","2","No",NA,NA,NA,"0","Fr1-Bx2-A5",NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0114","HGMB_0006","MC01-26","64_3p","MC01-26-64_3p",2024-06-24,"EtOAc/IPA + 1% HCOOH","3","No",NA,NA,NA,"0","Fr1-Bx2-A6",NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0115","HGMB_0007","MC01-26","86_1p","MC01-26-86_1p",2024-06-24,"EtOAc/IPA + 1% HCOOH","1","No",NA,NA,NA,"0","Fr1-Bx2-A7",NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0116","HGMB_0008","MC01-26","86_2p","MC01-26-86_2p",2024-06-24,"EtOAc/IPA + 1% HCOOH","2","No",NA,NA,NA,"0","Fr1-Bx2-A8",NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0117","HGMB_0009","MC01-26","86_3p","MC01-26-86_3p",2024-06-24,"EtOAc/IPA + 1% HCOOH","3","No",NA,NA,NA,"0","Fr1-Bx2-A9",NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0118","HGMB_0010","MC01-26","301_1p","MC01-26-301_1p",2024-06-24,"EtOAc/IPA + 1% HCOOH","1","No",NA,NA,NA,"0","Fr1-Bx2-A10",NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0119","HGMB_0011","MC01-26","301_2p","MC01-26-301_2p",2024-06-24,"EtOAc/IPA + 1% HCOOH","2","No",NA,NA,NA,"0","Fr1-Bx2-B1",NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0120","HGMB_0012","MC01-26","301_3p","MC01-26-301_3p",2024-06-24,"EtOAc/IPA + 1% HCOOH","3","No",NA,NA,NA,"0","Fr1-Bx2-B2",NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0121","HGMB_0013","MC01-26","565_1p","MC01-26-565_1p",2024-06-24,"EtOAc/IPA + 1% HCOOH","1","No",NA,NA,NA,"0","Fr1-Bx2-B3",NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0122","HGMB_0014","MC01-26","565_2p","MC01-26-565_2p",2024-06-24,"EtOAc/IPA + 1% HCOOH","2","No",NA,NA,NA,"0","Fr1-Bx2-B4",NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0123","HGMB_0015","MC01-26","565_3p","MC01-26-565_3p",2024-06-24,"EtOAc/IPA + 1% HCOOH","3","No",NA,NA,NA,"0","Fr1-Bx2-B5",NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0124","HGMB_0016","MC01-26","Con_1p","MC01-26-Con_1p",2024-06-24,"EtOAc/IPA + 1% HCOOH","1","No",NA,NA,NA,"0","Fr1-Bx2-B6",NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0125","HGMB_0017","MC01-26","Con_2p","MC01-26-Con_2p",2024-06-24,"EtOAc/IPA + 1% HCOOH","2","No",NA,NA,NA,"0","Fr1-Bx2-B7",NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0126","HGMB_0018","MC01-26","Con_3p","MC01-26-Con_3p",2024-06-24,"EtOAc/IPA + 1% HCOOH","3","No",NA,NA,NA,"0","Fr1-Bx2-B8",NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0127","HGMB_0001","MC01-26","614_1n","MC01-26-614_1n",2024-06-24,"EtOAc/IPA + 1% HCOOH","1","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0128","HGMB_0002","MC01-26","614_2n","MC01-26-614_2n",2024-06-24,"EtOAc/IPA + 1% HCOOH","2","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0129","HGMB_0003","MC01-26","614_3n","MC01-26-614_3n",2024-06-24,"EtOAc/IPA + 1% HCOOH","3","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0130","HGMB_0004","MC01-26","64_1n","MC01-26-64_1n",2024-06-24,"EtOAc/IPA + 1% HCOOH","1","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0131","HGMB_0005","MC01-26","64_2n","MC01-26-64_2n",2024-06-24,"EtOAc/IPA + 1% HCOOH","2","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0132","HGMB_0006","MC01-26","64_3n","MC01-26-64_3n",2024-06-24,"EtOAc/IPA + 1% HCOOH","3","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0133","HGMB_0007","MC01-26","86_1n","MC01-26-86_1n",2024-06-24,"EtOAc/IPA + 1% HCOOH","1","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0134","HGMB_0008","MC01-26","86_2n","MC01-26-86_2n",2024-06-24,"EtOAc/IPA + 1% HCOOH","2","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0135","HGMB_0009","MC01-26","86_3n","MC01-26-86_3n",2024-06-24,"EtOAc/IPA + 1% HCOOH","3","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0136","HGMB_0010","MC01-26","301_1n","MC01-26-301_1n",2024-06-24,"EtOAc/IPA + 1% HCOOH","1","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0137","HGMB_0011","MC01-26","301_2n","MC01-26-301_2n",2024-06-24,"EtOAc/IPA + 1% HCOOH","2","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0138","HGMB_0012","MC01-26","301_3n","MC01-26-301_3n",2024-06-24,"EtOAc/IPA + 1% HCOOH","3","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0139","HGMB_0013","MC01-26","565_1n","MC01-26-565_1n",2024-06-24,"EtOAc/IPA + 1% HCOOH","1","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0140","HGMB_0014","MC01-26","565_2n","MC01-26-565_2n",2024-06-24,"EtOAc/IPA + 1% HCOOH","2","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0141","HGMB_0015","MC01-26","565_3n","MC01-26-565_3n",2024-06-24,"EtOAc/IPA + 1% HCOOH","3","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0142","HGMB_0016","MC01-26","Con_1n","MC01-26-Con_1n",2024-06-24,"EtOAc/IPA + 1% HCOOH","1","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0143","HGMB_0017","MC01-26","Con_2n","MC01-26-Con_2n",2024-06-24,"EtOAc/IPA + 1% HCOOH","2","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0144","HGMB_0018","MC01-26","Con_3n","MC01-26-Con_3n",2024-06-24,"EtOAc/IPA + 1% HCOOH","3","No",NA,NA,NA,"0",NA,NA,"p - polars, n - non-polars;  good layers formed"
+"HGME_0145","HGMB_0019","MC01-23","L1","MC01-23-L1",2024-06-26,"75% MeOH",NA,"Yes",NA,NA,NA,"0",NA,NA,"Ada cell assay"
+"HGME_0146","HGMB_0020","MC01-23","L2","MC01-23-L2",2024-06-26,"75% MeOH",NA,"Yes",NA,NA,NA,"0",NA,NA,"Ada cell assay"
+"HGME_0147","HGMB_0021","MC01-23","L3","MC01-23-L3",2024-06-26,"75% MeOH",NA,"Yes",NA,NA,NA,"0",NA,NA,"Ada cell assay"
+"HGME_0148","HGMB_0022","MC01-23","L6","MC01-23-L6",2024-06-26,"75% MeOH",NA,"Yes",NA,NA,NA,"0",NA,NA,"Ada cell assay"
+"HGME_0149","HGMB_0023","MC01-23","L7","MC01-23-L7",2024-06-26,"75% MeOH",NA,"Yes",NA,NA,NA,"0",NA,NA,"Ada cell assay"
+"HGME_0150","HGMB_0024","MC01-23","L8","MC01-23-L8",2024-06-26,"75% MeOH",NA,"Yes",NA,NA,NA,"0",NA,NA,"Ada cell assay"
+"HGME_0151","HGMB_0025","MC01-23","CON","MC01-23-CON",2024-06-26,"75% MeOH",NA,"Yes",NA,NA,NA,"0",NA,NA,"Ada cell assay"
+"HGME_0152","HGMH_0003","MC01-32","EX","MC01-32-EX",2024-07-04,"100% MeOH",NA,NA,NA,NA,NA,"0",NA,NA,NA
+"HGME_0153","HGME_0043","MC01-34","86-1","MC01-34-86-1",2024-07-11,"100% MeOH","1",NA,NA,NA,NA,"0",NA,NA,NA
+"HGME_0154","HGME_0044","MC01-34","86-2","MC01-34-86-2",2024-07-11,"100% MeOH","2",NA,NA,NA,NA,"0",NA,NA,NA
+"HGME_0155","HGME_0045","MC01-34","86-3","MC01-34-86-3",2024-07-11,"100% MeOH","3",NA,NA,NA,NA,"0",NA,NA,NA
+"HGME_0156","HGME_0025","MC01-34","614-1","MC01-34-614-1",2024-07-11,"100% MeOH","1",NA,NA,NA,NA,"0",NA,NA,NA
+"HGME_0157","HGME_0026","MC01-34","614-2","MC01-34-614-2",2024-07-11,"100% MeOH","2",NA,NA,NA,NA,"0",NA,NA,NA
+"HGME_0158","HGME_0027","MC01-34","614-3","MC01-34-614-3",2024-07-11,"100% MeOH","3",NA,NA,NA,NA,"0",NA,NA,NA
+"HGME_0159","HGME_0037","MC01-34","301-1","MC01-34-301-1",2024-07-11,"100% MeOH","1",NA,NA,NA,NA,"0",NA,NA,NA
+"HGME_0160","HGME_0038","MC01-34","301-2","MC01-34-301-2",2024-07-11,"100% MeOH","2",NA,NA,NA,NA,"0",NA,NA,NA
+"HGME_0161","HGME_0039","MC01-34","301-3","MC01-34-301-3",2024-07-11,"100% MeOH","3",NA,NA,NA,NA,"0",NA,NA,NA
+"HGME_0162","HGME_0049","MC01-34","565-1","MC01-34-565-1",2024-07-11,"100% MeOH","1",NA,NA,NA,NA,"0",NA,NA,NA
+"HGME_0163","HGME_0050","MC01-34","565-2","MC01-34-565-2",2024-07-11,"100% MeOH","2",NA,NA,NA,NA,"0",NA,NA,NA
+"HGME_0164","HGME_0051","MC01-34","565-3","MC01-34-565-3",2024-07-11,"100% MeOH","3",NA,NA,NA,NA,"0",NA,NA,NA
+"HGME_0165","HGME_0031","MC01-34","64-1","MC01-34-64-1",2024-07-11,"100% MeOH","1",NA,NA,NA,NA,"0",NA,NA,NA
+"HGME_0166","HGME_0032","MC01-34","64-2","MC01-34-64-2",2024-07-11,"100% MeOH","2",NA,NA,NA,NA,"0",NA,NA,NA
+"HGME_0167","HGME_0033","MC01-34","64-3","MC01-34-64-3",2024-07-11,"100% MeOH","3",NA,NA,NA,NA,"0",NA,NA,NA
+"HGME_0168","HGME_0153","MC01-34","86-1-ME","MC01-34-86-1-ME",2024-07-12,"MTBE/MeOH/H2O 2:2:1","1",NA,NA,NA,NA,"0",NA,NA,NA
+"HGME_0169","HGME_0154","MC01-34","86-2-ME","MC01-34-86-2-ME",2024-07-12,"MTBE/MeOH/H2O 2:2:1","2",NA,NA,NA,NA,"0",NA,NA,NA
+"HGME_0170","HGME_0155","MC01-34","86-3-ME","MC01-34-86-3-ME",2024-07-12,"MTBE/MeOH/H2O 2:2:1","3",NA,NA,NA,NA,"0",NA,NA,NA
+"HGME_0171","HGME_0156","MC01-34","614-1-ME","MC01-34-614-1-ME",2024-07-12,"MTBE/MeOH/H2O 2:2:1","1",NA,NA,NA,NA,"0",NA,NA,NA
+"HGME_0172","HGME_0157","MC01-34","614-2-ME","MC01-34-614-2-ME",2024-07-12,"MTBE/MeOH/H2O 2:2:1","2",NA,NA,NA,NA,"0",NA,NA,NA
+"HGME_0173","HGME_0158","MC01-34","614-3-ME","MC01-34-614-3-ME",2024-07-12,"MTBE/MeOH/H2O 2:2:1","3",NA,NA,NA,NA,"0",NA,NA,NA
+"HGME_0174","HGME_0159","MC01-34","301-1-ME","MC01-34-301-1-ME",2024-07-12,"MTBE/MeOH/H2O 2:2:1","1",NA,NA,NA,NA,"0",NA,NA,NA
+"HGME_0175","HGME_0160","MC01-34","301-2-ME","MC01-34-301-2-ME",2024-07-12,"MTBE/MeOH/H2O 2:2:1","2",NA,NA,NA,NA,"0",NA,NA,NA
+"HGME_0176","HGME_0161","MC01-34","301-3-ME","MC01-34-301-3-ME",2024-07-12,"MTBE/MeOH/H2O 2:2:1","3",NA,NA,NA,NA,"0",NA,NA,NA
+"HGME_0177","HGME_0162","MC01-34","565-1-ME","MC01-34-565-1-ME",2024-07-12,"MTBE/MeOH/H2O 2:2:1","1",NA,NA,NA,NA,"0",NA,NA,NA
+"HGME_0178","HGME_0163","MC01-34","565-2-ME","MC01-34-565-2-ME",2024-07-12,"MTBE/MeOH/H2O 2:2:1","2",NA,NA,NA,NA,"0",NA,NA,NA
+"HGME_0179","HGME_0164","MC01-34","565-3-ME","MC01-34-565-3-ME",2024-07-12,"MTBE/MeOH/H2O 2:2:1","3",NA,NA,NA,NA,"0",NA,NA,NA
+"HGME_0180","HGME_0165","MC01-34","64-1-ME","MC01-34-64-1-ME",2024-07-12,"MTBE/MeOH/H2O 2:2:1","1",NA,NA,NA,NA,"0",NA,NA,NA
+"HGME_0181","HGME_0166","MC01-34","64-2-ME","MC01-34-64-2-ME",2024-07-12,"MTBE/MeOH/H2O 2:2:1","2",NA,NA,NA,NA,"0",NA,NA,NA
+"HGME_0182","HGME_0167","MC01-34","64-3-ME","MC01-34-64-3-ME",2024-07-12,"MTBE/MeOH/H2O 2:2:1","3",NA,NA,NA,NA,"0",NA,NA,NA
+"HGME_0183","HGMH_0004","PR01-29","EX","PR01-29-EX",2024-07-17,"3:1 MeOH/DCM",NA,NA,NA,NA,NA,"0","Agribio fridge",NA,NA
+"HGME_0184","HGME_0183","PR01-33","1","PR01-33-1",2024-07-25,"DCM/MeOH/Water",NA,NA,NA,NA,NA,"0","Agribio fridge",NA,"Performed trituration"
+"HGME_0185","HGME_0183","PR01-33","2","PR01-33-2",2024-07-25,"Biphasic DCM/Water",NA,NA,NA,NA,NA,"0","Agribio fridge",NA,"Performed biphasic extraction (MeOH/DCM)"
+"HGME_0186","HGME_0184","PR01-34","1","PR01-34-1",2024-07-27,"DCM",NA,NA,NA,NA,NA,"0","Agribio fridge",NA,NA
+"HGME_0187","HGME_0184","PR01-34","2","PR01-34-2",2024-07-27,"MeOH",NA,NA,NA,NA,NA,"0","Agribio fridge",NA,NA
+"HGME_0188","HGME_0184","PR01-34","3","PR01-34-3",2024-07-27,"Water",NA,NA,NA,NA,NA,"0","Agribio fridge",NA,NA
+"HGME_0189","HGME_0185","PR01-35","1","PR01-35-1",2024-07-27,"DCM",NA,NA,NA,NA,NA,"0","Agribio fridge",NA,NA
+"HGME_0190","HGME_0185","PR01-35","2","PR01-35-2",2024-07-27,"Water",NA,NA,NA,NA,NA,"0","Agribio fridge",NA,NA
+"HGME_0191","HGMH_0005","MC01-44","R1","MC01-44-R1",2024-08-20,"MeOH","1","No",0.12,1.1082,1.1306,"22.399999999999977",NA,NA,NA
+"HGME_0192","HGMH_0005","MC01-44","R2","MC01-44-R2",2024-08-20,"MeOH","2","No",0.07,1.1099,1.1199,"9.9999999999997868",NA,NA,NA
+"HGME_0193","HGMH_0005","MC01-44","R3","MC01-44-R3",2024-08-20,"MeOH","3","No",0.06,1.1071,1.1152,"8.0999999999999961",NA,NA,NA
+"HGME_0194","HGMH_0006","MC01-50","1","MC01-50-1",2024-10-07,"MeOH","1","No",41.74,285.84,287.68,"1840.0000000000318",NA,NA,NA
+"HGME_0195","HGMH_0006","MC01-50","2","MC01-50-2",2024-10-07,"MeOH","2","No",39.04,319.85,322.14,"2289.9999999999636",NA,NA,NA
+"HGME_0196","HGMH_0006","MC01-50","3","MC01-50-3",2024-10-07,"MeOH","3","No",38.93,320.25,322.08,"1829.9999999999841",NA,NA,NA
+"HGME_0197",NA,"MC01-51","1","MC01-51-1",2024-10-14,"MeOH","1","No",27.89,320.07,320.88,"810.00000000000227",NA,NA,NA
+"HGME_0198",NA,"MC01-51","2","MC01-51-2",2024-10-14,"MeOH","2","No",23.2,285.86,286.46,"599.99999999996589",NA,NA,NA
+"HGME_0199",NA,"MC01-51","3","MC01-51-3",2024-10-14,"MeOH","3","No",25.7,299.69,300.45,"759.99999999999091",NA,NA,NA
+"HGME_0200","HGME_0194","MC01-52","DCM","MC01-52-DCM",NA,"DCM","1","No",NA,16.753,17.5503,"797.3",NA,NA,NA
+"HGME_0201","HGME_0194","MC01-52","AQ","MC01-52-AQ",NA,"Water","1","No",NA,300.23,301.25,"1019.9999999999818",NA,NA,NA
+"HGME_0202","HGME_0195","MC01-53","DCM","MC01-53-DCM",NA,"DCM","2","No",NA,16.8443,17.9531,"1108.7999999999986",NA,NA,NA
+"HGME_0203","HGME_0195","MC01-53","AQ","MC01-53-AQ",NA,"Water","2","No",NA,341.3,NA,"-341300",NA,NA,NA
+"HGME_0204","HGME_0196","MC01-54","DCM","MC01-54-DCM",NA,"DCM","3","No",NA,16.7413,17.2443,"503.00000000000011",NA,NA,NA
+"HGME_0205","HGME_0196","MC01-54","AQ","MC01-54-AQ",NA,"Water","3","No",NA,337.83,NA,"-337830",NA,NA,NA
+"HGME_0206","HGME_0197","MC01-58","DCM","MC01-58-DCM",NA,"DCM","1","No",NA,16.7923,17.0206,"228.30000000000084",NA,NA,NA
+"HGME_0207","HGME_0197","MC01-58","AQ","MC01-58-AQ",NA,"Water","1","No",NA,335.91,NA,"-335910",NA,NA,NA
+"HGME_0208","HGME_0198","MC01-59","DCM","MC01-59-DCM",NA,"DCM","2","No",NA,16.7865,16.9446,"158.10000000000102",NA,NA,NA
+"HGME_0209","HGME_0198","MC01-59","AQ","MC01-59-AQ",NA,"Water","2","No",NA,334.24,NA,"-334240",NA,NA,NA
+"HGME_0210","HGME_0199","MC01-60","DCM","MC01-60-DCM",NA,"DCM","3","No",NA,16.7396,16.9421,"202.50000000000057",NA,NA,NA
+"HGME_0211","HGME_0199","MC01-60","AQ","MC01-60-AQ",NA,"Water","3","No",NA,337.84,NA,"-337840",NA,NA,NA
+"HGME_0212","HGME_0201","MC01-60","AQP1","MC01-60-AQP1",2024-10-24,"Water",NA,"No",NA,1.1169,1.1177,"0.79999999999991189",NA,NA,"Weighed from freezedried AQ sample for SAX testing"
+"HGME_0213","HGME_0201","MC01-60","AQP2","MC01-60-AQP2",2024-10-24,"Water",NA,"No",NA,1.1122,1.1181,"5.9000000000000163",NA,NA,"Weighed from freezedried AQ sample for SAX testing"
+"HGME_0214","HGME_0201","MC01-60","AQP3","MC01-60-AQP3",2024-10-24,"Water",NA,"No",NA,1.105,1.1057,"0.69999999999992291",NA,NA,"Weighed from freezedried AQ sample for SAX testing"
+"HGME_0215","HGME_0201","MC01-60","AQP4","MC01-60-AQP4",2024-10-24,"Water",NA,"No",NA,1.1112,1.1127,"1.5000000000000568",NA,NA,"Weighed from freezedried AQ sample for SAX testing"
+"HGME_0216","HGME_0201","MC01-60","AQP5","MC01-60-AQP5",2024-10-24,"Water",NA,"No",NA,1.1033,1.1105,"7.2000000000000952",NA,NA,"Weighed from freezedried AQ sample for SAX testing"
+"HGME_0217","HGME_0201","MC01-60","AQP6","MC01-60-AQP6",2024-10-24,"Water",NA,"No",NA,1.1074,1.1123,"4.9000000000001265",NA,NA,"Weighed from freezedried AQ sample for SAX testing"
+"HGME_0218","HGME_0201","MC01-60","AQP7","MC01-60-AQP7",2024-10-24,"Water",NA,"No",NA,1.1032,1.1083,"5.1000000000001044",NA,NA,"Weighed from freezedried AQ sample for SAX testing"
+"HGME_0219","HGME_0201","MC01-60","AQP8","MC01-60-AQP8",2024-10-24,"Water",NA,"No",NA,1.1109,1.1199,"8.999999999999897",NA,NA,"Weighed from freezedried AQ sample for SAX testing"
+"HGME_0220","HGME_0201","MC01-60","AQP9","MC01-60-AQP9",2024-10-24,"Water",NA,"No",NA,1.1068,1.1174,"10.599999999999943",NA,NA,"Weighed from freezedried AQ sample for SAX testing"
+"HGME_0221","HGME_0201","MC01-60","AQP10","MC01-60-AQP10",2024-10-24,"Water",NA,"No",NA,1.1073,1.1107,"3.4000000000000696",NA,NA,"Weighed from freezedried AQ sample for SAX testing"
+"HGME_0222","HGME_0201","MC01-60","AQP11","MC01-60-AQP11",2024-10-24,"Water",NA,"No",NA,1.1105,1.1155,"4.9999999999998934",NA,NA,"Weighed from freezedried AQ sample for SAX testing"
+"HGME_0223","HGME_0201","MC01-60","AQP12","MC01-60-AQP12",2024-10-24,"Water",NA,"No",NA,1.1079,1.1139,"5.9999999999997833",NA,NA,"Weighed from freezedried AQ sample for SAX testing"
+"HGME_0224","HGME_0201","MC01-60","AQP13","MC01-60-AQP13",2024-10-24,"Water",NA,"No",NA,1.1034,1.1095,"6.0999999999999943",NA,NA,"Weighed from freezedried AQ sample for SAX testing"
+"HGME_0225","HGMH_0006","MC01-67","A","MC01-67-A",2024-11-13,"Methanol",NA,"No",NA,NA,NA,"0",NA,NA,"Small-scale extraction for biphasic vs trituration"
+"HGME_0226","HGMH_0006","MC01-67","B","MC01-67-B",2024-11-13,"Methanol",NA,"No",NA,NA,NA,"0",NA,NA,"Small-scale extraction for biphasic vs trituration"
+"HGME_0227","HGMH_0006","MC01-67","C","MC01-67-C",2024-11-13,"Methanol",NA,"No",NA,NA,NA,"0",NA,NA,"Small-scale extraction for biphasic vs trituration"
+"HGME_0228","HGMH_0006","MC01-67","D","MC01-67-D",2024-11-13,"Methanol",NA,"No",NA,NA,NA,"0",NA,NA,"Small-scale extraction for biphasic vs trituration"
+"HGME_0229","HGMH_0006","MC01-67","E","MC01-67-E",2024-11-13,"Methanol",NA,"No",NA,NA,NA,"0",NA,NA,"Small-scale extraction for biphasic vs trituration"
+"HGME_0230","HGMH_0006","MC01-67","F","MC01-67-F",2024-11-13,"Methanol",NA,"No",NA,NA,NA,"0",NA,NA,"Small-scale extraction for biphasic vs trituration"
+"HGME_0231","HGMH_0006","MC01-70","1A","MC01-70-1A",2024-12-16,"Methanol",NA,"No",50.7,NA,NA,"0",NA,NA,NA
+"HGME_0232","HGMH_0006","MC01-70","1B-U","MC01-70-1B-U",2024-12-16,"2:1 DCM/MeOH",NA,"No",34.5,NA,NA,"0",NA,NA,"Upper MeOH layer"
+"HGME_0233","HGMH_0006","MC01-70","1B-L","MC01-70-1B-L",2024-12-16,"2:1 DCM/MeOH",NA,"No",34.5,NA,NA,"0",NA,NA,"Lower DCM layer"
+"HGME_0234","HGMH_0006","MC01-70","1C","MC01-70-1C",2024-12-16,"75% MeOH/H2O",NA,"No",17.6,NA,NA,"0",NA,NA,NA
+"HGME_0235","HGMD_0032","MC01-70","2A","MC01-70-2A",2024-12-16,"Methanol",NA,"No",22.1,NA,NA,"0",NA,NA,NA
+"HGME_0236","HGMD_0032","MC01-70","2B-U","MC01-70-2B-U",2024-12-16,"2:1 DCM/MeOH",NA,"No",21.2,NA,NA,"0",NA,NA,"Upper MeOH layer"
+"HGME_0237","HGMD_0032","MC01-70","2C-L","MC01-70-2C-L",2024-12-16,"2:1 DCM/MeOH",NA,"No",21.2,NA,NA,"0",NA,NA,"Lower DCM layer"
+"HGME_0238","HGMD_0032","MC01-70","2C","MC01-70-2C",2024-12-16,"75% MeOH/H2O",NA,"No",45,NA,NA,"0",NA,NA,NA
+"HGME_0239","HGMF_1002","MC01-71","55-19","MC01-71-55-19",2025-01-13,"MeOH",NA,"Yes",NA,NA,NA,NA,NA,NA,"Bile acid sample prep"
+"HGME_0240","HGMF_1011","MC01-71","55-29","MC01-71-55-29",2025-01-13,"MeOH",NA,"Yes",NA,NA,NA,NA,NA,NA,"Bile acid sample prep"
+"HGME_0241","HGMF_1011","MC01-72","55-29","MC01-72-55-29",NA,NA,NA,"Yes",NA,NA,NA,NA,NA,NA,"SCFA sample prep"
+"HGME_0242","HGMF_1014","MC01-72","55-34","MC01-72-55-34",NA,NA,NA,"Yes",NA,NA,NA,NA,NA,NA,"SCFA sample prep"
+"HGME_0243","HGME_0231","MC01-71","1A","MC01-71-1A",2025-02-03,"MeOH",NA,"Yes",NA,NA,NA,NA,NA,NA,"Bile acid sample prep"
+"HGME_0244","HGME_0235","MC01-71","2A","MC01-71-2A",2025-02-03,"MeOH",NA,"Yes",NA,NA,NA,NA,NA,NA,"Bile acid sample prep"
+"HGME_0245","HGME0017","PR01-10","03","PR01-10-03",2024-03-08,"DCM layer",NA,"No",NA,NA,NA,"6.8000000000000005E-2",NA,NA,"Biphasic extraction(Water/DCM)"
+"HGME_0246","HGMF_0089","PR01-21","01","PR01-21-01",2024-06-21,"1:1 MeOH/CDCl3",NA,"No",NA,NA,NA,NA,NA,NA,"Non-polar"
+"HGME_0247","HGMF_0089","PR01-21","02","PR01-21-02",2024-06-21,"1:1 MeOH/CDCl3",NA,"No",NA,NA,NA,NA,NA,NA,"Polar"
+"HGME_0248","HGMF_0052","MC01-29","SL","MC01-29-SL",2024-07-02,"Cold acetonitrile",NA,"No",NA,1.0855,1.0935,"8.0000000000000071",NA,NA,"Insoluble in Acetonitrile (unless sonicated)"
+"HGME_0249","HGMF_0052","MC01-29","ML-01","MC01-29-ML-01",2024-07-02,"Cold acetonitrile",NA,"No",NA,1.0876,NA,"NA",NA,NA,"Mother Liquor"
+"HGME_0250","HGMF_0052","MC01-29","ML-02","MC01-29-ML-02",2024-07-02,"Cold acetonitrile",NA,"No",NA,1.0852,1.0908,"5.6000000000000494",NA,NA,"Mother Liquor"
+"HGME_0251","HGMH_0008","MC01-73","SCFA-6A","MC01-73-SCFA-6A",2025-02-18,"50% MeCN","1","Yes",0.0641,NA,NA,NA,NA,NA,NA
+"HGME_0252","HGMH_0009","MC01-73","SCFA-6B","MC01-73-SCFA-6B",2025-02-18,"50% MeCN","2","Yes",0.1101,NA,NA,NA,NA,NA,NA
+"HGME_0253","HGMH_0010","MC01-73","SCFA-6B","MC01-73-SCFA-6B",2025-02-18,"50% MeCN","3","Yes",0.584,NA,NA,NA,NA,NA,NA
+"HGME_0254","HGMH_0011","MC01-73","SCFA-7A","MC01-73-SCFA-7A",2025-02-18,"50% MeCN","1","Yes",0.0689,NA,NA,NA,NA,NA,NA
+"HGME_0255","HGMH_0012","MC01-73","SCFA-7B","MC01-73-SCFA-7B",2025-02-18,"50% MeCN","2","Yes",0.0631,NA,NA,NA,NA,NA,NA
+"HGME_0256","HGMH_0013","MC01-73","SCFA-7C","MC01-73-SCFA-7C",2025-02-18,"50% MeCN","3","Yes",0.0648,NA,NA,NA,NA,NA,NA
+"HGME_0257","HGME_0251","MC01-73","HILIC+VOC-6A","MC01-73-HILIC+VOC-6A",2025-02-18,"80% MeOH","1","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0258","HGME_0252","MC01-73","HILIC+VOC-6B","MC01-73-HILIC+VOC-6B",2025-02-18,"80% MeOH","2","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0259","HGME_0253","MC01-73","HILIC+VOC-6C","MC01-73-HILIC+VOC-6C",2025-02-18,"80% MeOH","3","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0260","HGME_0254","MC01-73","HILIC+VOC-7A","MC01-73-HILIC+VOC-7A",2025-02-18,"80% MeOH","1","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0261","HGME_0255","MC01-73","HILIC+VOC-7B","MC01-73-HILIC+VOC-7B",2025-02-18,"80% MeOH","2","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0262","HGME_0256","MC01-73","HILIC+VOC-7C","MC01-73-HILIC+VOC-7C",2025-02-18,"80% MeOH","3","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0263","HGME_0257","MC01-73","C18+BA-6A","MC01-73-C18+BA-6A",2025-02-18,"2:1 MeOH/DCM","1","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0264","HGME_0258","MC01-73","C18+BA-6B","MC01-73-C18+BA-6B",2025-02-18,"2:1 MeOH/DCM","2","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0265","HGME_0259","MC01-73","C18+BA-6C","MC01-73-C18+BA-6C",2025-02-18,"2:1 MeOH/DCM","3","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0266","HGME_0260","MC01-73","C18+BA-7A","MC01-73-C18+BA-7A",2025-02-18,"2:1 MeOH/DCM","1","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0267","HGME_0261","MC01-73","C18+BA-7B","MC01-73-C18+BA-7B",2025-02-18,"2:1 MeOH/DCM","2","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0268","HGME_0262","MC01-73","C18+BA-7C","MC01-73-C18+BA-7C",2025-02-18,"2:1 MeOH/DCM","3","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0269","HGMH_0014","MC01-78","M-02-R1","MC01-78M-02-R1-NP",2025-02-25,"MTBE/MeOH/H2O","1","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0270","HGMH_0015","MC01-78","M-02-R2","MC01-78M-02-R2-NP",2025-02-25,"MTBE/MeOH/H2O","2","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0271","HGMH_0016","MC01-78","M-02-R3","MC01-78M-02-R3-NP",2025-02-25,"MTBE/MeOH/H2O","3","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0272","HGMH_0026","MC01-78","F-02-R1","MC01-78F-02-R1-NP",2025-02-25,"MTBE/MeOH/H2O","1","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0273","HGMH_0027","MC01-78","F-02-R2","MC01-78F-02-R2-NP",2025-02-25,"MTBE/MeOH/H2O","2","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0274","HGMH_0028","MC01-78","F-02-R3","MC01-78F-02-R3-NP",2025-02-25,"MTBE/MeOH/H2O","3","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0275","HGMH_0014; HGMH_0015; HGMH_0016; HGMH_0026; HGMH_0027; HGMH_0028","MC01-78","PBQC-02","MC01-78PBQC-02-NP",2025-02-25,"MTBE/MeOH/H2O",NA,"Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0276","HGMH_0017","MC01-78","M-04-R1","MC01-78M-04-R1-NP",2025-02-25,"MTBE/MeOH/H2O","1","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0277","HGMH_0018","MC01-78","M-04-R2","MC01-78M-04-R2-NP",2025-02-25,"MTBE/MeOH/H2O","2","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0278","HGMH_0019","MC01-78","M-04-R3","MC01-78M-04-R3-NP",2025-02-25,"MTBE/MeOH/H2O","3","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0279","HGMH_0029","MC01-78","F-04-R1","MC01-78F-04-R1-NP",2025-02-25,"MTBE/MeOH/H2O","1","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0280","HGMH_0030","MC01-78","F-04-R2","MC01-78F-04-R2-NP",2025-02-25,"MTBE/MeOH/H2O","2","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0281","HGMH_0031","MC01-78","F-04-R3","MC01-78F-04-R3-NP",2025-02-25,"MTBE/MeOH/H2O","3","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0282","; HGMH_0018; HGMH_0019; HGMH_0029; HGMH_0030; HGMH_0031","MC01-78","PBQC-04","MC01-78PBQC-04-NP",2025-02-25,"MTBE/MeOH/H2O",NA,"Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0283","HGMH_0020","MC01-78","M-06-R1","MC01-78M-06-R1-NP",2025-02-25,"MTBE/MeOH/H2O","1","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0284","HGMH_0021","MC01-78","M-06-R2","MC01-78M-06-R2-NP",2025-02-25,"MTBE/MeOH/H2O","2","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0285","HGMH_0022","MC01-78","M-06-R3","MC01-78M-06-R3-NP",2025-02-25,"MTBE/MeOH/H2O","3","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0286","HGMH_0032","MC01-78","F-06-R1","MC01-78F-06-R1-NP",2025-02-25,"MTBE/MeOH/H2O","1","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0287","HGMH_0033","MC01-78","F-06-R2","MC01-78F-06-R2-NP",2025-02-25,"MTBE/MeOH/H2O","2","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0288","HGMH_0034","MC01-78","F-06-R3","MC01-78F-06-R3-NP",2025-02-25,"MTBE/MeOH/H2O","3","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0289","HGMH_0020; HGMH_0021; HGMH_0022; HGMH_0032; HGMH_0033; HGMH_0034","MC01-78","PBQC-06","MC01-78PBQC-06-NP",2025-02-25,"MTBE/MeOH/H2O",NA,"Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0290","HGMH_0023","MC01-78","M-10-R1","MC01-78M-10-R1-NP",2025-02-25,"MTBE/MeOH/H2O","1","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0291","HGMH_0024","MC01-78","M-10-R2","MC01-78M-10-R2-NP",2025-02-25,"MTBE/MeOH/H2O","2","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0292","HGMH_0025","MC01-78","M-10-R3","MC01-78M-10-R3-NP",2025-02-25,"MTBE/MeOH/H2O","3","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0293","HGMH_0035","MC01-78","F-10-R1","MC01-78F-10-R1-NP",2025-02-25,"MTBE/MeOH/H2O","1","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0294","HGMH_0036","MC01-78","F-10-R2","MC01-78F-10-R2-NP",2025-02-25,"MTBE/MeOH/H2O","2","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0295","HGMH_0037","MC01-78","F-10-R3","MC01-78F-10-R3-NP",2025-02-25,"MTBE/MeOH/H2O","3","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0296","HGMH_0023; HGMH_0024; HGMH_0025; HGMH_0035; HGMH_0036; HGMH_0037","MC01-78","PBQC-10","MC01-78PBQC-10-NP",2025-02-25,"MTBE/MeOH/H2O",NA,"Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0297","HGMH_0014","MC01-78","M-02-R1","MC01-78M-02-R1-Pol",2025-02-25,"MTBE/MeOH/H2O","1","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0298","HGMH_0015","MC01-78","M-02-R2","MC01-78M-02-R2-Pol",2025-02-25,"MTBE/MeOH/H2O","2","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0299","HGMH_0016","MC01-78","M-02-R3","MC01-78M-02-R3-Pol",2025-02-25,"MTBE/MeOH/H2O","3","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0300","HGMH_0026","MC01-78","F-02-R1","MC01-78F-02-R1-Pol",2025-02-25,"MTBE/MeOH/H2O","1","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0301","HGMH_0027","MC01-78","F-02-R2","MC01-78F-02-R2-Pol",2025-02-25,"MTBE/MeOH/H2O","2","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0302","HGMH_0028","MC01-78","F-02-R3","MC01-78F-02-R3-Pol",2025-02-25,"MTBE/MeOH/H2O","3","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0303","HGMH_0014; HGMH_0015; HGMH_0016; HGMH_0026; HGMH_0027; HGMH_0028","MC01-78","PBQC-02","MC01-78PBQC-02-Pol",2025-02-25,"MTBE/MeOH/H2O",NA,"Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0304","HGMH_0017","MC01-78","M-04-R1","MC01-78M-04-R1-Pol",2025-02-25,"MTBE/MeOH/H2O","1","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0305","HGMH_0018","MC01-78","M-04-R2","MC01-78M-04-R2-Pol",2025-02-25,"MTBE/MeOH/H2O","2","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0306","HGMH_0019","MC01-78","M-04-R3","MC01-78M-04-R3-Pol",2025-02-25,"MTBE/MeOH/H2O","3","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0307","HGMH_0029","MC01-78","F-04-R1","MC01-78F-04-R1-Pol",2025-02-25,"MTBE/MeOH/H2O","1","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0308","HGMH_0030","MC01-78","F-04-R2","MC01-78F-04-R2-Pol",2025-02-25,"MTBE/MeOH/H2O","2","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0309","HGMH_0031","MC01-78","F-04-R3","MC01-78F-04-R3-Pol",2025-02-25,"MTBE/MeOH/H2O","3","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0310","; HGMH_0018; HGMH_0019; HGMH_0029; HGMH_0030; HGMH_0031","MC01-78","PBQC-04","MC01-78PBQC-04-Pol",2025-02-25,"MTBE/MeOH/H2O",NA,"Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0311","HGMH_0020","MC01-78","M-06-R1","MC01-78M-06-R1-Pol",2025-02-25,"MTBE/MeOH/H2O","1","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0312","HGMH_0021","MC01-78","M-06-R2","MC01-78M-06-R2-Pol",2025-02-25,"MTBE/MeOH/H2O","2","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0313","HGMH_0022","MC01-78","M-06-R3","MC01-78M-06-R3-Pol",2025-02-25,"MTBE/MeOH/H2O","3","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0314","HGMH_0032","MC01-78","F-06-R1","MC01-78F-06-R1-Pol",2025-02-25,"MTBE/MeOH/H2O","1","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0315","HGMH_0033","MC01-78","F-06-R2","MC01-78F-06-R2-Pol",2025-02-25,"MTBE/MeOH/H2O","2","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0316","HGMH_0034","MC01-78","F-06-R3","MC01-78F-06-R3-Pol",2025-02-25,"MTBE/MeOH/H2O","3","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0317","HGMH_0020; HGMH_0021; HGMH_0022; HGMH_0032; HGMH_0033; HGMH_0034","MC01-78","PBQC-06","MC01-78PBQC-06-Pol",2025-02-25,"MTBE/MeOH/H2O",NA,"Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0318","HGMH_0023","MC01-78","M-10-R1","MC01-78M-10-R1-Pol",2025-02-25,"MTBE/MeOH/H2O","1","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0319","HGMH_0024","MC01-78","M-10-R2","MC01-78M-10-R2-Pol",2025-02-25,"MTBE/MeOH/H2O","2","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0320","HGMH_0025","MC01-78","M-10-R3","MC01-78M-10-R3-Pol",2025-02-25,"MTBE/MeOH/H2O","3","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0321","HGMH_0035","MC01-78","F-10-R1","MC01-78F-10-R1-Pol",2025-02-25,"MTBE/MeOH/H2O","1","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0322","HGMH_0036","MC01-78","F-10-R2","MC01-78F-10-R2-Pol",2025-02-25,"MTBE/MeOH/H2O","2","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0323","HGMH_0037","MC01-78","F-10-R3","MC01-78F-10-R3-Pol",2025-02-25,"MTBE/MeOH/H2O","3","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0324","HGMH_0023; HGMH_0024; HGMH_0025; HGMH_0035; HGMH_0036; HGMH_0037","MC01-78","PBQC-10","MC01-78PBQC-10-Pol",2025-02-25,"MTBE/MeOH/H2O",NA,"Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0325","HGMH_0038","MC01-80","A-R1","MC01-80A-R1-NP",2025-03-03,"MTBE/MeOH/H2O","1","Yes",NA,NA,NA,NA,NA,NA,"Uses cryomill"
+"HGME_0326","HGMH_0039","MC01-80","A-R2","MC01-80A-R2-NP",2025-03-03,"MTBE/MeOH/H2O","2","Yes",NA,NA,NA,NA,NA,NA,"Uses cryomill"
+"HGME_0327","HGMH_0040","MC01-80","A-R3","MC01-80A-R3-NP",2025-03-03,"MTBE/MeOH/H2O","3","Yes",NA,NA,NA,NA,NA,NA,"Uses cryomill"
+"HGME_0328","HGMH_0041","MC01-80","B-R1","MC01-80B-R1-NP",2025-03-03,"MTBE/MeOH/H2O","1","Yes",NA,NA,NA,NA,NA,NA,"Standard extract"
+"HGME_0329","HGMH_0042","MC01-80","B-R2","MC01-80B-R2-NP",2025-03-03,"MTBE/MeOH/H2O","2","Yes",NA,NA,NA,NA,NA,NA,"Standard extract"
+"HGME_0330","HGMH_0043","MC01-80","B-R3","MC01-80B-R3-NP",2025-03-03,"MTBE/MeOH/H2O","3","Yes",NA,NA,NA,NA,NA,NA,"Standard extract"
+"HGME_0331","HGMH_0038; HGMH_0039; HGMH_0040; HGMH_0041; HGMH_0042; HGMH_0043","MC01-80","PBQC","MC01-80PBQC-NP",2025-03-03,"MTBE/MeOH/H2O",NA,"Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0332","HGMH_0038","MC01-80","A-R1","MC01-80A-R1-Pol",2025-03-03,"MTBE/MeOH/H2O","1","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0333","HGMH_0039","MC01-80","A-R2","MC01-80A-R2-Pol",2025-03-03,"MTBE/MeOH/H2O","2","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0334","HGMH_0040","MC01-80","A-R3","MC01-80A-R3-Pol",2025-03-03,"MTBE/MeOH/H2O","3","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0335","HGMH_0041","MC01-80","B-R1","MC01-80B-R1-Pol",2025-03-03,"MTBE/MeOH/H2O","1","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0336","HGMH_0042","MC01-80","B-R2","MC01-80B-R2-Pol",2025-03-03,"MTBE/MeOH/H2O","2","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0337","HGMH_0043","MC01-80","B-R3","MC01-80B-R3-Pol",2025-03-03,"MTBE/MeOH/H2O","3","Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0338","HGMH_0038; HGMH_0039; HGMH_0040; HGMH_0041; HGMH_0042; HGMH_0043","MC01-80","PBQC","MC01-80PBQC-Pol",2025-03-03,"MTBE/MeOH/H2O",NA,"Yes",NA,NA,NA,NA,NA,NA,NA
+"HGME_0339","HGMH_0044","MC01-81","1","MC01-81-1",2025-02-27,"DCM/H2O",NA,"No",NA,NA,NA,NA,NA,NA,"Not kept, just trial extractions"
+"HGME_0340","HGMH_0045","MC01-81","2","MC01-81-2",2025-02-27,"MTBE/MeOH/H2O",NA,"No",NA,NA,NA,NA,NA,NA,"Not kept, just trial extractions"
+"HGME_0341","HGMH_0046","MC01-81","3","MC01-81-3",2025-02-27,"MTBE/MeOH/H2O",NA,"No",NA,NA,NA,NA,NA,NA,"Not kept, just trial extractions"
+"HGME_0342","HGMF_1008","MC01-72","55-25","MC01-72-55-25",2025-02-10,"50% MeCN/H2O",NA,"Yes",NA,NA,NA,NA,NA,NA,"SCFA extraction"
+"HGME_0343","HGMF_1011","MC01-72","55-29","MC01-72-55-29",2025-02-10,"50% MeCN/H2O",NA,"Yes",NA,NA,NA,NA,NA,NA,"SCFA extraction"
+"HGME_0344","HGMF_1012","MC01-72","55-30","MC01-72-55-30",2025-02-10,"50% MeCN/H2O",NA,"Yes",NA,NA,NA,NA,NA,NA,"SCFA extraction"
+"HGME_0345","HGMF_1013","MC01-72","55-32","MC01-72-55-32",2025-02-10,"50% MeCN/H2O",NA,"Yes",NA,NA,NA,NA,NA,NA,"SCFA extraction"
+"HGME_0346","HGMF_1014","MC01-72","55-34","MC01-72-55-34",2025-02-10,"50% MeCN/H2O",NA,"Yes",NA,NA,NA,NA,NA,NA,"SCFA extraction"
+"HGME_0347","HGMF_1015","MC01-72","55-35","MC01-72-55-35",2025-02-10,"50% MeCN/H2O",NA,"Yes",NA,NA,NA,NA,NA,NA,"SCFA extraction"
+"HGME_0348","HGMF_1016","MC01-72","55-36","MC01-72-55-36",2025-02-10,"50% MeCN/H2O",NA,"Yes",NA,NA,NA,NA,NA,NA,"SCFA extraction"
+"HGME_0349","HGMF_1017","MC01-72","55-37","MC01-72-55-37",2025-02-10,"50% MeCN/H2O",NA,"Yes",NA,NA,NA,NA,NA,NA,"SCFA extraction"
+"HGME_0350","HGME_0200","MC01-72","52-DCM","MC01-72-52-DCM",2025-02-10,"50% MeCN/H2O",NA,"Yes",NA,NA,NA,NA,NA,NA,"SCFA extraction"
+"HGME_0351","HGME_0201","MC01-72","52-AQ","MC01-72-52-AQ",2025-02-10,"50% MeCN/H2O",NA,"Yes",NA,NA,NA,NA,NA,NA,"SCFA extraction"
+"HGME_0352","HGMH_0047","MC01-102","A1","MC01-102-A1",2025-04-16,"100% MeOH","1","No",NA,NA,NA,NA,NA,NA,NA
+"HGME_0353","HGMH_0048","MC01-102","A2","MC01-102-A2",2025-04-16,"100% MeOH","2","No",NA,NA,NA,NA,NA,NA,NA
+"HGME_0354","HGMH_0049","MC01-102","A3","MC01-102-A3",2025-04-16,"100% MeOH","3","No",NA,NA,NA,NA,NA,NA,NA
+"HGME_0355","HGMH_0050","MC01-102","B1","MC01-102-B1",2025-04-16,"100% MeOH","1","No",NA,NA,NA,NA,NA,NA,NA
+"HGME_0356","HGMH_0051","MC01-102","B2","MC01-102-B2",2025-04-16,"100% MeOH","2","No",NA,NA,NA,NA,NA,NA,NA
+"HGME_0357","HGMH_0052","MC01-102","B3","MC01-102-B3",2025-04-16,"100% MeOH","3","No",NA,NA,NA,NA,NA,NA,NA
+"HGME_0358","HGME_0352","MC01-103","A1-DCM","MC01-103-A1-DCM",2025-04-17,"DCM","1","No",NA,NA,NA,NA,NA,NA,NA
+"HGME_0359","HGME_0352","MC01-103","A1-AQ","MC01-103-A1-AQ",2025-04-17,"Water","1","No",NA,NA,NA,NA,NA,NA,NA
+"HGME_0360","HGME_0353","MC01-103","A2-DCM","MC01-103-A2-DCM",2025-04-17,"DCM","2","No",NA,NA,NA,NA,NA,NA,NA
+"HGME_0361","HGME_0353","MC01-103","A2-AQ","MC01-103-A2-AQ",2025-04-17,"Water","2","No",NA,NA,NA,NA,NA,NA,NA
+"HGME_0362","HGME_0354","MC01-103","A3-DCM","MC01-103-A3-DCM",2025-04-17,"DCM","3","No",NA,NA,NA,NA,NA,NA,NA
+"HGME_0363","HGME_0354","MC01-103","A3-AQ","MC01-103-A3-AQ",2025-04-17,"Water","3","No",NA,NA,NA,NA,NA,NA,NA
+"HGME_0364","HGME_0355","MC01-103","B1-DCM","MC01-103-B1-DCM",2025-04-17,"DCM","1","No",NA,NA,NA,NA,NA,NA,NA
+"HGME_0365","HGME_0355","MC01-103","B1-AQ","MC01-103-B1-AQ",2025-04-17,"Water","1","No",NA,NA,NA,NA,NA,NA,NA
+"HGME_0366","HGME_0356","MC01-103","B2-DCM","MC01-103-B2-DCM",2025-04-17,"DCM","2","No",NA,NA,NA,NA,NA,NA,NA
+"HGME_0367","HGME_0356","MC01-103","B2-AQ","MC01-103-B2-AQ",2025-04-17,"Water","2","No",NA,NA,NA,NA,NA,NA,NA
+"HGME_0368","HGME_0357","MC01-103","B3-DCM","MC01-103-B3-DCM",2025-04-17,"DCM","3","No",NA,NA,NA,NA,NA,NA,NA
+"HGME_0369","HGME_0357","MC01-103","B3-AQ","MC01-103-B3-AQ",2025-04-17,"Water","3","No",NA,NA,NA,NA,NA,NA,NA
+"HGME_0370",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"HGME_0371",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"HGME_0372",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"HGME_0373",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"HGME_0374",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"HGME_0375",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"HGME_0376",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"HGME_0377",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"HGME_0378",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"HGME_0379",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"HGME_0380",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"HGME_0381",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"HGME_0382",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"HGME_0383",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"HGME_0384",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"HGME_0385",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"HGME_0386",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"HGME_0387",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"HGME_0388",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"HGME_0389",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"HGME_0390",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"HGME_0391",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"HGME_0392",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"HGME_0393",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"HGME_0394",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"HGME_0395",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"HGME_0396",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"HGME_0397",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"HGME_0398",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"HGME_0399",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"HGME_0400",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"HGME_0401",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA

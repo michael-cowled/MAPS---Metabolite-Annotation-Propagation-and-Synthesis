@@ -99,11 +99,11 @@
 ##To make a cumulative histogram to show unique annotations with respect to crude and previous fractions
 
 # Define the crude sample (or samples) to act as the baseline                     ###USER-INPUT###
-remove_sample <- "" #e.g. HGMA_1598
+remove_sample <- "HGMA_1598" 
 
 # Filter out rows containing the specified sample
-Annotations.with.samples <- Annotations.with.samples %>%
-  filter(!str_detect(Samples, remove_sample))
+#Annotations.with.samples <- Annotations.with.samples #%>%                        ## Remove #'s if wanting to filter out crude or anotehr sample
+#  filter(!str_detect(Samples, remove_sample))                                    ## Same here
 
 library(tidyverse)
 
