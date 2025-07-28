@@ -1,13 +1,11 @@
 #### ANNOTATION TABLE SCRIPT FOR AUSTRALIAN HUMAN GUT METABOLOME DATABASE ####
 
-#!# Run 1-Functions first! #!!#
-
 #------------------------------------------------------------------------------#
 ###---START OF USER-FED INFORMATION---###
 
 # Dataset ID: From Data Management Plan:
 
-dataset.id <- "HGMD_0070"     #####Change to dataset of interest#####
+dataset.id <- "HGMD_0108"      #####Change to dataset of interest#####
 
 # Specify the path to the Data Management Plan (unless moved to Mediaflux then should be consistent)
 
@@ -23,13 +21,14 @@ ms2query.prob <- 0.63         # Default is 0.63 ##Recommended by paper
 
 # Specify rt tolerance of standards (min)
 
-rt.tol <- 0.1               # Default is 0.1 min for C18 (use 0.2 min for HILIC)
+# rt.tol <- 0.1               # Default is 0.1 min for C18 (use 0.2 min for HILIC) ##More important for public release
 
 ###---END OF USER-FED INFORMATION---###
 #------------------------------------------------------------------------------#
 
 
 ## 1. check_and_install
+setwd(file.path("~/"))
 # Function to check, install, and load required packages
 check_and_install <- function(packages, github_packages = list()) {
   # Install 'remotes' if needed for GitHub installs
@@ -53,27 +52,13 @@ check_and_install <- function(packages, github_packages = list()) {
 
 required_packages <- c("MAPS.Package", "dplyr", "tidyr", "stringr", "readr", 
                        "reshape2", "ggplot2", "svglite", "readxl", "data.table", 
-                       "openxlsx", "tidyverse", "rvest", "jsonlite", "xml2")
+                       "openxlsx", "tidyverse", "rvest", "jsonlite", "xml2", "progress",
+                       "DBI", "RSQLite")
 
 github_packages <- list("MAPS.Package" = "michael-cowled/MAPS-Package-Public")
 check_and_install(required_packages, github_packages)
 
-# --- Load or Initialize Cache ---
-cid_cache_file <- "cid_cache.csv"
-if (file.exists(cid_cache_file)) {
-  cid_cache_df <- read.csv(cid_cache_file, stringsAsFactors = FALSE)
-} else {
-  cid_cache_df <- data.frame(
-    LookupName = character(),
-    ResolvedName = character(),
-    SMILES = character(),
-    CID = numeric(),
-    MolecularFormula = character(),
-    MonoisotopicMass = numeric(),
-    stringsAsFactors = FALSE
-  )
-}
-
+#-----------------------------------------------------------------------------------------------------------------------#
 ## 2. Updating Metadata and extract gnps task ID                                ----> Remove from published version
 sheet_names <- excel_sheets(excel_file) # Get the sheet names
 for (sheet in sheet_names) {
@@ -85,9 +70,17 @@ dataset <- read.csv("HGM/D - Dataset.csv") %>%
   filter(HGMD.ID == dataset.id)
 gnps.task.id <- dataset$gnps.task.ID[1] #                                       ----> Put gnps.task.ID as a required user-fed info in published
 
+if (!is.na(dataset$column.type[1]) && dataset$column.type[1] == "HILIC") {
+  rt.tol <- 0.2
+} else {
+  rt.tol <- 0.1
+}
+
 if (is.na(gnps.task.id)) {
   stop("gnps.task.ID is missing. Add to 'dataset' csv before re-running.")  # Stop execution
 }
+
+#-----------------------------------------------------------------------------------------------------------------------#
 
 ## 3. File List Extractor                                                       ----> Remove from published version
 dataset <- read.csv("HGM/D - Dataset.csv") %>%
@@ -135,34 +128,33 @@ mzmine.annotations <- read.csv(mzmine.annotations) %>%
   # First, ensure distinct compound_name per id
   distinct(id, compound_name, .keep_all = TRUE) %>%
   group_by(id) %>%
-  # Remove all rows with the lowest confidence.score per id
-  filter(score > min(score) | n() == 1) %>%
+  # Remove all rows with the lowest confidence.score per id,
+  # or keep the first if all scores within the group are identical.
+  filter(
+    n() == 1 |                                   # Keep if there's only one row in the group
+      score > min(score, na.rm = TRUE) |           # Keep if score is strictly greater than the min score in the group
+      (all(score == min(score, na.rm = TRUE)) &    # If all scores are identical to the min score, AND
+         row_number() == 1)                          # Keep only the first row
+  ) %>%
   ungroup() %>%
   # Now, reduce to only one row per compound_name (highest confidence.score overall)
   group_by(compound_name) %>%
-  filter(score == max(score)) %>%
-  slice(1) %>%  # If there's a tie on confidence.score, pick the first row arbitrarily
+  filter(score == max(score, na.rm = TRUE)) %>%
+  slice(1) %>%                                   # If there's a tie on confidence.score, pick the first row arbitrarily
   ungroup()
 
 #Calculating ID probability of level 1 annotations
 mzmine.annotations$mzmine.id.prob <- NA
 #Standardisation of compound names (retrieving from a locally stored cache/pubchem)
 # --- Main Processing Loop ---
-mzmine.annotations <- standardise_annotation(mzmine.annotations, "compound_name", "smiles")
-write.csv(cid_cache_df, cid_cache_file, row.names = FALSE)
-
-# --- Populate from cache ---
-for (i in seq_len(nrow(mzmine.annotations))) {
-  current_name <- mzmine.annotations$compound_name[i]
-  row_match <- cid_cache_df[cid_cache_df$LookupName == current_name, ]
-  
-  if (nrow(row_match) > 0) {
-    mzmine.annotations$CID[i] <- row_match$CID[1]
-    mzmine.annotations$smiles[i] <- row_match$SMILES[1]
-    mzmine.annotations$mol_formula[i] <- row_match$MolecularFormula[1]
-    mzmine.annotations$MonoisotopicMass[i] <- row_match$MonoisotopicMass[1]
-  }
-}
+mzmine.annotations$smiles <- trimws(mzmine.annotations$smiles)
+mzmine.annotations <- standardise_annotation(
+  mzmine.annotations,
+  name_col = "compound_name",
+  smiles_col = "smiles",
+  cid_database_path = "Y:/MA_BPA_Microbiome/MS Databases/PubChem/cid_lookup.sqlite",
+  cid_cache_path = "~cid_cache.csv"
+)
 
 mzmine.annotations.final <- mzmine.annotations %>%
   group_by(id) %>%
@@ -173,9 +165,9 @@ mzmine.annotations.final <- mzmine.annotations %>%
   slice(1) %>%  # In case of ties, keep one arbitrarily
   ungroup() %>%
   # Keep only relevant columns:
-  select(id, compound_name, score, smiles, mzmine.id.prob, mol_formula, CID, MonoisotopicMass)
+  select(id, compound_name, score, smiles, mzmine.id.prob, CID)
 names(mzmine.annotations.final) <- c('feature.ID', "compound.name", "confidence.score", 
-                                     "smiles", "id.prob", "molecular.formula", "CID", "MonoisotopicMass")
+                                     "smiles", "id.prob", "CID")
 mzmine.annotations.final$feature.ID <- as.numeric(mzmine.annotations.final$feature.ID)
 mzmine.annotations.final$confidence.level <- "1"
 mzmine.annotations.final$annotation.type <- "authentic standard"
@@ -220,6 +212,9 @@ names(gnps.cluster.data) <- c('feature.ID', "gnps.cluster.ID")
 gnps.cluster.pairs <- read_tsv(paste0("https://gnps2.org/resultfile?task=", gnps.task.id, "&file=nf_output/networking/filtered_pairs.tsv"))
 gnps.annotation.data$annotation.type <- "gnps"
 
+unique_in_gnps <- setdiff(gnps.annotation.data$feature.ID, mzmine.annotations.final$feature.ID) #filter out level 1
+gnps.annotation.data <- filter(gnps.annotation.data, feature.ID %in% unique_in_gnps)
+
 #Create level 2, and tidy
 gnps.data.lv2 <- filter(gnps.annotation.data, library.quality != "Insilico")
 gnps.data.lv2$confidence.level <- "2"
@@ -239,8 +234,6 @@ gnps.data.lv3 <- gnps.data.lv3 %>%
 gnps.data.lv3$gnps.in.silico.bile.acid.info <- gsub('"', "", gnps.data.lv3$gnps.in.silico.bile.acid.info)     
 gnps.data.lv3$compound.name <- gsub('"', "", gnps.data.lv3$compound.name)
 gnps.data.lv3$CID <- NA
-gnps.data.lv3$MolecularFormula <- NA
-gnps.data.lv3$MonoisotopicMass <- NA
 gnps.data.lv3$id.prob <- NA
 
 ## 7. Load in MS2QUERY data
@@ -253,6 +246,9 @@ ms2query.data <- fix_compound_names(ms2query.data, "compound.name")  ##df, and c
 ms2query.data <- mutate(ms2query.data, mz.diff.ppm = mz.diff/precursor_mz *1000000) %>%
   filter(mz.diff.ppm <= 5)
 ms2query.data$annotation.type <- "ms2query"
+
+unique_in_ms2query <- setdiff(ms2query.data$feature.ID, mzmine.annotations.final$feature.ID) #filter out level 1
+ms2query.data <- filter(ms2query.data, feature.ID %in% unique_in_ms2query)
 
 #Create level 2, and tidy
 ms2query.data.lv2 <-ms2query.data %>%
@@ -276,17 +272,18 @@ ms2query.data.lv3$confidence.level <- "3"
 
 ## 8. Standardise level 2 annotations and compute ID probability
 lv2.annotations <- rbind(gnps.data.lv2, ms2query.data.lv2)  ##bind the two sets of annotations together
+lv2.annotations$smiles <- trimws(lv2.annotations$smiles)
 
 lv2.annotations$CID <- NA
-lv2.annotations$MolecularFormula<- NA
-lv2.annotations$MonoisotopicMass <- NA
 lv2.annotations <- deduplicate_data(lv2.annotations, compound.name, confidence.score) #Pre-standardisation filtering for duplicates
-lv2.annotations<- standardise_annotation(lv2.annotations, "compound.name", "smiles") #Standardisation of naming using pubchem, remove for time-savings
+lv2.annotations <- standardise_annotation(
+  lv2.annotations,
+  name_col = "compound.name",
+  smiles_col = "smiles",
+  cid_database_path = "Y:/MA_BPA_Microbiome/MS Databases/PubChem/cid_lookup.sqlite",
+  cid_cache_path = "~cid_cache.csv"
+)
 lv2.annotations <- deduplicate_data(lv2.annotations, compound.name, confidence.score) #Post-standardisation filtering of duplicates
-write.csv(cid_cache_df, cid_cache_file, row.names = FALSE)
-
-#Removal of lv1 annotations
-lv2.annotations <- filter_data_by_standards(lv2.annotations, mzmine.data, "compound.name", "feature.ID", rt.tol)
 
 #Computing of ID prob.
 lv2.annotations <- lv2.annotations %>%
@@ -300,11 +297,37 @@ lv2.annotations <- lv2.annotations %>%
   group_by(feature.ID) %>%
   arrange(desc(confidence.score)) %>%
   slice(1) %>%
-  ungroup() %>%
-  select(-rt)
+  ungroup()
+
+#Appending lv1 annotations
+# Identify columns present in lv2..annotations but not in lv1 annotations
+missing_cols <- colnames(lv2.annotations)[!colnames(lv2.annotations) %in% colnames(mzmine.annotations.final)]
+for (col in missing_cols) { # Add the missing columns to csi.data and fill with NA
+  mzmine.annotations.final[[col]] <- NA
+}
+
+lv1.and.lv2.annotations <- lv2.annotations %>%
+  rbind(mzmine.annotations.final)
 
 ## 9. Appending lv3 In silico matches from GNPS
-lv2.and.lv3.annotations <- lv2.annotations %>%
+unique_in_lv3<- setdiff(gnps.data.lv3$feature.ID, lv1.and.lv2.annotations$feature.ID) #filter out level 1 and 2
+gnps.data.lv3 <- filter(gnps.data.lv3, feature.ID %in% unique_in_lv3)
+
+#Computing of ID prob.
+gnps.data.lv3 <- gnps.data.lv3 %>%
+  group_by(feature.ID) %>%
+  mutate(
+    n_above_thresh = sum(confidence.score >= gnps.prob),
+    id.prob = ifelse(confidence.score >= gnps.prob & n_above_thresh > 0, 1 / n_above_thresh, 0)
+  ) %>%
+  ungroup() %>%
+  select(-n_above_thresh) %>%
+  group_by(feature.ID) %>%
+  arrange(desc(confidence.score)) %>%
+  slice(1) %>%
+  ungroup()
+
+lv1.lv2.lv3.annotations <- lv1.and.lv2.annotations %>%
   rbind(gnps.data.lv3)
 
 ## 10. Load in SIRIUS data:      Compatible with v6.1.0 onwards
@@ -360,53 +383,40 @@ csi.data <- csi.data %>%
   ungroup()
 
 #Filter for unique entries to csi.data not already in lv2 and lv3 annotations
-unique_in_csi <- setdiff(csi.data$feature.ID, lv2.and.lv3.annotations$feature.ID)
+unique_in_csi <- setdiff(csi.data$feature.ID, lv1.lv2.lv3.annotations$feature.ID)
 csi.data <- filter(csi.data, feature.ID %in% unique_in_csi)
 
-#################Evenutally add in standardisation and removal of lv1 AND lv2 from here ---------------------------------------------------------------------------------------## TO DO
-#[in similar style to what was done for gnps. Do at this point after reducing, and prob. is calculated diff. i.e. estimate #of hits, and remove by 1.]
-
 # Identify columns present in lv2.and.lv3.annotations but not in csi.data
-missing_cols <- colnames(lv2.and.lv3.annotations)[!colnames(lv2.and.lv3.annotations) %in% colnames(csi.data)]
+missing_cols <- colnames(lv1.lv2.lv3.annotations)[!colnames(lv1.lv2.lv3.annotations) %in% colnames(csi.data)]
 for (col in missing_cols) { # Add the missing columns to csi.data and fill with NA
   csi.data[[col]] <- NA
 }
 csi.data$annotation.type <- "CSI:FingerID"
 csi.data$confidence.level <- "3"
 
-lv2.and.lv3.annotations <- lv2.and.lv3.annotations %>%
+lv1.lv2.lv3.annotations <- lv1.lv2.lv3.annotations %>%
   rbind(csi.data)
 
 ## 12. Appending lv3 analogues from ms2query
 ms2query.data.lv3$compound.name <- paste0("Analogue of ", ms2query.data.lv3$compound.name)
+
 #Filter for unique entries to csi.data not already in lv2 and lv3 annotations
-unique_in_ms2query <- setdiff(ms2query.data.lv3$feature.ID, lv2.and.lv3.annotations$feature.ID)
+unique_in_ms2query <- setdiff(ms2query.data.lv3$feature.ID, lv1.lv2.lv3.annotations$feature.ID)
 ms2query.data.lv3 <- filter(ms2query.data.lv3, feature.ID %in% unique_in_ms2query) %>%
   select(-mz.diff, -precursor_mz)
 
 # Identify columns present in lv2.and.lv3.annotations but not in csi.data
-missing_cols <- colnames(lv2.and.lv3.annotations)[!colnames(lv2.and.lv3.annotations) %in% colnames(ms2query.data.lv3)]
+missing_cols <- colnames(lv1.lv2.lv3.annotations)[!colnames(lv1.lv2.lv3.annotations) %in% colnames(ms2query.data.lv3)]
 for (col in missing_cols) { # Add the missing columns to ms2query.data.lv3 and fill with NA
   ms2query.data.lv3[[col]] <- NA
 }
 
-lv2.and.lv3.annotations <- lv2.and.lv3.annotations %>%
+lv1.lv2.lv3.annotations <- lv1.lv2.lv3.annotations %>%
   rbind(ms2query.data.lv3)
 
-## 13. Appending lv1 annotations and all other annotations
-missing_cols <- colnames(lv2.and.lv3.annotations)[!colnames(lv2.and.lv3.annotations) %in% colnames(mzmine.annotations.final)]
-for (col in missing_cols) { # Add the missing columns to ms2query.data.lv3 and fill with NA
-  mzmine.annotations.final[[col]] <- NA
-}
-mzmine.annotations.final$confidence.level <- "1"
-mzmine.annotations.final <- select(mzmine.annotations.final, -molecular.formula)
-
-lv1.lv2.lv3.annotations <- lv2.and.lv3.annotations %>%
-  rbind(mzmine.annotations.final)
-
-#Merge annotations into one big table                                     
+## 13. Appending all other features
 full.annotation.data <- mzmine.data[,1:4] %>%
-  full_join(lv2.and.lv3.annotations, by = "feature.ID") %>%
+  full_join(lv1.lv2.lv3.annotations, by = "feature.ID") %>%
   full_join(canopus.data, by = "feature.ID") %>%
   full_join(zodiac.data, by = "feature.ID") %>%
   full_join(gnps.cluster.data, by = "feature.ID")
@@ -414,112 +424,90 @@ full.annotation.data <- mzmine.data[,1:4] %>%
 full.annotation.data$feature.usi <- paste0("mzspec:GNPS2:TASK-", gnps.task.id, "-nf_output/clustering/spectra_reformatted.mgf:scan:", full.annotation.data$feature.ID) #Adds unique spectra identifiers
 
 ## 14. Propagation of annotations
-# Initialize columns in propagated.annotation.data
-propagated.annotation.data <- full.annotation.data %>%
-  mutate(
-    Probable.Analogue.Of = NA,
-    Propagated.Feature.ID = NA,
-    Propagated.Annotation.Type = NA, # Initialize the new column
-    Propagated.Annotation.Class = NA # This is already here
-  )
-
-# Identify the unknown features
-na.rows <- filter(propagated.annotation.data, is.na(compound.name))
+# Identify the unknown features that need annotation
+na.rows <- filter(full.annotation.data, is.na(compound.name))
 na.feature.ids <- na.rows$feature.ID
+propagated_results <- list()
 
-# Iterate over na.feature.ids to populate propagated.annotation.data
+# --- PROGRESS BAR - Initialize for the annotation propagation loop ---
+pb <- progress::progress_bar$new(
+  format = "Propagating annotations [:bar] :percent eta: :eta",
+  total = length(na.feature.ids),
+  width = 60
+)
+
+# Collect all the new annotations
 for (i in na.feature.ids) {
-  paired_values <- paired_feature_finder(i)
-  print(paste("Paired values for feature ID", i, ":", paste(paired_values, collapse = ", ")))
+  pb$tick() # --- PROGRESS BAR - Update ---
   
-  result_data <- list(value = NA, column = NA, superclass = NA)
+  paired_values <- paired_feature_finder(i)
   selected_paired_value <- NA
+  final_result_data <- list(value = NA, column = NA, superclass = NA)
   
   for (value in paired_values) {
     result_data <- get_result(value, full.annotation.data)
     if (!is.na(result_data$value)) {
       selected_paired_value <- value
+      final_result_data <- result_data
+      annotation_type_value <- full.annotation.data %>%
+        filter(feature.ID == selected_paired_value) %>%
+        pull(annotation.type) %>%
+        first()
+      final_result_data$column <- annotation_type_value
       break
     }
   }
   
-  # If you want to ensure annotation.type specifically:
   if (!is.na(selected_paired_value)) {
-    annotation_type_value <- full.annotation.data %>%
-      filter(feature.ID == selected_paired_value) %>%
-      pull(annotation.type) %>%
-      first()
-    
-    result_data$column <- annotation_type_value
-  }
-  
-  propagated.annotation.data <- propagated.annotation.data %>%
-    mutate(
-      Probable.Analogue.Of = case_when(
-        feature.ID == i ~ result_data$value,
-        TRUE ~ Probable.Analogue.Of
-      ),
-      Propagated.Feature.ID = case_when(
-        feature.ID == i ~ selected_paired_value,
-        TRUE ~ Propagated.Feature.ID
-      ),
-      Propagated.Annotation.Type = case_when(
-        feature.ID == i ~ result_data$column,
-        TRUE ~ Propagated.Annotation.Type
-      ),
-      Propagated.Annotation.Class = case_when(
-        feature.ID == i ~ result_data$superclass,
-        TRUE ~ Propagated.Annotation.Class
-      )
+    propagated_results[[as.character(i)]] <- list(
+      feature.ID = i,
+      Probable.Analogue.Of = final_result_data$value,
+      Propagated.Feature.ID = selected_paired_value,
+      Propagated.Annotation.Type = final_result_data$column,
+      Propagated.Annotation.Class = final_result_data$superclass
     )
-}
-
-# Calculating the mz difference of the analogue to the propagated feature:
-# Convert mz column to numeric if it's not already
-if (!is.numeric(full.annotation.data$mz)) {
-  full.annotation.data$mz <- as.numeric(full.annotation.data$mz)
-}
-
-# Add a new column for the m/z difference
-propagated.annotation.data <- propagated.annotation.data %>%
-  mutate(Propagated.Annotation.mz.Diff = NA)
-
-# Iterate over the rows of propagated.annotation.data
-for (i in 1:nrow(propagated.annotation.data)) {
-  # Get the feature ID and the propagated feature ID
-  feature_id <- propagated.annotation.data$feature.ID[i]
-  propagated_feature_id <- propagated.annotation.data$Propagated.Feature.ID[i]
-  
-  # If a propagated feature ID exists
-  if (!is.na(propagated_feature_id)) {
-    # Get the m/z values for both feature IDs
-    mz_value <- full.annotation.data$mz[full.annotation.data$feature.ID == feature_id]
-    propagated_mz_value <- full.annotation.data$mz[full.annotation.data$feature.ID == propagated_feature_id]
-    
-    # Calculate the m/z difference
-    mz_diff <- mz_value - propagated_mz_value
-    
-    # Update the new column
-    propagated.annotation.data$Propagated.Annotation.mz.Diff[i] <- mz_diff
   }
 }
 
-# Inside the loop:
-if (!is.na(propagated_feature_id)) {
-  mz_value <- summary.annotation.data$mz[summary.annotation.data$feature.ID == feature_id]
-  propagated_mz_value <- summary.annotation.data$mz[summary.annotation.data$feature.ID == propagated_feature_id]
-  
-  if (!is.na(mz_value) && !is.na(propagated_mz_value)) {  # Check for NA
-    mz_diff <- mz_value - propagated_mz_value
-    propagated.annotation.data$Propagated.Annotation.mz.Diff[i] <- mz_diff
-  }
-}
+# Convert the list of results into a single data frame
+propagated_df <- bind_rows(propagated_results)
 
-##Append level 4 and 5 annotations
+# Join the new annotations back to the original data frame in one step
+propagated.annotation.data <- full.annotation.data %>%
+  left_join(propagated_df, by = "feature.ID")
+
+## 15. Append propagations
 propagated.annotation.data <- propagated.annotation.data %>%
   mutate(
     confidence.level = as.character(confidence.level),  # ensure editable
-    level4_mask = is.na(compound.name) & !is.na(canopus.NPC.pathway),  # condition mask
+    propagation_mask = is.na(compound.name) & !is.na(Probable.Analogue.Of),  # condition mask
+    compound.name = ifelse(
+      propagation_mask,
+      paste0("Probable analogue of: ", Probable.Analogue.Of),
+      compound.name
+    ),
+    confidence.level = ifelse(
+      propagation_mask,
+      "3",
+      confidence.level
+    ),
+    NPC.pathway = NA,
+    NPC.superclass = Propagated.Annotation.Class,
+    annotation.type = ifelse(
+      propagation_mask,
+      "GNPS Propagation",
+      annotation.type
+    )
+) %>%
+  select(-propagation_mask)
+
+## 16. Append level 4 and 5 annotations
+propagated.annotation.data <- propagated.annotation.data %>%
+  mutate(
+    confidence.level = as.character(confidence.level),  # ensure editable
+    level4_mask = is.na(compound.name) &
+      !is.na(canopus.NPC.pathway) &
+      canopus.NPC.pathway.probability >= canopus.prob,  # modifiable threshold set in start
     compound.name = ifelse(
       level4_mask,
       paste0("Predicted NPC Pathway: ", canopus.NPC.pathway),
@@ -543,7 +531,8 @@ propagated.annotation.data <- propagated.annotation.data %>%
     confidence.level = ifelse(is.na(confidence.level), "5", confidence.level)
   )
 
-## 13. Sample List Data
+
+## 17. Sample List Data
 # Now to append sample.list corresponding to each feature
 # Select columns containing ".area" and rename the first column
 sample.data <- sample.data %>%
@@ -580,7 +569,7 @@ sample.data <- sample.data[, c(1, ncol(sample.data))]
 propagated.annotation.data.with.samples <- propagated.annotation.data %>%
   full_join(sample.data, by = "feature.ID") 
 
-## 14. Cytoscape Appending
+## 18. Cytoscape Appending
 #Simultaneously creates a tidied cytoscape file with the best annotation (including analogues)
 #Represented as the output.
 
@@ -601,7 +590,7 @@ colnames(cytoscape)[colnames(cytoscape) == 'shared.name'] <- 'shared name'
 
 write.csv(cytoscape, paste0(folder, "/cytoscape-v2.csv"), row.names = FALSE)
 
-## 15. Collapsing Ion Identity Networks
+## 19. Collapsing Ion Identity Networks
 #performed in such a way to retain the best annotation (if multiple)
 
 #A new editing df where features are sequentially removed:
@@ -647,7 +636,7 @@ samples.df <- long_df %>%
 
 final.annotation.df <- fix_compound_names(final.annotation.df, "compound.name")  ##df, and column to fix
 
-## 16. Redundancy reduction
+## 20. Redundancy reduction
 
 dataset <- final.annotation.df %>%
   filter(!is.na(smiles) & smiles != "N/A") # Changed OR to AND
@@ -659,7 +648,7 @@ other.data <- final.annotation.df %>%
 
 dataset <- redundancy_fixer(dataset, column_to_check = "smiles")
 
-## 17. Writing files to disk      
+## 21. Writing files to disk      
 ################################
 ##ANNOTATION FILE      
 final.annotation.df2 <- dataset %>% 
@@ -671,9 +660,9 @@ write.csv(final.annotation.df2, paste0(folder, "/final-annotation-df.csv"))
 write.csv(final.annotation.df2, paste0("Y:/MA_BPA_Microbiome/Dataset-Annotations/", dataset.id, ".csv"))
 
 ##################################
-##SAMPLES DF
+##SAMPLES DF - to be copied manually back to mediaflux folder
 
-output_file <- paste0(folder, "/", dataset.id, "-samples-df.csv")
+output_file <- paste0(dataset.id, "-samples-df.csv")
 chunk_size <- 50000 # Process 50,000 rows at a time
 total_rows <- nrow(samples.df)
 num_chunks <- ceiling(total_rows / chunk_size)
@@ -723,6 +712,13 @@ top_10_features <- samples.df.with.annotations %>%
   top_n(10, area) %>%
   ungroup()
 
-write.csv(top_10_features, paste0(folder, "/", dataset.id, "-top-10-features.csv"))
+write.csv(top_10_features, paste0(dataset.id, "-top-10-features.csv"))
+
+#Verification of data: A check to make sure processed data corresponds with each other and wasn't mixed up
+if (nrow(final.annotation.df) > nrow(mzmine.data)) {
+  paste0("!ATTENTION! Possible data mix-up: Check all data has been processed correctly for dataset ", dataset.id, "!")
+}  else  {
+  paste0("Script has finished: No issues detected in processing ", dataset.id, "!")
+}
 
 #Script has finished processing

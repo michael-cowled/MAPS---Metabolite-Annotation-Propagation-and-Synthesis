@@ -7,11 +7,14 @@ library(dplyr)
 library(tidyr)
 library(stringr)
 library(ComplexUpset)
+library(svglite)
+library(tidyverse)
 
 #Using df 'combined' resulting from Extract annotations based on metadata.R
+##Remember to standardise and deduplicate beforehand (by method)
 
-annotation_cleaned <- annotation_counts %>%
-  filter(Best.Annotation.Confidence.Level %in% 1:5) %>%  # Now include level 5
+annotation_cleaned <- combined %>%
+  filter(confidence.level %in% 1:5) %>%
   mutate(
     Method = case_when(
       str_detect(metadata, "HILIC") ~ "HILIC",
@@ -21,9 +24,9 @@ annotation_cleaned <- annotation_counts %>%
       str_detect(metadata, "_LS") ~ "Large-Scale",
       str_detect(metadata, "_SS") ~ "Small-Scale"
     ),
-    Confidence_Level = Best.Annotation.Confidence.Level
+    Confidence_Level = confidence.level
   ) %>%
-  select(Confidence_Level, Method, Scale, Number_of_Compounds = count)
+  count(Confidence_Level, Method, Scale, name = "Number_of_Compounds")
 
 # Step 2: Ensure all combinations exist, filling with 0 if missing
 data_df <- annotation_cleaned %>%
@@ -63,6 +66,8 @@ colors_manual <- c(
 )
 
 # 2. Create the grouped bar chart
+# Create the grouped bar chart without labels on top of the bars
+# Create the grouped bar chart with a y-axis limit
 ggplot(data_df, aes(x = Confidence_Level, y = Number_of_Compounds, fill = Bar_Group)) +
   geom_bar(stat = "identity", position = position_dodge(width = 0.8)) +
   scale_fill_manual(
@@ -82,18 +87,16 @@ ggplot(data_df, aes(x = Confidence_Level, y = Number_of_Compounds, fill = Bar_Gr
   ) +
   theme_minimal() +
   theme(
-    plot.title = element_text(hjust = 0.5, face = "bold", size = 32), # DOUBLED from 16
-    axis.text.x = element_text(size = 24), # DOUBLED from 12
-    axis.text.y = element_text(size = 24), # DOUBLED from 12
-    axis.title = element_text(size = 28, face = "bold"), # DOUBLED from 14
-    legend.title = element_text(size = 26, face = "bold"), # DOUBLED from 13
-    legend.text = element_text(size = 24), # DOUBLED from 12
+    plot.title = element_text(hjust = 0.5, face = "bold", size = 32),
+    axis.text.x = element_text(size = 24),
+    axis.text.y = element_text(size = 24),
+    axis.title = element_text(size = 28, face = "bold"),
+    legend.title = element_text(size = 26, face = "bold"),
+    legend.text = element_text(size = 24),
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank()
   ) +
-  geom_text(aes(label = Number_of_Compounds),
-            position = position_dodge(width = 0.8),
-            vjust = -0.5, size = 8)
+  coord_cartesian(ylim = c(0, 10000))
 
 # IMPORTANT: You will almost certainly need to increase the width and height
 # when saving the plot, otherwise text will overlap significantly.
@@ -102,13 +105,13 @@ ggsave("compound_counts_grouped_bar_chart_doubled_fonts.svg", width = 16, height
 
 # Compound Class Plot (Total Features) - from 'all_combined_datasets' before filtering for uniqueness
 plot_data_total <- combined %>%
-  filter(!(Best.Annotation.Compound.Class %in% c("None", "Others", "N/A", "NA", "")) & !is.na(Best.Annotation.Compound.Class)) %>%
-  group_by(Best.Annotation.Compound.Class, metadata) %>%
+  filter(!(NPC.superclass %in% c("None", "Others", "N/A", "NA", "")) & !is.na(NPC.superclass)) %>%
+  group_by(NPC.superclass, metadata) %>%
   summarise(Feature_Count = n(), .groups = "drop") %>%
   # Filter categories with less than 10 annotations
   filter(Feature_Count >= 10)
 
-ggplot(plot_data_total, aes(x = Feature_Count, y = Best.Annotation.Compound.Class, fill = metadata)) +
+ggplot(plot_data_total, aes(x = Feature_Count, y = NPC.superclass, fill = metadata)) +
   geom_bar(stat = "identity", position = "dodge") +
   labs(
     title = "Total Annotations by Superclass and Dataset (All Four, >= 3 Annotations)",
@@ -124,7 +127,7 @@ ggplot(plot_data_total, aes(x = Feature_Count, y = Best.Annotation.Compound.Clas
   ) -> p_total
 
 ggsave(
-  filename = "Best_Annotation_Compound_Class_Annotation_counts_total_all_four.svg",
+  filename = "Compound_Class_Annotation_counts_total_all_four.svg",
   plot = p_total,
   width = 10,
   height = 14,
@@ -135,9 +138,9 @@ ggsave(
 ##Creation of Upset Plot
 # Filter to non-NA SMILES
 smiles_by_group <- combined %>%
-  filter(!is.na(Best.Annotation.Smiles)) %>%
+  filter(!is.na(smiles)) %>%
   group_by(metadata) %>%
-  summarise(smiles = list(unique(Best.Annotation.Smiles))) %>%
+  summarise(smiles = list(unique(smiles))) %>%
   deframe()
 
 # Get metadata groups (up to 4 for Venn)
@@ -159,8 +162,8 @@ library(ComplexUpset)
 
 # Make long format
 upset_data <- combined %>%
-  filter(!is.na(Best.Annotation.Smiles)) %>%
-  distinct(Best.Annotation.Smiles, metadata) %>%
+  filter(!is.na(smiles)) %>%
+  distinct(smiles, metadata) %>%
   mutate(present = 1) %>%
   pivot_wider(names_from = metadata, values_from = present, values_fill = 0)
 

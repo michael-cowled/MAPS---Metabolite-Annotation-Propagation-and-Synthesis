@@ -6,7 +6,7 @@ library(ggplot2)
 ##-----------USER INPUT------------##
 
 # List of dataset IDs
-list.of.datasets <- c("HGMD_0105", "HGMD_0108") # Add as many or little as you want.
+list.of.datasets <- c("HGMD_0070", "HGMD_0108") # Add as many or little as you want.
 
 ##-----------END USER INPUT------------##
 
@@ -21,14 +21,14 @@ dataset.tidier <- function(list.of.datasets) {
       dataset <- read.csv(file_path)
       dataset$dataset.id <- i
       dataset <- dataset %>%
-        select(dataset.id, feature.usi, Samples, Best.Annotation, Best.Annotation.Smiles, 
-               Best.Annotation.Confidence.Level, Best.Annotation.Compound.Class)      # %>%
+        select(dataset.id, feature.usi, Samples, compound.name, smiles, 
+               confidence.level, canopus.NPC.superclass)      # %>%
       # Optional filtering step (remove # above and below)
-        # distinct(Best.Annotation, .keep_all = TRUE)
+        # distinct(compound.name, .keep_all = TRUE)
       
       # --- FIX START ---
-      # Convert Best.Annotation.Confidence.Level to numeric, coercing non-numeric to NA
-      dataset$Best.Annotation.Confidence.Level <- as.numeric(as.character(dataset$Best.Annotation.Confidence.Level))
+      # Convert confidence.level to numeric, coercing non-numeric to NA
+      dataset$confidence.level <- as.numeric(as.character(dataset$confidence.level))
       # --- FIX END ---
       
       dataset_list[[i]] <- dataset
@@ -45,8 +45,8 @@ datasets <- dataset.tidier(list.of.datasets)
   
 # Ensure correct column names
 if(length(colnames(datasets))>=5){
-  if(colnames(datasets)[5] != "Best.Annotation.Smiles"){
-    stop("The fifth column is expected to be named 'Best.Annotation.Smiles'. Please rename it accordingly.")
+  if(colnames(datasets)[5] != "smiles"){
+    stop("The fifth column is expected to be named 'smiles'. Please rename it accordingly.")
   }
 } else {
   stop("The 'datasets' dataframe does not have at least 5 columns")
@@ -55,7 +55,7 @@ if(length(colnames(datasets))>=5){
 
 # Get unique dataset IDs and confidence levels
 unique_datasets <- unique(datasets$dataset.id)
-unique_confidence_levels <- unique(datasets$Best.Annotation.Confidence.Level)
+unique_confidence_levels <- unique(datasets$confidence.level)
 
 # Initialize an empty list to store the results
 result_list <- list()
@@ -66,7 +66,7 @@ for (target_dataset in unique_datasets) {
     
     # 1. Subset the data for the target dataset and confidence level
     target_data <- datasets %>%
-      filter(dataset.id == target_dataset, Best.Annotation.Confidence.Level == target_confidence)
+      filter(dataset.id == target_dataset, confidence.level == target_confidence)
     
     # Skip to the next iteration if target_data is empty
     if (nrow(target_data) == 0) {
@@ -75,16 +75,16 @@ for (target_dataset in unique_datasets) {
     
     # 2. Remove duplicates *within* the target dataset/confidence
     target_data_distinct <- target_data %>%
-      distinct(Best.Annotation.Smiles, .keep_all = TRUE)
+      distinct(smiles, .keep_all = TRUE)
     
     # 3. Subset the data for all *other* datasets and the *same* confidence level
     other_data <- datasets %>%
-      filter(dataset.id != target_dataset, Best.Annotation.Confidence.Level == target_confidence)
+      filter(dataset.id != target_dataset, confidence.level == target_confidence)
     
     # 4. Perform the comparison and filtering (efficiently with anti_join)
     if (nrow(other_data) > 0) {
       filtered_data <- target_data_distinct %>%
-        anti_join(other_data, by = c("Best.Annotation.Smiles" = "Best.Annotation.Smiles"))
+        anti_join(other_data, by = c("smiles" = "smiles"))
     } else {
       filtered_data <- target_data_distinct
     }
@@ -104,34 +104,48 @@ write.csv(final_result, "filtered_datasets.csv", row.names = FALSE)
 
 #Verification
 dataset_summary_exclusive <- final_result %>%
-  group_by(dataset.id, Best.Annotation.Confidence.Level) %>%
+  group_by(dataset.id, confidence.level) %>%
   summarize(unique_smiles_count = n(), .groups = "drop")
 print(dataset_summary_exclusive)
 write.csv(dataset_summary_exclusive, "unique_smiles.csv", row.names = FALSE)
 
 #Count USIs per dataset.id and confidence.level (no change here)
 usi_counts <- datasets %>%
-  group_by(dataset.id, Best.Annotation.Confidence.Level) %>%
+  group_by(dataset.id, confidence.level) %>%
   summarize(total_usi = n_distinct(feature.usi), .groups = "drop")
 
 write_csv(usi_counts, "usi_counts.csv")
 print(usi_counts)
 
+##----------- TOTAL CONFIDENCE LEVEL SUMMARY -----------##
+
+# Summarize total annotations for each confidence level across ALL datasets
+total_confidence_summary <- datasets %>%
+  group_by(confidence.level) %>%
+  summarize(total_annotations = n(), .groups = "drop") %>%
+  arrange(confidence.level) # Optional: sorts the output by confidence level
+
+# Print and save the summary
+print("--- Total Annotations per Confidence Level (All Datasets) ---")
+print(total_confidence_summary)
+write.csv(total_confidence_summary, "total_confidence_level_counts.csv", row.names = FALSE)
+
+
 #------------------------------------------------------------------------------#
 
 ##Compound Class Plot -- By Siyao Liu
-# Count features per Best.Annotation.Compound.Class and dataset.id
+# Count features per canopus.NPC.superclass and dataset.id
 
 # Read the filtered dataset and clean invalid superclasses
 filtered_datasets <- final_result %>%
-  filter(!(Best.Annotation.Compound.Class %in% c("None", "Others", "N/A", "NA", "")) & !is.na(Best.Annotation.Compound.Class))
+  filter(!(canopus.NPC.superclass %in% c("None", "Others", "N/A", "NA", "")) & !is.na(canopus.NPC.superclass))
 
 plot_data <- filtered_datasets %>%
-  group_by(Best.Annotation.Compound.Class, dataset.id) %>%
+  group_by(canopus.NPC.superclass, dataset.id) %>%
   summarise(Feature_Count = n(), .groups = "drop")
 
 # Create and save the plot in one go
-ggplot(plot_data, aes(x = Feature_Count, y = Best.Annotation.Compound.Class, fill = dataset.id)) +
+ggplot(plot_data, aes(x = Feature_Count, y = canopus.NPC.superclass, fill = dataset.id)) +
   geom_bar(stat = "identity", position = "dodge") +
   labs(
     title = "Unique Feature Count by Superclass and Dataset",
@@ -157,18 +171,18 @@ ggsave(
 
 
 ##Compound Class Plot -- By Siyao Liu
-# Count features per Best.Annotation.Compound.Class and dataset.id
+# Count features per canopus.NPC.superclass and dataset.id
 
 # Read the filtered dataset and clean invalid superclasses
 datasets <- datasets %>%
-  filter(!(Best.Annotation.Compound.Class %in% c("None", "Others", "N/A", "NA", "")) & !is.na(Best.Annotation.Compound.Class))
+  filter(!(canopus.NPC.superclass %in% c("None", "Others", "N/A", "NA", "")) & !is.na(canopus.NPC.superclass))
 
 plot_data <- datasets %>%
-  group_by(Best.Annotation.Compound.Class, dataset.id) %>%
+  group_by(canopus.NPC.superclass, dataset.id) %>%
   summarise(Feature_Count = n(), .groups = "drop")
 
 # Create and save the plot in one go
-ggplot(plot_data, aes(x = Feature_Count, y = Best.Annotation.Compound.Class, fill = dataset.id)) +
+ggplot(plot_data, aes(x = Feature_Count, y = canopus.NPC.superclass, fill = dataset.id)) +
   geom_bar(stat = "identity", position = "dodge") +
   labs(
     title = "Total Annotations by Superclass and Dataset",

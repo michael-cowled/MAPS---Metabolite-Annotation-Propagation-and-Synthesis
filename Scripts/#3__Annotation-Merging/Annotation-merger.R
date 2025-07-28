@@ -18,15 +18,18 @@ good_datasets <- dataset.info %>%
 file_list <- file_list %>%
   keep(~ tools::file_path_sans_ext(basename(.x)) %in% good_datasets)
 
+# Prepare an empty tibble to collect results
 all_unique_entries <- tibble(
   feature.ID = character(),
   rt = numeric(),
   mz = numeric(),
-  Best.Annotation = character(),
-  Best.Annotation.Smiles = character(),
-  Best.Annotation.Confidence.Score = numeric(),
-  Best.Annotation.Confidence.Level = numeric(),
-  Best.Annotation.Type = character(),
+  compound.name = character(),
+  smiles = character(),
+  CID = numeric(),
+  confidence.score = numeric(),
+  confidence.level = numeric(),
+  id.prob = character(),
+  annotation.type = character(),
   dataset.ID = character()
 )
 
@@ -44,8 +47,8 @@ for (file_path in file_list) {
   
   if (is.null(dataset)) next
   
-  if (!"Best.Annotation.Smiles" %in% names(dataset)) {
-    message(paste("Warning: 'Best.Annotation.Smiles' not found in", file_name, "- skipping"))
+  if (!"smiles" %in% names(dataset)) {
+    message(paste("Warning: 'smiles' not found in", file_name, "- skipping"))
     next
   }
   
@@ -56,17 +59,20 @@ for (file_path in file_list) {
   
   dataset$feature.ID <- as.character(dataset$feature.ID)
   dataset$dataset.ID <- dataset_id
+  dataset$id.prob <- as.character(dataset$id.prob)  # <-- Fix type mismatch
   
   current_unique_entries <- dataset %>%
-    filter(!is.na(Best.Annotation.Smiles), Best.Annotation.Smiles != "N/A") %>%
-    filter(Best.Annotation.Confidence.Level <= 2) %>%
-    distinct(Best.Annotation.Smiles, .keep_all = TRUE) %>%
-    select(feature.ID, rt, mz, Best.Annotation, Best.Annotation.Smiles,
-           Best.Annotation.Confidence.Score, Best.Annotation.Confidence.Level,
-           Best.Annotation.Type, dataset.ID)
+    filter(!is.na(smiles), smiles != "N/A") %>%
+    filter(confidence.level <= 2) %>%
+    arrange(confidence.level) %>%
+    distinct(smiles, .keep_all = TRUE) %>%
+    select(feature.ID, rt, mz, compound.name, smiles, CID,
+           confidence.score, id.prob, confidence.level,
+           annotation.type, dataset.ID)
   
   all_unique_entries <- bind_rows(all_unique_entries, current_unique_entries)
 }
+
 
 # --- Join Dataset Info ---
 dataset.info$HGMD.ID <- as.character(dataset.info$HGMD.ID)
@@ -82,42 +88,72 @@ if (length(unmatched) > 0) {
 }
 
 # --- Calculate Annotation Frequency ---
-# Placeholder: fix_compound_names() must be defined somewhere
-final_combined_unique_entries_filtered <- fix_compound_names(all_unique_entries, "Best.Annotation")
+# Placeholder: fix_compound_names() must be defined elsewhere
+
+final_combined_unique_entries_filtered <- fix_compound_names(all_unique_entries, "compound.name")
 
 final_data_with_frequency <- final_combined_unique_entries_filtered %>%
-  group_by(Best.Annotation) %>%
+  group_by(compound.name) %>%
   mutate(Frequency = n_distinct(dataset.ID)) %>%
   ungroup()
 
-final_combined_unique_entries_filtered <- final_data_with_frequency %>%
-  group_by(column.type) %>%
-  distinct(Best.Annotation.Smiles, .keep_all = TRUE) %>%
-  distinct(Best.Annotation, .keep_all = TRUE) %>%
+compound_frequencies <- final_data_with_frequency %>%
+  filter(!is.na(smiles)) %>%
+  group_by(smiles) %>%
+  summarise(Frequency = n_distinct(dataset.ID))
+
+# Step 1: Assign column-type priority
+priority_filtered <- final_data_with_frequency %>%
+  mutate(priority = case_when(
+    column.type %in% c("Phe-Hex", "HILIC") ~ 1,
+    column.type == "C18" ~ 2,
+    TRUE ~ 3
+  ))
+
+# Step 2: Keep only best annotation per (smiles + column.type)
+best_per_smiles_coltype <- priority_filtered %>%
+  arrange(confidence.level, desc(id.prob), desc(confidence.score)) %>%
+  group_by(smiles, column.type) %>%
+  slice_head(n = 1) %>%
   ungroup()
+
+# Step 3: Drop C18 if Phe-Hex exists for that compound
+final_combined_unique_entries_filtered <- best_per_smiles_coltype %>%
+  group_by(smiles) %>%
+  filter(
+    column.type %in% c("Phe-Hex", "HILIC") |
+      (column.type == "C18" & !any(column.type == "Phe-Hex"))
+  ) %>%
+  ungroup()
+
+# Step 4: Add frequency of datasets in which each compound was detected
+final_combined_unique_entries_filtered <- final_combined_unique_entries_filtered %>%
+  group_by(smiles) %>%
+  mutate(Frequency = n_distinct(dataset.ID)) %>%
+  ungroup()
+
+# Step 5: Join the true frequency back to the filtered results
+final_combined_unique_entries_filtered <- final_combined_unique_entries_filtered %>%
+  left_join(compound_frequencies, by = "smiles")
+
+#Final tidying
+
+final_combined_unique_entries_filtered <- final_combined_unique_entries_filtered %>%
+  select(-Frequency.x, -priority) %>%
+  filter(!is.na(compound.name), !is.na(smiles))
 
 # --- Write Final CSV ---
 write.csv(final_combined_unique_entries_filtered,
           "Y:/MA_BPA_Microbiome/Total-List-Of-Annotations.csv",
           row.names = FALSE)
 
-# --- Post-standardisation with PubChem ---
-final_data_after_initial_annotation_and_frequency <- final_combined_unique_entries_filtered %>%
-  group_by(Best.Annotation) %>%
-  mutate(Initial_Frequency = n_distinct(dataset.ID)) %>%
-  ungroup()
+hilic <- filter(final_combined_unique_entries_filtered, column.type == "HILIC")
+phehex <- filter(final_combined_unique_entries_filtered, column.type == "Phe-Hex" | column.type == "C18")
 
-final_combined_unique_entries_filtered <- final_data_after_initial_annotation_and_frequency %>%
-  group_by(column.type) %>%
-  distinct(Best.Annotation.Smiles, .keep_all = TRUE) %>%
-  distinct(Best.Annotation, .keep_all = TRUE) %>%
-  ungroup()
+write.csv(hilic,
+          "Y:/MA_BPA_Microbiome/HILIC-List-Of-Annotations.csv",
+          row.names = FALSE)
 
-final_output_with_final_frequencies <- final_combined_unique_entries_filtered %>%
-  group_by(Best.Annotation) %>%
-  mutate(Final_Frequency = n_distinct(dataset.ID)) %>%
-  ungroup()
-
-write.csv(final_output_with_final_frequencies,
-          "Y:/MA_BPA_Microbiome/Total-List-Of-Annotations-post-standardisation.csv",
+write.csv(phehex,
+          "Y:/MA_BPA_Microbiome/PheHex-List-Of-Annotations.csv",
           row.names = FALSE)

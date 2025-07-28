@@ -6,11 +6,11 @@ library(readr)
 base_path <- "Y:/MA_BPA_Microbiome/Dataset-Annotations"
 
 # Load and label datasets
-df_0110 <- read_csv(file.path(base_path, "HGMD_0112.csv")) %>%
-  mutate(Dataset = "HGMD_0112")
+df_0110 <- read_csv(file.path(base_path, "HGMD_0108.csv")) %>%
+  mutate(Dataset = "HGMD_0108")
 
-df_0111 <- read_csv(file.path(base_path, "HGMD_0113.csv")) %>%
-  mutate(Dataset = "HGMD_0113")
+df_0111 <- read_csv(file.path(base_path, "HGMD_0070.csv")) %>%
+  mutate(Dataset = "HGMD_0070")
 
 
 
@@ -48,11 +48,11 @@ print(p1)
 #-----------------------stacked bar chart showing superclass composition------------#
 # Step 1: Remove unwanted classes
 cleaned_df <- combined_df %>%
-  filter(!(Best.Annotation.Compound.Class %in% c("None", "Others", "N/A", "NA", "")) & !is.na(Best.Annotation.Compound.Class))
+  filter(!(canopus.NPC.superclass %in% c("None", "Others", "N/A", "NA", "")) & !is.na(canopus.NPC.superclass))
 
 # Step 2: Find top 15 classes per dataset after filtering
 top_classes <- cleaned_df %>%
-  group_by(Dataset, Best.Annotation.Compound.Class) %>%
+  group_by(Dataset, canopus.NPC.superclass) %>%
   summarise(Count = n(), .groups = "drop") %>%
   group_by(Dataset) %>%
   slice_max(order_by = Count, n = 15) %>%
@@ -60,16 +60,16 @@ top_classes <- cleaned_df %>%
 
 # Step 3: Filter cleaned_df to include only top classes
 filtered_df <- inner_join(cleaned_df, top_classes, 
-                          by = c("Dataset", "Best.Annotation.Compound.Class"))
+                          by = c("Dataset", "canopus.NPC.superclass"))
 
 # Compute counts, percentages, and angles
 class_counts <- filtered_df %>%
-  group_by(Dataset, Best.Annotation.Compound.Class) %>%
+  group_by(Dataset, canopus.NPC.superclass) %>%
   summarise(Count = n(), .groups = "drop") %>%
   group_by(Dataset) %>%
   mutate(Percent = Count / sum(Count) * 100,
          Label = if_else(row_number(desc(Count)) <= 5,
-                         paste0(Best.Annotation.Compound.Class, "\n", round(Percent, 1), "%"),
+                         paste0(canopus.NPC.superclass, "\n", round(Percent, 1), "%"),
                          NA_character_),
          ymax = cumsum(Count),
          ymin = lag(ymax, default = 0),
@@ -78,18 +78,18 @@ class_counts <- filtered_df %>%
 
 # Step 1: Reorder compound class factor by total count
 class_order <- class_counts %>%
-  group_by(Best.Annotation.Compound.Class) %>%
+  group_by(canopus.NPC.superclass) %>%
   summarise(Total = sum(Count), .groups = "drop") %>%
   arrange(desc(Total)) %>%
-  pull(Best.Annotation.Compound.Class)
+  pull(canopus.NPC.superclass)
 
-class_counts$Best.Annotation.Compound.Class <- factor(
-  class_counts$Best.Annotation.Compound.Class,
+class_counts$canopus.NPC.superclass <- factor(
+  class_counts$canopus.NPC.superclass,
   levels = class_order
 )
 
 # Step 2: Plot with sorted legend
-p2<-ggplot(class_counts, aes(x = Dataset, y = Count, fill = Best.Annotation.Compound.Class)) +
+p2<-ggplot(class_counts, aes(x = Dataset, y = Count, fill = canopus.NPC.superclass)) +
   geom_bar(stat = "identity") +
   scale_fill_manual(values = custom_colors_20) +
   labs(title = "Feature Count by compound Class",
@@ -102,11 +102,11 @@ p2<-ggplot(class_counts, aes(x = Dataset, y = Count, fill = Best.Annotation.Comp
 #----------------------Annotation confidence conparison------------------------#
 # Filter and clean
 confidence_data <- combined_df %>%
-  filter(!Best.Annotation.Confidence.Level %in% c("NA", "N/A", "", "Unknown")) %>%
-  mutate(Best.Annotation.Confidence.Level = factor(Best.Annotation.Confidence.Level, ordered = TRUE))
+  filter(!confidence.level %in% c("NA", "N/A", "", "Unknown")) %>%
+  mutate(confidence.level = factor(confidence.level, ordered = TRUE))
 
 # Plot: Bar chart of confidence level counts per dataset
-p3<-ggplot(confidence_data, aes(x = Best.Annotation.Confidence.Level, fill = Dataset)) +
+p3<-ggplot(confidence_data, aes(x = confidence.level, fill = Dataset)) +
   geom_bar(position = position_dodge(width = 0.9)) +
   geom_text(stat = "count",
             aes(label = ..count..),
@@ -121,21 +121,21 @@ p3<-ggplot(confidence_data, aes(x = Best.Annotation.Confidence.Level, fill = Dat
 
 # Filter and prepare data
 df_filtered <- combined_df %>%
-  filter(!is.na(Best.Annotation.Compound.Class),
-         !Best.Annotation.Compound.Class %in% c("", "None", "NA", "N/A"))
+  filter(!is.na(canopus.NPC.superclass),
+         !canopus.NPC.superclass %in% c("", "None", "NA", "N/A"))
 
 ###-----------------------stacked bar plot showing the annotation source----##
 
 percent_data <- df_filtered %>%
-  count(Best.Annotation.Compound.Class, Best.Annotation.Type) %>%
-  group_by(Best.Annotation.Compound.Class) %>%
+  count(canopus.NPC.superclass, annotation.type) %>%
+  group_by(canopus.NPC.superclass) %>%
   mutate(Percentage = n / sum(n) * 100) %>%
   ungroup()
 
 stacked_bar_plot <- ggplot(percent_data, 
-                           aes(x = reorder(Best.Annotation.Compound.Class, -Percentage), 
+                           aes(x = reorder(canopus.NPC.superclass, -Percentage), 
                                y = Percentage, 
-                               fill = Best.Annotation.Type)) +
+                               fill = annotation.type)) +
   geom_bar(stat = "identity", position = "stack", width = 0.8) +
   scale_fill_manual(values = custom_colors_20) +
   labs(title = "Percentage Contribution of Annotation Sources",
@@ -164,9 +164,9 @@ rt_binned <- df_filtered %>%
     RT_bin = floor(rt),  # Creates integer bins (0,1,2,...)
     RT_bin_label = sprintf("%d-%.4f", RT_bin, RT_bin + 0.9999)  # Precise labels
   ) %>%
-  count(RT_bin, RT_bin_label, Best.Annotation.Compound.Class, name = "Count") %>%
+  count(RT_bin, RT_bin_label, canopus.NPC.superclass, name = "Count") %>%
   mutate(RT_mid = RT_bin + 0.5) %>%  # Midpoint for plotting
-  group_by(Best.Annotation.Compound.Class) %>%
+  group_by(canopus.NPC.superclass) %>%
   mutate(Total_Class_Count = sum(Count)) %>%  # For ordering
   ungroup()
 
@@ -174,9 +174,9 @@ rt_binned <- df_filtered %>%
 rt.count <- max(rt_binned$RT_bin) + 1
 bubble<-ggplot(rt_binned, 
                aes(x = RT_mid, 
-                   y = reorder(Best.Annotation.Compound.Class, Total_Class_Count),
+                   y = reorder(canopus.NPC.superclass, Total_Class_Count),
                    size = Count, 
-                   color = Best.Annotation.Compound.Class)) +
+                   color = canopus.NPC.superclass)) +
   geom_point(alpha = 0.8) +
   scale_x_continuous(breaks = 0:rt.count, limits = c(0, rt.count)) +
   scale_size_continuous(range = c(3, 15), name = "Feature Count") +
