@@ -5,7 +5,7 @@
 
 # Dataset ID: From Data Management Plan:
 
-dataset.id <- "HGMD_0108"      #####Change to dataset of interest#####
+dataset.id <- "HGMD_0146"      #####Change to dataset of interest#####
 
 # Specify the path to the Data Management Plan (unless moved to Mediaflux then should be consistent)
 
@@ -63,7 +63,7 @@ check_and_install(required_packages, github_packages)
 sheet_names <- excel_sheets(excel_file) # Get the sheet names
 for (sheet in sheet_names) {
   data <- read_excel(excel_file, sheet = sheet)
-  write.csv(data, file = paste0("HGM/", sheet, ".csv"), row.names = FALSE)
+  write_csv(data, file = paste0("HGM/", sheet, ".csv"))
 }
 
 dataset <- read.csv("HGM/D - Dataset.csv") %>%
@@ -100,12 +100,13 @@ if (dir.exists(folder)) {
   print(file_info)
   output_filename <- paste0(dataset.id, "_file_list.csv")
   output_path <- file.path(output_directory, output_filename) # changed here
-  write.csv(file_info, file = output_path, row.names = FALSE) # and here
+  write_csv(file_info, file = output_path) # and here
   print(paste("File list saved to:", output_path)) # and here
 } else {
   print("Folder does not exist. Check the path.")
 }
 
+#-----------------------------------------------------------------------------------------------------------------------#
 ## 4. Processed Data Check
 #Check if all data is present in folder with correct naming conventions         ###CHECK SPELLING!!!!###
 #Folder with mzmine, ms2query, sirius and gnps results
@@ -123,6 +124,7 @@ zodiac.data <- paths$zodiac_data
 ms2query.data <- paths$ms2query_data
 cytoscape <- paths$cytoscape
 
+#-----------------------------------------------------------------------------------------------------------------------#
 ## 5. Load in MZMINE data
 mzmine.annotations <- read.csv(mzmine.annotations) %>%
   # First, ensure distinct compound_name per id
@@ -145,16 +147,83 @@ mzmine.annotations <- read.csv(mzmine.annotations) %>%
 
 #Calculating ID probability of level 1 annotations
 mzmine.annotations$mzmine.id.prob <- NA
+
+# Setting up database and cache connection
+library(DBI)
+cid_db_con <- dbConnect(RSQLite::SQLite(), "~/PubChem_Indexed.sqlite")
+
+cid_cache_path <- "~/cid_cache.csv"
+
+if (file.exists(cid_cache_path)) {
+  cid_cache_df <- read.csv(cid_cache_path, stringsAsFactors = FALSE)
+  # Ensure all necessary columns exist
+  required_cols <- c("LookupName", "ResolvedName", "SMILES", "CID")
+  missing_cols <- setdiff(required_cols, names(cid_cache_df))
+  if (length(missing_cols) > 0) {
+    for (col in missing_cols) cid_cache_df[[col]] <- NA
+  }
+  cid_cache_df <- cid_cache_df[, required_cols]
+} else {
+  message("[CACHE INIT] No cache file found. Initializing empty cache.")
+  cid_cache_df <- data.frame(LookupName = character(),
+                             ResolvedName = character(),
+                             SMILES = character(),
+                             CID = numeric(),
+                             stringsAsFactors = FALSE)
+}
+
 #Standardisation of compound names (retrieving from a locally stored cache/pubchem)
 # --- Main Processing Loop ---
 mzmine.annotations$smiles <- trimws(mzmine.annotations$smiles)
-mzmine.annotations <- standardise_annotation(
+# Call function
+result <- standardise_annotation(
   mzmine.annotations,
   name_col = "compound_name",
   smiles_col = "smiles",
-  cid_database_path = "Y:/MA_BPA_Microbiome/MS Databases/PubChem/cid_lookup.sqlite",
-  cid_cache_path = "~cid_cache.csv"
+  cid_cache_df = cid_cache_df,
+  cid_database_path = "~/PubChem_Indexed.sqlite"
 )
+
+# Old Code
+# mzmine.annotations <- result$data
+# cid_cache_df <- result$cache
+
+# New code to add for the new columns
+mzmine.annotations <- result$data
+cid_cache_df <- result$cache
+# Add new columns with initial NA values if they don't exist
+if (!("Formula" %in% names(mzmine.annotations))) mzmine.annotations$Formula <- NA_character_
+if (!("IUPAC" %in% names(mzmine.annotations))) mzmine.annotations$IUPAC <- NA_character_
+if (!("Monoisotopic.Mass" %in% names(mzmine.annotations))) mzmine.annotations$Monoisotopic.Mass <- NA_real_
+
+# Then modify the select statement to include the new columns
+mzmine.annotations.final <- mzmine.annotations %>%
+  group_by(id) %>%
+  mutate(mzmine.id.prob = 1 / n()) %>%
+  filter(score == max(score)) %>%
+  slice(1) %>%
+  ungroup() %>%
+  # UPDATE THIS LINE to include new columns
+  select(id, compound_name, score, smiles, mzmine.id.prob, CID, Formula, IUPAC, Monoisotopic.Mass)
+
+names(mzmine.annotations.final) <- c('feature.ID', "compound.name", "confidence.score",
+                                     "smiles", "id.prob", "CID", "Formula", "IUPAC", "Monoisotopic.Mass")
+
+# Save cache after done
+tryCatch({
+  write_csv(cid_cache_df, cid_cache_path)
+  message("[CACHE WRITE] Saved cache to: ", cid_cache_path)
+}, error = function(e) {
+  warning("Failed to save cache: ", e$message)
+})
+
+#Handling of level 1 annotations
+if (nrow(mzmine.annotations) == 0) {
+  mzmine.annotations$CID <- NA 
+  error.message <- "No level 1 annotations were observed."
+} else {
+  error.message <- "Level 1 annotations seem fine."
+}
 
 mzmine.annotations.final <- mzmine.annotations %>%
   group_by(id) %>%
@@ -165,9 +234,9 @@ mzmine.annotations.final <- mzmine.annotations %>%
   slice(1) %>%  # In case of ties, keep one arbitrarily
   ungroup() %>%
   # Keep only relevant columns:
-  select(id, compound_name, score, smiles, mzmine.id.prob, CID)
+  select(id, compound_name, score, smiles, mzmine.id.prob, CID, Formula, IUPAC, Monoisotopic.Mass)
 names(mzmine.annotations.final) <- c('feature.ID', "compound.name", "confidence.score", 
-                                     "smiles", "id.prob", "CID")
+                                     "smiles", "id.prob", "CID", "Formula", "IUPAC", "Monoisotopic.Mass")
 mzmine.annotations.final$feature.ID <- as.numeric(mzmine.annotations.final$feature.ID)
 mzmine.annotations.final$confidence.level <- "1"
 mzmine.annotations.final$annotation.type <- "authentic standard"
@@ -255,7 +324,7 @@ ms2query.data.lv2 <-ms2query.data %>%
   filter(confidence.score > ms2query.prob) %>%
   filter(mz.diff <= 0.001) %>%
   select(-mz.diff, -precursor_mz)
-  
+
 ms2query.data.lv2$confidence.level <- "2"
 ms2query.data.lv2$gnps.shared.peaks <- NA
 ms2query.data.lv2$library.name <- "ms2query"
@@ -270,20 +339,66 @@ ms2query.data.lv3 <- ms2query.data %>%
   filter(!feature.ID %in% mzmine.annotations.final$feature.ID) #removes any annotations that conflict with level 1 annotations
 ms2query.data.lv3$confidence.level <- "3"
 
+#Read in cache
+if (file.exists(cid_cache_path)) {
+  cid_cache_df <- read.csv(cid_cache_path, stringsAsFactors = FALSE)
+  # Ensure all necessary columns exist
+  required_cols <- c("LookupName", "ResolvedName", "SMILES", "CID")
+  missing_cols <- setdiff(required_cols, names(cid_cache_df))
+  if (length(missing_cols) > 0) {
+    for (col in missing_cols) cid_cache_df[[col]] <- NA
+  }
+  cid_cache_df <- cid_cache_df[, required_cols]
+} else {
+  message("[CACHE INIT] No cache file found. Initializing empty cache.")
+  cid_cache_df <- data.frame(LookupName = character(),
+                             ResolvedName = character(),
+                             SMILES = character(),
+                             CID = numeric(),
+                             stringsAsFactors = FALSE)
+}
+
 ## 8. Standardise level 2 annotations and compute ID probability
 lv2.annotations <- rbind(gnps.data.lv2, ms2query.data.lv2)  ##bind the two sets of annotations together
 lv2.annotations$smiles <- trimws(lv2.annotations$smiles)
 
 lv2.annotations$CID <- NA
 lv2.annotations <- deduplicate_data(lv2.annotations, compound.name, confidence.score) #Pre-standardisation filtering for duplicates
-lv2.annotations <- standardise_annotation(
+result <- standardise_annotation(
   lv2.annotations,
   name_col = "compound.name",
   smiles_col = "smiles",
-  cid_database_path = "Y:/MA_BPA_Microbiome/MS Databases/PubChem/cid_lookup.sqlite",
-  cid_cache_path = "~cid_cache.csv"
+  cid_cache_df = cid_cache_df,
+  cid_database_path = "~/PubChem_Indexed.sqlite"
 )
+
+# Old Code
+# lv2.annotations <- result$data
+# cid_cache_df <- result$cache
+
+# New code to add for the new columns
+lv2.annotations <- result$data
+cid_cache_df <- result$cache
+# Add new columns with initial NA values if they don't exist
+if (!("Formula" %in% names(lv2.annotations))) lv2.annotations$Formula <- NA_character_
+if (!("IUPAC" %in% names(lv2.annotations))) lv2.annotations$IUPAC <- NA_character_
+if (!("Monoisotopic.Mass" %in% names(lv2.annotations))) lv2.annotations$Monoisotopic.Mass <- NA_real_
+
 lv2.annotations <- deduplicate_data(lv2.annotations, compound.name, confidence.score) #Post-standardisation filtering of duplicates
+
+# Save cache after done
+tryCatch({
+  write_csv(cid_cache_df, cid_cache_path)
+  message("[CACHE WRITE] Saved cache to: ", cid_cache_path)
+}, error = function(e) {
+  warning("Failed to save cache: ", e$message)
+})
+
+# Close connection at end
+if (dbIsValid(cid_db_con)) {
+  dbDisconnect(cid_db_con)
+  message("[DB DISCONNECT] Closed global DB connection.")
+}
 
 #Computing of ID prob.
 lv2.annotations <- lv2.annotations %>%
@@ -327,7 +442,14 @@ gnps.data.lv3 <- gnps.data.lv3 %>%
   slice(1) %>%
   ungroup()
 
+# Add missing columns to gnps.data.lv3 from lv1.and.lv2.annotations
+missing_cols <- colnames(lv1.and.lv2.annotations)[!colnames(lv1.and.lv2.annotations) %in% colnames(gnps.data.lv3)]
+for (col in missing_cols) {
+  gnps.data.lv3[[col]] <- NA
+}
+
 lv1.lv2.lv3.annotations <- lv1.and.lv2.annotations %>%
+  rbind(gnps.data.lv3)
   rbind(gnps.data.lv3)
 
 ## 10. Load in SIRIUS data:      Compatible with v6.1.0 onwards
@@ -361,7 +483,8 @@ csi.data <- csi.data[, c(2, 1, 3:ncol(csi.data))] #Swap cols 1 and 2
 # Initial fixes
 csi.data$confidence.score[csi.data$confidence.score == -Inf] <- 0
 csi.data$confidence.score <- as.numeric(csi.data$confidence.score)
-csi.data <- filter(csi.data, confidence.score >= csi.prob)
+csi.data <- filter(csi.data, confidence.score >= csi.prob) %>%
+  filter(!grepl("PUBCHEM", compound.name, ignore.case = TRUE))
 csi.data$compound.name[grepl("Solaparnaine", csi.data$compound.name, ignore.case = TRUE)] <- "Solaparnaine" ##troublesome case
 csi.data$compound.name[grepl("Spectalinine", csi.data$compound.name, ignore.case = TRUE)] <- "(-)-Spectalinine" ##troublesome case
 
@@ -498,7 +621,7 @@ propagated.annotation.data <- propagated.annotation.data %>%
       "GNPS Propagation",
       annotation.type
     )
-) %>%
+  ) %>%
   select(-propagation_mask)
 
 ## 16. Append level 4 and 5 annotations
@@ -588,7 +711,7 @@ cytoscape <- cytoscape %>%
   full_join(cytoscape.annotations, by = "shared.name")
 colnames(cytoscape)[colnames(cytoscape) == 'shared.name'] <- 'shared name'
 
-write.csv(cytoscape, paste0(folder, "/cytoscape-v2.csv"), row.names = FALSE)
+write_csv(cytoscape, paste0(folder, "/cytoscape-v2.csv"))
 
 ## 19. Collapsing Ion Identity Networks
 #performed in such a way to retain the best annotation (if multiple)
@@ -628,7 +751,7 @@ long_df <- sample.data2 %>%
   )
 
 samples.df <- final.annotation.df %>%
-  select(feature.ID, feature.usi, compound.name, smiles)
+  select(feature.ID, feature.usi, compound.name, smiles, Formula, IUPAC, Monoisotopic.Mass)
 samples.df$feature.ID <- as.numeric(samples.df$feature.ID)
 
 samples.df <- long_df %>%
@@ -656,13 +779,13 @@ final.annotation.df2 <- dataset %>%
   select(-redundant) %>% 
   rbind(other.data)        
 
-write.csv(final.annotation.df2, paste0(folder, "/final-annotation-df.csv"))
-write.csv(final.annotation.df2, paste0("Y:/MA_BPA_Microbiome/Dataset-Annotations/", dataset.id, ".csv"))
+write_csv(final.annotation.df2, paste0(folder, "/final-annotation-df.csv"))
+write_csv(final.annotation.df2, paste0("Y:/MA_BPA_Microbiome/Dataset-Annotations/", dataset.id, ".csv"))
 
 ##################################
 ##SAMPLES DF - to be copied manually back to mediaflux folder
 
-output_file <- paste0(dataset.id, "-samples-df.csv")
+output_file <- paste0("Y:/MA_BPA_Microbiome/Dataset-Abundances/", dataset.id, "-samples-df.csv")
 chunk_size <- 50000 # Process 50,000 rows at a time
 total_rows <- nrow(samples.df)
 num_chunks <- ceiling(total_rows / chunk_size)
@@ -698,7 +821,7 @@ cat(sprintf("\nCSV file saved to: %s\n", output_file))
 #Now extracting top 10 features per sample
 ##First: To Combine Annotations and Samples
 final.annotation.df3 <- final.annotation.df2 %>%
-  select(feature.ID, mz, compound.name, smiles, confidence.level)
+  select(feature.ID, mz, compound.name, smiles, confidence.level, Formula, IUPAC, Monoisotopic.Mass)
 
 #Append to Samples
 samples.df.with.annotations <- samples.df %>%
@@ -712,13 +835,22 @@ top_10_features <- samples.df.with.annotations %>%
   top_n(10, area) %>%
   ungroup()
 
-write.csv(top_10_features, paste0(dataset.id, "-top-10-features.csv"))
+write_csv(top_10_features, paste0("Y:/MA_BPA_Microbiome/Dataset-Abundances/",dataset.id, "-top-10-features.csv"))
 
 #Verification of data: A check to make sure processed data corresponds with each other and wasn't mixed up
+print(error.message)
 if (nrow(final.annotation.df) > nrow(mzmine.data)) {
   paste0("!ATTENTION! Possible data mix-up: Check all data has been processed correctly for dataset ", dataset.id, "!")
 }  else  {
   paste0("Script has finished: No issues detected in processing ", dataset.id, "!")
 }
+
+closeAllConnections()
+tryCatch({
+  write_csv(cid_cache_df, cid_cache_path)
+  message("[CACHE WRITE] Saved cache to: ", cid_cache_path)
+}, error = function(e) {
+  warning("Failed to save cache: ", e$message)
+})
 
 #Script has finished processing
