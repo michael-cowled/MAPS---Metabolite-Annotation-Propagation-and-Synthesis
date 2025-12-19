@@ -65,7 +65,7 @@ List of all samples and associated feature abundances (area under the curve). Co
 ## Other Documents
 
 - `top-10-features.csv` – Top 10 most abundant features.
-- - `DATASET.ID-counts.csv` - Number of features annotated at each confidence level.
+- `DATASET.ID-counts.csv` - Number of features annotated at each confidence level.
 - `cytoscape-v2.csv` – Annotation override file for Cytoscape networks.
 - `ms2query.csv` – Processed output from MS2Query.
 - `data_annotations.csv` – MZMine-derived annotations and authentic standards.
@@ -78,7 +78,7 @@ List of all samples and associated feature abundances (area under the curve). Co
 - `canopus_structure_summary.tsv` – CANOPUS class predictions from structures.
 - `formula_identifications.tsv` – ZODIAC formula predictions.
 - `structure_identifications.tsv` – CSI:FingerID structure predictions.
-- `_top-100` suffix – Top 100 SIRIUS hits per feature.
+  - `_top-100` suffix – Top 100 SIRIUS hits per feature.
 
 ---
 
