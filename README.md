@@ -40,7 +40,7 @@ MAPS integrates several third-party tools. High-confidence annotations are accep
 | **GNPS** | Cosine Score | **> 0.7** | Measures spectral similarity of fragments. |
 | **CSI:FingerID**| Confidence | **> 0.64** | Equates to a 10% False Discovery Rate (FDR). |
 | **CANOPUS** | Prob. Score | **> 0.7** | Probability of compound class assignment. |
-| **MS2Query** | Tanimoto | **0.63** | Recommended distance for reliable analogues. |
+| **MS2Query** | Tanimoto | **> 0.63** | Recommended distance for reliable analogues. |
 
 
 ---
