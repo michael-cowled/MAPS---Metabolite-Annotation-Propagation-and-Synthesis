@@ -18,30 +18,30 @@ Comprehensive list of annotations (without intensity). This file represents the 
 | C | mz | Mass to charge ratio (m/z). |
 | D | compound.name | Highest confidence annotation as determined by MAPS – standardised to PubChem. |
 | E | smiles | Computational interpretation of molecule – standardised to PubChem. |
-| F | confidence.score | Confidence score is not a probability (or percentage confidence), and is different depending on the annotation.type that provided it. Accepted thresholds were: GNPS cosine score > 0.7 (level 2 and 3), CANOPUS score > 0.7, CSI:FingerID score > 0.64 (10% FDR), MS2Query Tanimoto distance of 0.63. |
-| G | mz.diff.ppm | m/z difference to the theoretical mass of the annotated adduct (in ppm). |
-| H | gnps.shared.peaks | Number of MS/MS fragments that match in GNPS spectral libraries (minimum 6). |
-| I | library.name | Only more defined for GNPS libraries (and can infer the original submitter). |
-| J | library.quality | GOLD – Synthetic, complete structural characterisation; SILVER – Isolated or crude with published evidence; BRONZE – Putative annotation. |
-| K | NPC.pathway | Natural Product class pathway as described by NPClassifier ontologies. Note: currently bugged and identical to canopus.NPC.pathway. |
-| L | NPC.superclass | Natural Product superclass as described by NPClassifier ontologies. Note: currently bugged and identical to canopus.NPC.superclass. |
-| M | gnps.library.usi | Unique spectrum identifier to matched library spectrum in GNPS2. |
-| N | gnps.in.silico.bile.acid.info | Only applicable to level 3 annotations derived from in silico GNPS libraries. |
-| O | annotation.type | Annotation tool from which the annotation was derived. |
-| P | confidence.level | Annotation confidence level. |
-| Q | CID | PubChem identifier. |
-| R | Formula | Molecular formula for unionised species. |
-| S | IUPAC | IUPAC compound name. |
-| T | Monoisotopic.Mass | Monoisotopic mass of the compound. |
-| U | id.prob | Identification probability computed as 1/N (Dorrestein, 2025). |
-| V | canopus.NPC.pathway | NPClassifier pathway derived from CANOPUS. |
-| W | canopus.NPC.pathway.probability | CANOPUS pathway confidence score. |
-| X | canopus.NPC.superclass | NPClassifier superclass derived from CANOPUS. |
-| Y | canopus.NPC.superclass.probability | CANOPUS superclass confidence score. |
-| Z | zodiac.formula | Molecular formula predicted by ZODIAC. |
-| AA | zodiac.confidence.score | ZODIAC confidence score. |
-| AB | gnps.cluster.ID | Feature-based molecular networking cluster ID. |
-| AC | feature.usi | Universal spectrum identifier for the feature. |
+| F | annotation.type | Annotation tool from which the annotation was derived. |
+| G | confidence.level | Annotation confidence level. |
+| H | confidence.score | Confidence score is not a probability (or percentage confidence), and is different depending on the annotation.type that provided it. Accepted thresholds were: GNPS cosine score > 0.7 (level 2 and 3), CANOPUS score > 0.7, CSI:FingerID score > 0.64 (10% FDR), MS2Query Tanimoto distance of 0.63. |
+| I | id.prob | Identification probability computed as 1/N (Dorrestein, 2025). |
+| J | CID | PubChem identifier. |
+| K | HMDB.ID | Human Metabolome Database identifier. |
+| L | Formula | Molecular formula for unionised species. |
+| M | IUPAC | IUPAC compound name. |
+| N | Monoisotopic.Mass | Monoisotopic mass of the compound. |
+| O | mz.diff.ppm | m/z difference to the theoretical mass of the annotated adduct (in ppm). |
+| P | feature.usi | Universal spectrum identifier for the feature. |
+| Q | gnps.library.usi | Unique spectrum identifier to matched library spectrum in GNPS2. |
+| R | gnps.cluster.ID | Feature-based molecular networking cluster ID. |
+| S | gnps.in.silico.bile.acid.info | Only applicable to level 3 annotations derived from in silico GNPS libraries. |
+| T | canopus.NPC.pathway | NPClassifier pathway derived from CANOPUS. |
+| U | canopus.NPC.pathway.probability | CANOPUS pathway confidence score. |
+| V | canopus.NPC.superclass | NPClassifier superclass derived from CANOPUS. |
+| W | canopus.NPC.superclass.probability | CANOPUS superclass confidence score. |
+| X | canopus.classyfire.subclass | Classyfire subclass derived from CANOPUS. |
+| Y | canopus.classyfire.subclass.probability | Classyfire subclass confidence score. |
+| Z | canopus.classyfire.specclass | Classyfire specific class derived from CANOPUS. |
+| AA | canopus.classyfire.specclass.probability | Classyfire specific class confidence score. |
+| AB | zodiac.formula | Molecular formula predicted by ZODIAC. |
+| AC | zodiac.confidence.score | ZODIAC confidence score. |
 | AD | Propagated.Feature.ID | Feature ID from which annotation was propagated. |
 | AE | Propagated.Annotation.Type | Annotation source of propagated annotation. |
 | AF | Propagated.Annotation.Class | NPC superclass of propagated annotation. |
