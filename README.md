@@ -1,14 +1,14 @@
 # MAPS: Metabolome Annotation Propagation and Synthesis
 ## Data File Explanations and Pipeline Documentation
 
-This repository contains the outputs and documentation for the **MAPS** metabolomics data processing pipeline[cite: 1, 19]. [cite_start]MAPS is an automated pipeline designed for processed untargeted metabolomics data[cite: 1, 19].
+This repository contains the outputs and documentation for the **MAPS** metabolomics data processing pipeline. MAPS is an automated pipeline designed for processed untargeted metabolomics data.
 
 ---
 
 ## 1. Main Output Files
 
 ### final-annotation-df.csv
-[cite_start]The primary output containing a comprehensive list of annotations for all chemical features [cite: 4, 34-1].
+The primary output containing a comprehensive list of annotations for all chemical features.
 
 | Column | Description |
 | :--- | :--- |
@@ -25,7 +25,7 @@ This repository contains the outputs and documentation for the **MAPS** metabolo
 | **feature.usi** | Universal Spectrum Identifier for the specific spectrum. |
 
 ### samples-df.csv
-[cite_start]Lists all data files (samples) and their associated abundances for each feature [cite: 11, 34-2].
+Lists all data files (samples) and their associated abundances for each feature.
 * **samples**: Individual data files included regardless of whether a specific feature is found.
 * **area**: Abundance represented as the area under the curve.
 
@@ -59,11 +59,11 @@ The propagation tool attempts to annotate previously unknown features after init
 
 Annotations are assigned levels based on the following criteria:
 
-* [cite_start]**Level 1**: Authentic Standard (requires MS/MS and retention time match) [cite: 27, 34-6].
-* [cite_start]**Level 2**: MS/MS spectral library match[cite: 28].
-* [cite_start]**Level 3**: Chemical analogue or *in silico* match[cite: 29].
-* [cite_start]**Level 4**: Compound Class identification[cite: 30].
-* [cite_start]**Level 5**: Molecular Formula or HRMS[cite: 31].
+* **Level 1**: Authentic Standard (requires MS/MS and retention time match).
+* **Level 2**: MS/MS spectral library match.
+* **Level 3**: Chemical analogue or *in silico* match.
+* **Level 4**: Compound Class identification.
+* **Level 5**: Molecular Formula or HRMS.
 
 ---
 
@@ -72,7 +72,7 @@ Annotations are assigned levels based on the following criteria:
 | File | Description |
 | :--- | :--- |
 | **top-10-features.csv** | The 10 most abundant features from the sample dataset. |
-| **data_sirius.mgf** | [cite_start]MS1/MS2 info for formula and class identification in SIRIUS [cite: 12, 34-9]. |
-| **data_annotations.csv** | [cite_start]Annotations from MZmine library and lipid tools [cite: 13, 34-6]. |
-| **formula_identifications.tsv** | [cite_start]Raw formula prediction data from the ZODIAC tool [cite: 16, 34-14]. |
+| **data_sirius.mgf** | MS1/MS2 info for formula and class identification in SIRIUS. |
+| **data_annotations.csv** | Annotations from MZmine library and lipid tools. |
+| **formula_identifications.tsv** | Raw formula prediction data from the ZODIAC tool. |
 | **mzmine-batch.mzbatch** | The sequence of processing parameters used in MZmine. |
