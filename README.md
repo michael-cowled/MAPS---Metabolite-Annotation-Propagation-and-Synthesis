@@ -65,6 +65,7 @@ List of all samples and associated feature abundances (area under the curve). Co
 ## Other Documents
 
 - `top-10-features.csv` – Top 10 most abundant features.
+- - `DATASET.ID-counts.csv` - Number of features annotated at each confidence level.
 - `cytoscape-v2.csv` – Annotation override file for Cytoscape networks.
 - `ms2query.csv` – Processed output from MS2Query.
 - `data_annotations.csv` – MZMine-derived annotations and authentic standards.
@@ -84,7 +85,7 @@ List of all samples and associated feature abundances (area under the curve). Co
 ## Tools
 
 **MAPS** – Metabolome Annotation Propagation and Synthesis  
-Automated pipeline for processed untargeted metabolomics data (Michael Cowled, University of Melbourne).
+Automated pipeline for processed untargeted metabolomics data (Michael Cowled, Metabolomics Australia, University of Melbourne).
 
 **Propagation Tool** – Propagates level 1–2 annotations to clustered unknown analogues.
 
