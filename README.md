@@ -84,8 +84,7 @@ List of all samples and associated feature abundances (area under the curve). Co
 
 ## Tools
 
-**MAPS** – Metabolome Annotation Propagation and Synthesis  
-Automated pipeline for processed untargeted metabolomics data (Michael Cowled, Metabolomics Australia, University of Melbourne).
+**MAPS** – Metabolite Annotation Propagation and Synthesis: Automated pipeline for processed untargeted metabolomics data (Michael Cowled, Metabolomics Australia, University of Melbourne).
 
 **Propagation Tool** – Propagates level 1–2 annotations to clustered unknown analogues.
 
