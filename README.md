@@ -60,8 +60,8 @@ The propagation tool attempts to annotate previously unknown features after init
 Annotations are assigned levels based on the following criteria:
 
 * **Level 1**: Authentic Standard (requires MS/MS and retention time match).
-* **Level 2**: MS/MS spectral library match.
-* **Level 3**: Chemical analogue or *in silico* match.
+* **Level 2**: Putative MS/MS spectral library match.
+* **Level 3**: Spectral analogue or *in silico* match.
 * **Level 4**: Compound Class identification.
 * **Level 5**: Molecular Formula or HRMS.
 
