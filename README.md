@@ -5,7 +5,15 @@ This document provides a detailed guide to the various files, columns, and analy
 
 ---
 
-## Main Annotations
+## Main Annotations: Key Information
+The main output is 'final-annotation-df.csv', which is a comprehensive list of annotations. It includes columns for core feature information like: feature.ID, rt (retention time), and mz (mass-to-charge ratio). The compound.name is the highest-confidence annotation, standardised to PubChem. The confidence.score is a non-probabilistic value that differs based on the annotation.type. For example, a GNPS cosine score > 0.7, a CSI:FingerID score > 0.64, and a Canopus score > 0.7 were all accepted.
+
+The document defines five levels of confidence for annotations:
+-	'Level 1:' Authentic Standard (requires MS/MS and retention time).
+-	'Level 2:' MS/MS spectral library match.
+-	'Level 3:' Analogue to a Level 1 or 2 compound, or an in silico match.
+-	'Level 4:' Compound Class.
+-	'Level 5:' Formula or HRMS (High-Resolution Mass Spectrometry).
 
 ### `final-annotation-df.csv`
 
