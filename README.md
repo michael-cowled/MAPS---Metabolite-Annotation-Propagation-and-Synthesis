@@ -35,6 +35,7 @@ Before running the MAPS pipeline, ensure the following tools are installed:
 * **[ProteoWizard MSConvert](http://proteowizard.sourceforge.net/):** For converting raw vendor formats to `.mzML`.
 * **[MZmine](http://mzmine.github.io/) (v4.5+):** For alignment and feature extraction.
 * **[SIRIUS 6](https://www.google.com/search?q=https://sirius-ms.github.io/):** For formula and structure identification.
+* **MS2Query:** Python-based tool for spectral library searching.Note: This must be installed and run via an Anaconda prompt (Python 3.7+ environment recommended).
 * **R (v4.0+):** Required to run the Shiny application.
 
 ---
@@ -81,6 +82,7 @@ Run the processed data through the following tools and generate the required out
 ### GNPS2
 
 * **Requirement:** The MAPS pipeline requires **GNPS2** (incompatible with the original GNPS due to output differences).
+* **FBMN:** Run feature-based molecular networking according to your desired paramaters. Set Top-K = 100 under "Library Search parameters".
 * **Cytoscape Export:** Import the resulting `.graphml` file into Cytoscape and export the network table as a CSV.
 * *Required File:* `cytoscape.csv`
 
@@ -89,15 +91,14 @@ Run the processed data through the following tools and generate the required out
 
 ### MS2Query
 
-* Run the Python-based MS2Query program.
+* Run the MS2Query application via your Anaconda prompt. See https://github.com/iomega/ms2query for details.
 * *Required File:* `ms2query.csv` (Case-sensitive).
 
 ### SIRIUS 6
 
 * Run the "Write/Export Summary.tsv" function **twice**:
 1. **Standard Run:** Default settings.
-2. **Top-100 Run:** Set `K=100` to identify the top 100 hits for each feature via CSI:FingerID.
-
+2. **Summaries ‘Write/Export Summary.tsv’** - Save results twice: first with the default parameters, and again setting K=100.
 
 * *Required Files:*
 * `canopus_structure_summary.tsv`
@@ -196,7 +197,8 @@ This file is the comprehensive list of annotations (without intensity data). It 
 | **confidence.level** | Annotation confidence level (1-5). |
 | **confidence.score** | Score derived from the specific tool (non-probabilistic). Accepted thresholds: GNPS cosine > 0.7; CANOPUS > 0.7; CSI:FingerID > 0.64; MS2Query Tanimoto > 0.63. |
 | **id.prob** | Identification probability computed as  (Dorrestein, 2025). |
-| **CID / HMDB.ID** | Identifiers for PubChem and Human Metabolome Database. |
+| **CID** | Identifiers for PubChem. |
+| **HMDB.ID** | Identifiers for Human Metabolome Database. |
 | **Formula** | Molecular formula for unionised species. |
 | **IUPAC** | IUPAC compound name. |
 | **Monoisotopic.Mass** | Monoisotopic mass of the compound. |
@@ -204,11 +206,20 @@ This file is the comprehensive list of annotations (without intensity data). It 
 | **feature.usi** | Universal spectrum identifier for the feature. |
 | **gnps.library.usi** | Unique spectrum identifier to matched library spectrum in GNPS2. |
 | **gnps.cluster.ID** | Feature-based molecular networking cluster ID. |
-| **gnps.in.silico...** | Bile acid info (only applicable to level 3 annotations from GNPS *in silico* libraries). |
-| **canopus.NPC...** | NPClassifier pathway, superclass, and associated probabilities from CANOPUS. |
-| **canopus.classyfire...** | ClassyFire subclass, specific class, and associated probabilities from CANOPUS. |
-| **zodiac...** | Formula and confidence score predicted by ZODIAC. |
-| **Propagated...** | Feature ID, type, and class if the annotation was propagated from a cluster member. |
+| **gnps.in.silico.bile.acid.info** | Bile acid info (only applicable to level 3 annotations from GNPS *in silico* libraries). |
+| **canopus.NPC.pathway** | NPClassifier pathway from CANOPUS. |
+| **canopus.NPC.pathway.probability** | NPClassifier pathway probabilities from CANOPUS. |
+| **canopus.NPC.superclass** | NPClassifier superclass from CANOPUS. |
+| **canopus.NPC.superclass.probability** | NPClassifier superclass probabilities from CANOPUS. |
+| **canopus.classyfire.subclass** | ClassyFire subclass from CANOPUS. |
+| **canopus.classyfire.subclass.probability** | ClassyFire subclass probabilities from CANOPUS. |
+| **canopus.classyfire.specclass** | ClassyFire specific class from CANOPUS. |
+| **canopus.classyfire.sspecclass.probability** | ClassyFire specific class probabilities from CANOPUS. |
+| **zodiac.formula** | Formula predicted by ZODIAC. |
+| **zodiac.confidence.score** | Confidence score for formula predicted by ZODIAC. |
+| **Propagated.Feature.ID** | Feature ID, type, and class if the annotation was propagated from a cluster member. |
+| **Propagated.Annotation.Type** | Feature ID of the known propagated annotation. |
+| **Propagated.Annotation.Class** | canopus.NPC.superclass of the known propagated annotation. |
 | **Samples** | List of samples in which the feature is detected. |
 
 ### Abundance Output: `samples-df.csv`
