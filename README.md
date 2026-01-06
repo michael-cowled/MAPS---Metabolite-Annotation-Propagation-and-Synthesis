@@ -115,7 +115,7 @@ Run the processed data through the following tools and generate the required out
 
 *![Sirius](Images/sirius.png)*
 
-*Figure 2: Ensure that the Zodiac module is selected when running SIRIUS.*
+*Figure 3: Ensure that the Zodiac module is selected when running SIRIUS.*
 
 
 
