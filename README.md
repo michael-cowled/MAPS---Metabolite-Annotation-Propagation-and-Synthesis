@@ -51,6 +51,8 @@ Convert all raw mass spectrometry data to the non-proprietary **.mzML** format u
 Import the `.mzML` files into MZmine (v4.5 or later).
 
 **Recommended Batch Processing:**
+
+> **Note:** Simply change the export directories to your desired folder location, any chromatographic details (e.g. retention time window), and noise thresholds and you're good to go.
 We provide a recommended MZmine batch file, optimised for MZmine v4.8 (available in this repository) that performs a cascading annotation strategy:
 
 **Level 1 Assignments (5 Rounds):** 
