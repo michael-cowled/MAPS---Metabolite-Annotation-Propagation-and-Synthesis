@@ -121,9 +121,9 @@ Run the processed data through the following tools and generate the required out
 
 ---
 
-## Step 3: Directory Structure
+## Step 3: Directory Structure and General Set-Up
 
-To run the MAPS script successfully, organize your results into the following folder structure exactly as shown.
+1. To run the MAPS script successfully, organize your results into the following folder structure exactly as shown.
 
 > **Note:** Folder and file names are **case-sensitive**. 'Processed_Data_Folder' can be renamed to whatever dataset identifier is relevant.
 
@@ -142,6 +142,16 @@ Processed_Data_Folder/
     ├── formula_identifications.tsv
     └── structure_identifications_top-100.tsv
 
+```
+
+2. If performing compound name standardization, ensure the following is set up in a separate MAPS folder within your Documents.
+
+```text
+Documents/
+├── MAPS/
+│   ├── cid_cache.csv
+│   ├── lipids_expanded.tsv
+│   └── *PubChem_Indexed.sqlite*
 ```
 
 ---
