@@ -91,6 +91,9 @@ Run the processed data through the following tools and generate the required out
 * **Cytoscape Export:** Import the resulting `.graphml` file into Cytoscape and export the network table as a CSV.
 * *Required File:* `cytoscape.csv`
 
+*![Cytoscape](Images/cytoscape.png)*
+
+*Figure 2: Import .graphml and export as cytoscape.csv.*
 
 * **Automatic Downloads:** MAPS will automatically retrieve `merged_results_with_gnps.tsv`, `clustersummary_with_network.tsv`, and `filtered_pairs.tsv` using your GNPS2 Task ID.
 
