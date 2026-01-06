@@ -52,8 +52,9 @@ Import the `.mzML` files into MZmine (v4.5 or later).
 
 **Recommended Batch Processing:**
 
-> **Note:** Simply change the export directories to your desired folder location, any chromatographic details (e.g. retention time window), and noise thresholds and you're good to go.
 We provide a recommended MZmine batch file, optimised for MZmine v4.8 (available in this repository) that performs a cascading annotation strategy:
+
+> **Note:** Simply change the export directories to your desired folder location, any chromatographic details (e.g. retention time window), and noise thresholds and you're good to go.
 
 **Level 1 Assignments (5 Rounds):** 
 * Starts with the highest stringency (High-Res m/z + RT Match + Spectral Match ≥ 6 fragments).
