@@ -35,7 +35,7 @@ Before running the MAPS pipeline, ensure the following tools are installed:
 * **[ProteoWizard MSConvert](http://proteowizard.sourceforge.net/):** For converting raw vendor formats to `.mzML`.
 * **[MZmine](http://mzmine.github.io/) (v4.5+):** For alignment and feature extraction.
 * **[SIRIUS 6](https://www.google.com/search?q=https://sirius-ms.github.io/):** For formula and structure identification.
-* **MS2Query:** Python-based tool for spectral library searching.Note: This must be installed and run via an Anaconda prompt (Python 3.7+ environment recommended).
+* **[MS2Query](https://github.com/iomega/ms2query):** Python-based tool for spectral library searching.Note: This must be installed and run via an Anaconda prompt (Python 3.7+ environment recommended).
 * **R (v4.0+):** Required to run the Shiny application.
 
 ---
@@ -91,7 +91,7 @@ Run the processed data through the following tools and generate the required out
 
 ### MS2Query
 
-* Run the MS2Query application via your Anaconda prompt. See https://github.com/iomega/ms2query for details.
+* Run the MS2Query application via your Anaconda prompt.
 * *Required File:* `ms2query.csv` (Case-sensitive).
 
 ### SIRIUS 6
