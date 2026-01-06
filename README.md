@@ -243,10 +243,10 @@ This file is the comprehensive list of annotations (without intensity data). It 
 | **canopus.classyfire.sspecclass.probability** | ClassyFire specific class probabilities from CANOPUS. |
 | **zodiac.formula** | Formula predicted by ZODIAC. |
 | **zodiac.confidence.score** | Confidence score for formula predicted by ZODIAC. |
-| **Propagated.Feature.ID** | Feature ID, type, and class if the annotation was propagated from a cluster member. |
-| **Propagated.Annotation.Type** | Feature ID of the known propagated annotation. |
+| **Propagated.Feature.ID** | Feature ID of the known propagated annotation. |
+| **Propagated.Annotation.Type** | Annotation source of the known propagated annotation. |
 | **Propagated.Annotation.Class** | canopus.NPC.superclass of the known propagated annotation. |
-| **Samples** | List of samples in which the feature is detected. |
+| **Samples** | List of samples in which the feature is detected separated by a semi-colon. |
 
 ### Abundance Output: `samples-df.csv`
 
