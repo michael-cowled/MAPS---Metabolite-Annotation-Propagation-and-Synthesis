@@ -6,6 +6,16 @@
 
 *Figure 1: The MAPS data-processing pipeline.*
 
+---
+
+### Citation
+
+If you use MAPS in your work, please cite:
+
+> [Insert Citation Here]
+
+---
+
 ## Table of Contents
 
 * [Prerequisites](https://www.google.com/search?q=%23prerequisites)
@@ -245,11 +255,3 @@ The pipeline involves several other key files, categorized below:
 | **ZODIAC** | Molecular formula prediction. |
 | **MS2Query** | Spectral library search and analogue prediction. |
 | **Cytoscape** | Network visualisation tool. |
-
----
-
-### Citation
-
-If you use MAPS in your work, please cite:
-
-> [Insert Citation Here]
