@@ -115,7 +115,7 @@ Run the processed data through the following tools and generate the required out
 
 To run the MAPS script successfully, organize your results into the following folder structure exactly as shown.
 
-> **Note:** Folder and file names are **case-sensitive**.
+> **Note:** Folder and file names are **case-sensitive**. 'Processed_Data_Folder' can be renamed to whatever dataset identifier is relevant.
 
 ```text
 Processed_Data_Folder/
