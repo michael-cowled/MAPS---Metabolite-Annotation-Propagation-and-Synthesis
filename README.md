@@ -216,7 +216,7 @@ This file is the comprehensive list of annotations (without intensity data). It 
 | --- | --- |
 | **feature.ID** | Most intense ion for a particular compound (related ions matched by IIN). |
 | **rt** | Retention time in minutes. |
-| **mz** | Mass to charge ratio (). |
+| **mz** | Mass to charge ratio (*m*/*z*). |
 | **compound.name** | Highest confidence annotation as determined by MAPS (standardised to PubChem). |
 | **smiles** | Computational interpretation of molecule (standardised to PubChem). |
 | **annotation.type** | Annotation tool from which the annotation was derived. |
