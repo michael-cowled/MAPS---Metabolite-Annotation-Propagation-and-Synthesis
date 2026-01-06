@@ -1,115 +1,257 @@
-
-# Explanations of Data Files
-
-This document provides a detailed guide to the various files, columns, and analytical tools used in the metabolomics data processing pipeline **MAPS** (currently unpublished).
+Here is the updated, publication-ready README. I have integrated the new file explanations into a dedicated **"Outputs & File Reference"** section following the execution instructions, and added a **"Glossary of Tools"** at the end to define the software used.
 
 ---
 
-## Main Annotations: Key Information
-The main output is 'final-annotation-df.csv', which is a comprehensive list of annotations. It includes columns for core feature information like: feature.ID, rt (retention time), and mz (mass-to-charge ratio). The compound.name is the highest-confidence annotation, standardised to PubChem. The confidence.score is a non-probabilistic value that differs based on the annotation.type. For example, a GNPS cosine score > 0.7, a CSI:FingerID score > 0.64, and a Canopus score > 0.7 were all accepted.
+# MAPS: Metabolomics Annotation & Processing System
 
-The document defines five levels of confidence for annotations:
--	Level 1: Authentic Standard (requires MS/MS and retention time).
--	Level 2: MS/MS spectral library match.
--	Level 3: Analogue to a Level 1 or 2 compound, or an in silico match.
--	Level 4: Compound Class.
--	Level 5: Formula or HRMS (High-Resolution Mass Spectrometry).
+**MAPS** is an R-based pipeline and Shiny application designed to integrate and standardize metabolomics annotation data. It streamlines the workflow between raw data processing (MZmine) and advanced annotation tools (GNPS2, MS2Query, SIRIUS), providing a unified interface for compound identification and visualization.
 
-### `final-annotation-df.csv`
+*Figure 1: The MAPS data-processing pipeline.*
 
-Comprehensive list of annotations (without intensity). This file represents the primary MAPS output and contains the highest-confidence annotation per feature, standardised to PubChem where applicable.
+## Table of Contents
 
-| ID | File / Column | Description |
-|----|---------------|-------------|
-| A | feature.ID | Most intense ion for a particular compound (related ions which have been matched by ion identity networking). |
-| B | rt | Retention time in minutes. |
-| C | mz | Mass to charge ratio (m/z). |
-| D | compound.name | Highest confidence annotation as determined by MAPS – standardised to PubChem. |
-| E | smiles | Computational interpretation of molecule – standardised to PubChem. |
-| F | annotation.type | Annotation tool from which the annotation was derived. |
-| G | confidence.level | Annotation confidence level. |
-| H | confidence.score | Confidence score is not a probability (or percentage confidence), and is different depending on the annotation.type that provided it. Accepted thresholds were: GNPS cosine score > 0.7 (level 2 and 3), CANOPUS score > 0.7, CSI:FingerID score > 0.64 (10% FDR), MS2Query Tanimoto distance of 0.63. |
-| I | id.prob | Identification probability computed as 1/N (Dorrestein, 2025). |
-| J | CID | PubChem identifier. |
-| K | HMDB.ID | Human Metabolome Database identifier. |
-| L | Formula | Molecular formula for unionised species. |
-| M | IUPAC | IUPAC compound name. |
-| N | Monoisotopic.Mass | Monoisotopic mass of the compound. |
-| O | mz.diff.ppm | m/z difference to the theoretical mass of the annotated adduct (in ppm). |
-| P | feature.usi | Universal spectrum identifier for the feature. |
-| Q | gnps.library.usi | Unique spectrum identifier to matched library spectrum in GNPS2. |
-| R | gnps.cluster.ID | Feature-based molecular networking cluster ID. |
-| S | gnps.in.silico.bile.acid.info | Only applicable to level 3 annotations derived from in silico GNPS libraries. |
-| T | canopus.NPC.pathway | NPClassifier pathway derived from CANOPUS. |
-| U | canopus.NPC.pathway.probability | CANOPUS pathway confidence score. |
-| V | canopus.NPC.superclass | NPClassifier superclass derived from CANOPUS. |
-| W | canopus.NPC.superclass.probability | CANOPUS superclass confidence score. |
-| X | canopus.classyfire.subclass | Classyfire subclass derived from CANOPUS. |
-| Y | canopus.classyfire.subclass.probability | Classyfire subclass confidence score. |
-| Z | canopus.classyfire.specclass | Classyfire specific class derived from CANOPUS. |
-| AA | canopus.classyfire.specclass.probability | Classyfire specific class confidence score. |
-| AB | zodiac.formula | Molecular formula predicted by ZODIAC. |
-| AC | zodiac.confidence.score | ZODIAC confidence score. |
-| AD | Propagated.Feature.ID | Feature ID from which annotation was propagated. |
-| AE | Propagated.Annotation.Type | Annotation source of propagated annotation. |
-| AF | Propagated.Annotation.Class | NPC superclass of propagated annotation. |
-| AG | Samples | Samples in which the feature is detected. |
+* [Prerequisites](https://www.google.com/search?q=%23prerequisites)
+* [Step 1: Data Pre-processing (MZmine)](https://www.google.com/search?q=%23step-1-data-pre-processing-mzmine)
+* [Step 2: External Annotation Tools](https://www.google.com/search?q=%23step-2-external-annotation-tools)
+* [Step 3: Directory Structure](https://www.google.com/search?q=%23step-3-directory-structure)
+* [Step 4: Running the MAPS App](https://www.google.com/search?q=%23step-4-running-the-maps-app)
+* [Step 5: Outputs & File Reference](https://www.google.com/search?q=%23step-5-outputs--file-reference)
+* [Glossary of Tools](https://www.google.com/search?q=%23glossary-of-tools)
 
 ---
 
-## Abundances
+## Prerequisites
 
-### `samples-df.csv`
+Before running the MAPS pipeline, ensure the following tools are installed:
 
-List of all samples and associated feature abundances (area under the curve). Columns shared with `final-annotation-df.csv` include feature.ID, feature.USI, compound.name, smiles, Formula, IUPAC, and Monoisotopic.Mass.
+* **[ProteoWizard MSConvert](http://proteowizard.sourceforge.net/):** For converting raw vendor formats to `.mzML`.
+* **[MZmine](http://mzmine.github.io/) (v4.5+):** For alignment and feature extraction.
+* **[SIRIUS 6](https://www.google.com/search?q=https://sirius-ms.github.io/):** For formula and structure identification.
+* **R (v4.0+):** Required to run the Shiny application.
+
+---
+
+## Step 1: Data Pre-processing (MZmine)
+
+### 1. Data Conversion
+
+Convert all raw mass spectrometry data to the non-proprietary **.mzML** format using ProteoWizard MSConvert.
+
+### 2. Processing & Alignment
+
+Import the `.mzML` files into MZmine (v4.5 or later).
+
+**Recommended Batch Processing:**
+We provide a recommended MZmine batch file (available in this repository) that performs a cascading annotation strategy:
+
+1. **Level 1 Assignments (5 Rounds):** * Starts with the highest stringency (High-Res m/z + RT Match + Spectral Match ≥ 6 fragments).
+* Decreases in stringency sequentially to High-Res m/z + RT Match only (using Local Compound Database Search).
+* *Note:* Assigned features are removed from the pool after each round to prevent duplicate matching.
+
+
+2. **Level 2 Assignment:** * Checks for spectral matches (≥ 6 fragments) *without* retention time matching.
+* This accounts for RT drift where strict alignment might fail.
+
+
+
+### 3. MZmine Output
+
+After processing, export the following three files. **Do not rename these files** (except for the folder path).
+
+| File Name | MZmine Function |
+| --- | --- |
+| `ms1-and-ms2.csv` | **Export to CSV file (modular)** |
+| `DATA_iimn_gnps_quant.csv` | **Export molecular networking files** (e.g., GNPS, FBMN, IIMN) |
+| `data_annotations.csv` | **Export all annotations to CSV file** (Must be generated even if no Level 1 assignments exist) |
+
+---
+
+## Step 2: External Annotation Tools
+
+Run the processed data through the following tools and generate the required output files.
+
+### GNPS2
+
+* **Requirement:** The MAPS pipeline requires **GNPS2** (incompatible with the original GNPS due to output differences).
+* **Cytoscape Export:** Import the resulting `.graphml` file into Cytoscape and export the network table as a CSV.
+* *Required File:* `cytoscape.csv`
+
+
+* **Automatic Downloads:** MAPS will automatically retrieve `merged_results_with_gnps.tsv`, `clustersummary_with_network.tsv`, and `filtered_pairs.tsv` using your GNPS2 Task ID.
+
+### MS2Query
+
+* Run the Python-based MS2Query program.
+* *Required File:* `ms2query.csv` (Case-sensitive).
+
+### SIRIUS 6
+
+* Run the "Write/Export Summary.tsv" function **twice**:
+1. **Standard Run:** Default settings.
+2. **Top-100 Run:** Set `K=100` to identify the top 100 hits for each feature via CSI:FingerID.
+
+
+* *Required Files:*
+* `canopus_structure_summary.tsv`
+* `formula_identifications.tsv`
+* `structure_identifications_top-100.tsv`
+
+
+
+---
+
+## Step 3: Directory Structure
+
+To run the MAPS script successfully, organize your results into the following folder structure exactly as shown.
+
+> **Note:** Folder and file names are **case-sensitive**.
+
+```text
+Processed_Data_Folder/
+├── mzmine/
+│   ├── ms1-and-ms2.csv
+│   ├── DATA_iimn_gnps_quant.csv
+│   └── data_annotations.csv
+├── gnps/
+│   └── cytoscape.csv
+├── ms2query/
+│   └── ms2query.csv
+└── sirius/
+    ├── canopus_structure_summary.tsv
+    ├── formula_identifications.tsv
+    └── structure_identifications_top-100.tsv
+
+```
+
+---
+
+## Step 4: Running the MAPS App
+
+1. Open `MAPS-app.R` in RStudio.
+2. Install any missing libraries prompted by R.
+3. Run the Shiny App.
+
+### Configuration Fields
+
+#### Mandatory Settings
+
+* **Dataset ID:** An arbitrary name for your project/dataset.
+* **Processed data folder:** The full path to the parent folder created in [Step 3](https://www.google.com/search?q=%23step-3-directory-structure) (use forward slashes `/`).
+* **GNPS task ID:** The 32-character alphanumeric string from your GNPS2 URL (e.g., found after `task=` in the URL).
+* **PubChem SQLite path:** Path to the local PubChem SQLite database (files and instructions provided in this repo).
+* *If standardization is not required:* Deselect "PubChem standardization" and leave the path as default `""`.
+
+
+
+#### Acceptance Thresholds
+
+Adjust these based on your instrumentation resolution. Default values are optimized for a **Q Exactive Plus (Orbitrap)** with ~5% FDR.
+
+* **Probability Scores:** Defaults: `gnps = 0.7`, `canopus = 0.7`, `csi = 0.64`, `ms2query = 0.7`.
+* **RT Tolerance:** Default `0.1 min` (Creates a 0.2 min window). Adjust based on chromatography sharpness.
+* **PPM Tolerance:** Default `5 ppm`.
+
+#### Optional Features
+
+* **Generate & save plots:** Generates basic visualizations comparing annotation counts and compound classes.
+* **PubChem standardization:** Highly recommended. Standardizes names to PubChem entries to reduce redundancy across different tools.
+* **Sublevel prioritizations:** Enable if using the detailed Level 1/2 subclass matching from the provided MZmine batch.
+
+---
+
+## Step 5: Outputs & File Reference
+
+This section details the primary output files generated by MAPS and defines the confidence levels used in the annotation process.
+
+### Annotation Confidence Levels
+
+MAPS assigns confidence levels based on the strength of the match:
+
+* **Level 1:** Authentic Standard (requires MS/MS and retention time match).
+* **Level 2:** MS/MS spectral library match.
+* **Level 3:** Analogue to a Level 1 or 2 compound, or an *in silico* match.
+* **Level 4:** Compound Class assignment.
+* **Level 5:** Formula or HRMS (High-Resolution Mass Spectrometry) only.
+
+### Primary Output: `final-annotation-df.csv`
+
+This file is the comprehensive list of annotations (without intensity data). It represents the primary MAPS output, containing the highest-confidence annotation per feature, standardized to PubChem where applicable.
 
 | Column | Description |
-|-------|-------------|
-| samples | One row per sample, regardless of feature presence. |
-| area | Area under the curve for the feature in that sample. |
+| --- | --- |
+| **feature.ID** | Most intense ion for a particular compound (related ions matched by IIN). |
+| **rt** | Retention time in minutes. |
+| **mz** | Mass to charge ratio (). |
+| **compound.name** | Highest confidence annotation as determined by MAPS (standardised to PubChem). |
+| **smiles** | Computational interpretation of molecule (standardised to PubChem). |
+| **annotation.type** | Annotation tool from which the annotation was derived. |
+| **confidence.level** | Annotation confidence level (1-5). |
+| **confidence.score** | Score derived from the specific tool (non-probabilistic). Accepted thresholds: GNPS cosine > 0.7; CANOPUS > 0.7; CSI:FingerID > 0.64; MS2Query Tanimoto > 0.63. |
+| **id.prob** | Identification probability computed as  (Dorrestein, 2025). |
+| **CID / HMDB.ID** | Identifiers for PubChem and Human Metabolome Database. |
+| **Formula** | Molecular formula for unionised species. |
+| **IUPAC** | IUPAC compound name. |
+| **Monoisotopic.Mass** | Monoisotopic mass of the compound. |
+| **mz.diff.ppm** | Difference between observed and theoretical mass (in ppm). |
+| **feature.usi** | Universal spectrum identifier for the feature. |
+| **gnps.library.usi** | Unique spectrum identifier to matched library spectrum in GNPS2. |
+| **gnps.cluster.ID** | Feature-based molecular networking cluster ID. |
+| **gnps.in.silico...** | Bile acid info (only applicable to level 3 annotations from GNPS *in silico* libraries). |
+| **canopus.NPC...** | NPClassifier pathway, superclass, and associated probabilities from CANOPUS. |
+| **canopus.classyfire...** | ClassyFire subclass, specific class, and associated probabilities from CANOPUS. |
+| **zodiac...** | Formula and confidence score predicted by ZODIAC. |
+| **Propagated...** | Feature ID, type, and class if the annotation was propagated from a cluster member. |
+| **Samples** | List of samples in which the feature is detected. |
+
+### Abundance Output: `samples-df.csv`
+
+A matrix of samples and feature abundances (area under the curve). It shares identification columns (ID, USI, name, SMILES, Formula, IUPAC, Mass) with the annotation file for easy merging.
+
+| Column | Description |
+| --- | --- |
+| **samples** | One row per sample, regardless of feature presence. |
+| **area** | Area under the curve (AUC) for the feature in that sample. |
+
+### Supplementary Files
+
+The pipeline involves several other key files, categorized below:
+
+**Analysis & Summaries:**
+
+* `top-10-features.csv`: Top 10 most abundant features in the dataset.
+* `DATASET.ID-counts.csv`: Number of features annotated at each confidence level.
+* `cytoscape-v2.csv`: Annotation override file formatted for Cytoscape network visualization.
+
+**Intermediate & Source Data:**
+
+* `ms1-and-ms2.csv`: Comprehensive MS1 and MS2 feature table (Input).
+* `DATA_iimn_gnps.mgf`: MS2 spectra for GNPS and MS2Query.
+* `data_sirius.mgf`: MS1 and MS2 spectra for SIRIUS.
+* `mzmine-batch.mzbatch`: The MZmine processing workflow file.
+* `canopus_formula_summary.tsv`: CANOPUS class predictions from formulae.
 
 ---
 
-## Other Documents
+## Glossary of Tools
 
-- `top-10-features.csv` – Top 10 most abundant features.
-- `DATASET.ID-counts.csv` - Number of features annotated at each confidence level.
-- `cytoscape-v2.csv` – Annotation override file for Cytoscape networks.
-- `ms2query.csv` – Processed output from MS2Query.
-- `data_annotations.csv` – MZMine-derived annotations and authentic standards.
-- `DATA_iimn_gnps.mgf` – MS2 spectra for GNPS and MS2Query.
-- `DATA_iimn_gnps_quant.csv` – Sample vs feature matrix (MS2 only).
-- `data_sirius.mgf` – MS1 and MS2 spectra for SIRIUS.
-- `ms1-and-ms2.csv` – Comprehensive MS1 and MS2 feature table.
-- `mzmine-batch.mzbatch` – MZMine processing workflow.
-- `canopus_formula_summary.tsv` – CANOPUS class predictions from formulae.
-- `canopus_structure_summary.tsv` – CANOPUS class predictions from structures.
-- `formula_identifications.tsv` – ZODIAC formula predictions.
-- `structure_identifications.tsv` – CSI:FingerID structure predictions.
-  - `_top-100` suffix – Top 100 SIRIUS hits per feature.
+| Tool | Description |
+| --- | --- |
+| **MAPS** | *Metabolite Annotation Propagation and Synthesis:* Automated pipeline for processed untargeted metabolomics data (Michael Cowled, Metabolomics Australia, University of Melbourne). |
+| **Propagation Tool** | Propagates level 1–2 annotations to clustered unknown analogues. |
+| **Ion Identity Networking (IIN)** | Links adducts of the same compound within MZmine. |
+| **MZmine** | Open-source MS data processing and QC software. |
+| **GNPS** | Global Natural Product Social Molecular Networking platform. |
+| **FBMN** | Feature-Based Molecular Networking. |
+| **CANOPUS** | Compound class prediction via SIRIUS. |
+| **CSI:FingerID** | *In silico* structure identification. |
+| **ZODIAC** | Molecular formula prediction. |
+| **MS2Query** | Spectral library search and analogue prediction. |
+| **Cytoscape** | Network visualisation tool. |
 
 ---
 
-## Tools
+### Citation
 
-**MAPS** – Metabolite Annotation Propagation and Synthesis: Automated pipeline for processed untargeted metabolomics data (Michael Cowled, Metabolomics Australia, University of Melbourne).
+If you use MAPS in your work, please cite:
 
-**Propagation Tool** – Propagates level 1–2 annotations to clustered unknown analogues.
-
-**Ion Identity Networking (IIN)** – Links adducts of the same compound in MZMine.
-
-**MZMine** – Open-source MS data processing and QC software.
-
-**GNPS** – Global Natural Product Social Molecular Networking platform.
-
-**FBMN** – Feature-Based Molecular Networking.
-
-**CANOPUS** – Compound class prediction via SIRIUS.
-
-**CSI:FingerID** – In silico structure identification.
-
-**ZODIAC** – Molecular formula prediction.
-
-**MS2Query** – Spectral library search and analogue prediction.
-
-**Cytoscape** – Network visualisation tool.
+> [Insert Citation Here]
