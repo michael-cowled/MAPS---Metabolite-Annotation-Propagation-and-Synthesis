@@ -250,7 +250,7 @@ This file is the comprehensive list of annotations (without intensity data). It 
 
 ### Abundance Output: `samples-df.csv`
 
-A matrix of samples and feature abundances (area under the curve). It shares identification columns (ID, USI, name, SMILES, Formula, IUPAC, Mass) with the annotation file for easy merging.
+A long-table format of samples and feature abundances (area under the curve). It shares identification columns (ID, USI, name, SMILES, Formula, IUPAC, Mass) with the annotation file for easy merging. Note: It might be more useful to append annotations to the Quant file used for GNPS if wanting to import into tools such as MetaboAnalyst.
 
 | Column | Description |
 | --- | --- |
