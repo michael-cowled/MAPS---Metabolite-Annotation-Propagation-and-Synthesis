@@ -150,7 +150,21 @@ Processed_Data_Folder/
 
 1. Open `MAPS-app.R` in RStudio.
 2. Install any missing libraries prompted by R.
-3. Run the Shiny App.
+
+*![R-packages](Images/install-packages.png)*
+
+4. Run the Shiny App.
+
+*![Run App](Images/runapp.png)*
+
+5. Install the MAPS app when prompted - press "1" and enter.
+
+*![Install MAPS App](Images/install-app.png)*
+
+6. The R Shiny application for MAPS will open in a new window once the app is full installed.
+7. Fill in the mandatory fields, as the bare minimum and select
+   
+*![MAPS-APP](Images/MAPS-APP.png)*
 
 ### Configuration Fields
 
