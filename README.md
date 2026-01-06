@@ -147,7 +147,7 @@ Processed_Data_Folder/
 #### Mandatory Settings
 
 * **Dataset ID:** An arbitrary name for your project/dataset.
-* **Processed data folder:** The full path to the parent folder created in [Step 3](https://www.google.com/search?q=%23step-3-directory-structure) (use forward slashes `/`).
+* **Processed data folder:** The full path to the parent folder created in Step 3 (use forward slashes `/`).
 * **GNPS task ID:** The 32-character alphanumeric string from your GNPS2 URL (e.g., found after `task=` in the URL).
 * **PubChem SQLite path:** Path to the local PubChem SQLite database (files and instructions provided in this repo).
 * *If standardization is not required:* Deselect "PubChem standardization" and leave the path as default `""`.
