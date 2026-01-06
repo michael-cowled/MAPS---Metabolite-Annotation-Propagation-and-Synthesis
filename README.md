@@ -105,7 +105,7 @@ Run the processed data through the following tools and generate the required out
 ### SIRIUS 6
 
 * Run the "Write/Export Summary.tsv" function **twice**:
-1. **Standard Run:** Default settings, with the Zodiac module turned on.
+1. **Standard Run:** Default settings, with the **Zodiac** module turned on.
 2. **Summaries ‘Write/Export Summary.tsv’** - Save results twice: first with the default parameters, and again setting K=100.
 
 * *Required Files:*
