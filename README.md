@@ -53,12 +53,14 @@ Import the `.mzML` files into MZmine (v4.5 or later).
 **Recommended Batch Processing:**
 We provide a recommended MZmine batch file, optimised for MZmine v4.8 (available in this repository) that performs a cascading annotation strategy:
 
-**Level 1 Assignments (5 Rounds):** * Starts with the highest stringency (High-Res m/z + RT Match + Spectral Match ≥ 6 fragments).
+**Level 1 Assignments (5 Rounds):** 
+* Starts with the highest stringency (High-Res m/z + RT Match + Spectral Match ≥ 6 fragments).
 * Decreases in stringency sequentially to High-Res m/z + RT Match only (using Local Compound Database Search).
 * *Note:* Assigned features are removed from the pool after each round to prevent duplicate matching.
 
 
-**Level 2 Assignment:** * Checks for spectral matches (≥ 6 fragments) *without* retention time matching.
+**Level 2 Assignment:** 
+* Checks for spectral matches (≥ 6 fragments) *without* retention time matching.
 * This accounts for RT drift where strict alignment might fail.
 
 
