@@ -149,11 +149,11 @@ Processed_Data_Folder/
 ```text
 Documents/
 ├── MAPS/
-│   ├── cid_cache.csv
-│   ├── lipids_expanded.tsv
-│   └── *PubChem_Indexed.sqlite*
+    ├── cid_cache.csv
+    └── lipids_expanded.tsv
 ```
 
+* Download cid_cache
 ---
 
 ## Step 4: Running the MAPS App
