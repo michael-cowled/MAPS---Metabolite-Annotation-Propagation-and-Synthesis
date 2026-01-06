@@ -1,4 +1,4 @@
-# MAPS: Metabolomics Annotation Propagation and Synthesis
+# MAPS: Metabolite Annotation Propagation and Synthesis
 
 **MAPS** is an R-based pipeline and Shiny application designed to integrate and standardize metabolomics annotation data. It streamlines the workflow between raw data processing (MZmine) and advanced annotation tools (GNPS2, MS2Query, SIRIUS), providing a unified interface for compound identification and visualization.
 
@@ -105,13 +105,17 @@ Run the processed data through the following tools and generate the required out
 ### SIRIUS 6
 
 * Run the "Write/Export Summary.tsv" function **twice**:
-1. **Standard Run:** Default settings.
+1. **Standard Run:** Default settings, with the Zodiac module turned on.
 2. **Summaries ‘Write/Export Summary.tsv’** - Save results twice: first with the default parameters, and again setting K=100.
 
 * *Required Files:*
 * `canopus_structure_summary.tsv`
 * `formula_identifications.tsv`
 * `structure_identifications_top-100.tsv`
+
+*![Sirius](Images/sirius.png)*
+
+*Figure 2: Ensure that the Zodiac module is selected when running SIRIUS.*
 
 
 
