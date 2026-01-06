@@ -204,8 +204,8 @@ MAPS assigns confidence levels based on the strength of the match:
 
 * **Level 1:** Authentic Standard (requires MS/MS and retention time match).
 * **Level 2:** MS/MS spectral library match.
-* **Level 3:** Analogue to a Level 1 or 2 compound, or an *in silico* match.
-* **Level 4:** Compound Class assignment.
+* **Level 3:** Analogue (via spectral matching in MS2Query or propagation of a Level 1 or 2 compound), or an *in silico* spectral library match (CSI:FingerID).
+* **Level 4:** Compound class assignment.
 * **Level 5:** Formula or HRMS (High-Resolution Mass Spectrometry) only.
 
 ### Primary Output: `final-annotation-df.csv`
