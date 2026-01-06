@@ -148,12 +148,12 @@ Processed_Data_Folder/
 
 ```text
 Documents/
-├── MAPS/
+└── MAPS/
     ├── cid_cache.csv
     └── lipids_expanded.tsv
 ```
 
-* Download cid_cache
+* Download cid_cache.csv and lipids_expanded.zip from the [Additional-Files](https://github.com/michael-cowled/MAPS---Metabolite-Annotation-Propagation-and-Synthesis/tree/main/Additional-Files) folder.
 ---
 
 ## Step 4: Running the MAPS App
