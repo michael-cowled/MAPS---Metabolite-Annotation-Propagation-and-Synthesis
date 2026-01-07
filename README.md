@@ -37,7 +37,7 @@ Before running the MAPS pipeline, ensure the following tools are installed:
 * **[SIRIUS 6](https://bio.informatik.uni-jena.de/software/sirius/):** For formula and structure identification.
 * **[MS2Query](https://github.com/iomega/ms2query):** Python-based tool for spectral library searching. Note: This must be installed and run via an Anaconda prompt (Python 3.7+ environment recommended).
 * **[Cytoscape](https://cytoscape.org/download.html):** Network visualization tool.
-* **[R (v4.32+)](https://cran.r-project.org/bin/windows/base/old/4.3.2/):** Required to run the Shiny application.
+* **[R](https://cran.r-project.org/bin/windows/base/old/4.3.2/) (v4.32+):** Required to run the Shiny application.
 * **[R Studio](https://posit.co/download/rstudio-desktop/):** Required to run the Shiny application.
 
 ---
