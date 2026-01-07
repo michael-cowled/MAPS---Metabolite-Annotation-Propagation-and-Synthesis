@@ -158,13 +158,13 @@ Documents/
 
 3. Optional creation of a locally indexed version of PubChem
 
-> 1.	Download the 'CID-HMDB' and 'build_pubchem_db.py' files and add to an empty folder.
+> 1.	Download the 'CID-HMDB' and 'build_pubchem_db.py' files from the [Scripts](https://github.com/michael-cowled/MAPS---Metabolite-Annotation-Propagation-and-Synthesis/tree/main/Scripts/Creating_a_local_database_of_PubChem) folder and add to an empty folder.
 > 2.	Using your favourite FTP transfer software (e.g. Filezilla), connect to ftp.ncbi.nlm.nih.gov (no password required).
 > 3.	Navigate to Pubchem/Compound/Extras and download the following:
->       | `CID-Title.gz` |
->   	| `CID-IUPAC.gz` |
->   	| `CID-IUPAC.gz` |
->   	| `CID-SMILES.gz` |
+>        `CID-Title.gz` 
+>   	 `CID-IUPAC.gz` 
+>   	 `CID-IUPAC.gz` 
+>   	 `CID-SMILES.gz` 
 > 5.	Extract all files and place in the same folder as 'build_pubchem_db.py'
 > 6.	Open Anaconda Prompt (install if you don’t have it already).
 > 7.	In the Anaconda Prompt, change working directory to the folder containing the PubChem files and 'build_pubchem_db.py' using the command “cd FOLDER_NAME”
