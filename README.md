@@ -154,7 +154,6 @@ Documents/
 ```
 
 * Download cid_cache.csv and lipids_expanded.zip from the [Additional-Files](https://github.com/michael-cowled/MAPS---Metabolite-Annotation-Propagation-and-Synthesis/tree/main/Additional-Files) folder.
----
 
 3. Optional creation of a locally indexed version of PubChem
 
@@ -177,6 +176,7 @@ python build_pubchem_db.py
 ```
 > 10.	Monitor RAM usage and resist the urge to terminate early (even if it seems it is finished) as this can lead to a corrupted or un-indexed database. Typically, this will take several hours to complete.
 
+---
 
 ## Step 4: Running the MAPS App
 
