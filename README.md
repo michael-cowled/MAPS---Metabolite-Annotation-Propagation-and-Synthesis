@@ -159,9 +159,9 @@ Documents/
 3. Optional creation of a locally indexed version of PubChem
 
 > 1.	Download the CID-HMDB and build_pubchem_db.py files and add to an empty folder.
-2.	Using your favourite FTP transfer software (e.g. Filezilla), connect to ftp.ncbi.nlm.nih.gov (no password required).
-3.	Navigate to Pubchem/Compound/Extras and download the following:
-•	CID-Title.gz
+> 2.	Using your favourite FTP transfer software (e.g. Filezilla), connect to ftp.ncbi.nlm.nih.gov (no password required).
+> 3.	Navigate to Pubchem/Compound/Extras and download the following:
+> •	CID-Title.gz
 •	CID-IUPAC.gz
 •	CID-Mass.gz
 •	CID-SMILES.gz
