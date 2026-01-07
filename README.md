@@ -167,9 +167,15 @@ Documents/
 >   	 `CID-SMILES.gz` 
 > 5.	Extract all files and place in the same folder as 'build_pubchem_db.py'
 > 6.	Open Anaconda Prompt (install if you don’t have it already).
-> 7.	In the Anaconda Prompt, change working directory to the folder containing the PubChem files and 'build_pubchem_db.py' using the command “cd FOLDER_NAME”
-> 8.	In the Anaconda Prompt, execute the script using: python build_pubchem_db.py 
-> 9.	Monitor RAM usage and resist the urge to terminate early (even if it seems it is finished) as this can lead to a corrupted or un-indexed database. Typically, this will take several hours to complete.
+> 7.	In the Anaconda Prompt, change working directory to the folder containing the PubChem files and 'build_pubchem_db.py' using the command:
+```text
+cd FOLDER_NAME
+```
+> 9.	In the Anaconda Prompt, execute the script using:
+```text
+python build_pubchem_db.py
+```
+> 10.	Monitor RAM usage and resist the urge to terminate early (even if it seems it is finished) as this can lead to a corrupted or un-indexed database. Typically, this will take several hours to complete.
 
 
 ## Step 4: Running the MAPS App
