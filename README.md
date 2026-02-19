@@ -146,14 +146,10 @@ Processed_Data_Folder/
 
 ```
 
-2. If performing compound name standardization, ensure the following is set up in a separate MAPS folder within your Documents.
+2. If performing compound name standardization, ensure the following are downloaded and preferrably stored locally.
 
-```text
-Documents/
-└── MAPS/
-    ├── cid_cache.csv
-    └── lipids_expanded.tsv
-```
+* cid_cache.csv
+* lipids_expanded.tsv
 
 * Download cid_cache.csv and lipids_expanded.zip from the [Additional-Files](https://github.com/michael-cowled/MAPS---Metabolite-Annotation-Propagation-and-Synthesis/tree/main/Additional-Files) folder.
 
