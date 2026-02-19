@@ -146,12 +146,7 @@ Processed_Data_Folder/
 
 ```
 
-2. If performing compound name standardization, ensure the following are downloaded and preferrably stored locally.
-
-* cid_cache.csv
-* lipids_expanded.tsv
-
-* Download cid_cache.csv and lipids_expanded.zip from the [Additional-Files](https://github.com/michael-cowled/MAPS---Metabolite-Annotation-Propagation-and-Synthesis/tree/main/Additional-Files) folder.
+2. If performing compound name standardization, ensure 'cid_cache.csv' and 'lipids_expanded.zip' from the [Additional-Files](https://github.com/michael-cowled/MAPS---Metabolite-Annotation-Propagation-and-Synthesis/tree/main/Additional-Files) folder are downloaded and stored locally.
 
 3. Optional creation of a locally indexed version of PubChem
 
