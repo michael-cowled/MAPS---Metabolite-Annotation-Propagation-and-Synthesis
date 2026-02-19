@@ -204,12 +204,17 @@ python build_pubchem_db.py
 
 #### Mandatory Settings
 
-* **Dataset ID:** An arbitrary name for your project/dataset.
-* **Processed data folder:** The full path to the parent folder created in Step 3 (use forward slashes `/`).
-* **GNPS task ID:** The 32-character alphanumeric string from your GNPS2 URL (e.g., found after `task=` in the URL).
-* **PubChem SQLite path:** Path to the local PubChem SQLite database (files and instructions provided in this repo).
-* *If standardization is not required:* Deselect "PubChem standardization" and leave the path as default `""`.
+```text
+**IMPORTANT:** Use forward slashes `/` for all folder or file directories to be compatible.
+```
 
+* **Dataset ID:** An arbitrary name for your project/dataset.
+* **GNPS task ID:** The 32-character alphanumeric string from your GNPS2 URL (e.g., found after `task=` in the URL).
+* **Processed data folder:** The full path to the parent folder created in Step 3 (use forward slashes `/`).
+* **CID Cache CSV path:** The full path to the cid-cache.csv file.
+* **Lipids CSV path:** The full path to the lipids-expanded.csv file.
+* **PubChem SQLite path:** The full path to the local PubChem SQLite database (files and instructions provided in this repo).
+* *If standardization is not required:* Deselect "PubChem standardization" and leave the path as default `""`.
 
 
 #### Acceptance Thresholds
