@@ -207,7 +207,7 @@ python build_pubchem_db.py
 * **PubChem SQLite path:** The full path to the local PubChem SQLite database (files and instructions provided in this repo).
 
 ```text
-If standardization is not required:* Deselect "PubChem standardization" and leave the path as default `""`.
+If standardization is not required:* Deselect "PubChem standardization" and leave the CID Cache, Lipids CSV and Pubxehm SQLite paths as default `""`.
 ```
 
 #### Acceptance Thresholds
