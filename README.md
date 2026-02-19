@@ -4,7 +4,7 @@
 
 ### Citation
 
-The preprint can be found here: [https://chemrxiv.org/doc/7c712023-ff74-475e-a17d-adb1ff038667](https://chemrxiv.org/doc/7c712023-ff74-475e-a17d-adb1ff038667) Please cite this article when using MAPS. 
+The preprint can be found here: [https://chemrxiv.org/doc/7c712023-ff74-475e-a17d-adb1ff038667](https://chemrxiv.org/doc/7c712023-ff74-475e-a17d-adb1ff038667). Please cite this article when using MAPS. 
 
 ---
 
