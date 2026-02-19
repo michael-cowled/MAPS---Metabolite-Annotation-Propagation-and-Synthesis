@@ -214,8 +214,10 @@ python build_pubchem_db.py
 * **CID Cache CSV path:** The full path to the cid-cache.csv file.
 * **Lipids CSV path:** The full path to the lipids-expanded.csv file.
 * **PubChem SQLite path:** The full path to the local PubChem SQLite database (files and instructions provided in this repo).
-* *If standardization is not required:* Deselect "PubChem standardization" and leave the path as default `""`.
 
+```text
+If standardization is not required:* Deselect "PubChem standardization" and leave the path as default `""`.
+```
 
 #### Acceptance Thresholds
 
