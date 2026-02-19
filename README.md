@@ -197,6 +197,7 @@ python build_pubchem_db.py
 
 ```text
 **IMPORTANT:** Use forward slashes `/` for all folder or file directories to be compatible.
+Alternatively, you can edit the USER DEFAULTS within the R script for the app.
 ```
 
 * **Dataset ID:** An arbitrary name for your project/dataset.
