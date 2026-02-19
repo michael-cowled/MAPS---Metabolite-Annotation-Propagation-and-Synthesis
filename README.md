@@ -1,18 +1,10 @@
 # MAPS: Metabolite Annotation Propagation and Synthesis
 
-**MAPS** is an R-based pipeline and Shiny application designed to integrate and standardize metabolomics annotation data. It streamlines the workflow between raw data processing (MZmine) and advanced annotation tools (GNPS2, MS2Query, SIRIUS), providing a unified interface for compound identification and visualization.
-
-*![MAPS Annotation Workflow](Images/Workflow-Image.svg)*
-
-*Figure 1: The MAPS data-processing pipeline.*
-
 ---
 
 ### Citation
 
-If you use MAPS in your work, please cite:
-
-> [Insert Citation Here]
+The preprint can be found here: [https://rdcu.be/c8Hkc](https://chemrxiv.org/doc/7c712023-ff74-475e-a17d-adb1ff038667) Please cite this article when using MAPS. 
 
 ---
 
@@ -25,6 +17,14 @@ If you use MAPS in your work, please cite:
 * [Step 4: Running the MAPS App](https://www.google.com/search?q=%23step-4-running-the-maps-app)
 * [Step 5: Outputs & File Reference](https://www.google.com/search?q=%23step-5-outputs--file-reference)
 * [Glossary of Tools](https://www.google.com/search?q=%23glossary-of-tools)
+
+---
+
+**MAPS** is an R-based pipeline and Shiny application designed to integrate and standardize metabolomics annotation data. It streamlines the workflow between raw data processing (MZmine) and advanced annotation tools (GNPS2, MS2Query, SIRIUS), providing a unified interface for compound identification and visualization.
+
+*![MAPS Annotation Workflow](Images/Workflow-Image.svg)*
+
+*Figure 1: The MAPS data-processing pipeline.*
 
 ---
 
