@@ -8,6 +8,12 @@ The preprint can be found here: [https://chemrxiv.org/doc/7c712023-ff74-475e-a17
 
 ---
 
+### Known Bugs
+
+1. The plots tab appears blank. Plots will still be generated in R Studio and automatically saved to the designated processed folder.
+
+---
+
 ## Table of Contents
 
 * [Prerequisites](https://www.google.com/search?q=%23prerequisites)
