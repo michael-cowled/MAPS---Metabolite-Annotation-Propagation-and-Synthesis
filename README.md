@@ -11,6 +11,7 @@ The preprint can be found here: [https://chemrxiv.org/doc/7c712023-ff74-475e-a17
 ### Known Bugs
 
 1. The plots tab appears blank. Plots will still be generated in R Studio and automatically saved to the designated processed folder.
+2. Selecting MZmine level 2 annotations without level 1 subclasses comes into an error. Selecting or deselecting both still work.
 
 ---
 
