@@ -10,12 +10,14 @@ The preprint can be found here: [https://chemrxiv.org/doc/7c712023-ff74-475e-a17
 
 ### Known Bugs
 
-1. The plots tab appears blank. Plots will still be generated in R Studio and automatically saved to the designated processed folder.
+1. The plots tab appears blank. 
+   **Temporary Fix: Plots will still be generated in R Studio and automatically saved to the designated processed folder.**
 2. Frag0 annotations are currently not being incorporated.
    **Temporary Fix: Change the method column from 'simple_compound_db_annotation' to 'spectral_library_annotation'. Will be implemented in the next update.**
-3. Selecting MZmine level 2 annotations without level 1 subclasses comes into an error. Selecting or deselecting both still work.
-4. . Sometimes the data_annotations.csv file is not recognised.
-   **Temporary Fix: You can rename to data_annotations_frag6.csv to fix.**
+3. Selecting MZmine level 2 annotations without level 1 subclasses comes into an error.
+   **Temporary Fix: Selecting or deselecting both options still work. If selecting both, make sure all five files are in the mzmine subfolder (i.e. data_annotations_frag0.csv, lv2-annotations.csv, etc.)**
+4. Sometimes the data_annotations.csv file is not recognised.
+   **Temporary Fix: You can rename to data_annotations_frag6.csv to fix. Will be implemented in the next update.**
 
 ---
 
