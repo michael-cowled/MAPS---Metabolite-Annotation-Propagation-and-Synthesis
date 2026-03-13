@@ -128,12 +128,12 @@ Run the processed data through the following tools and generate the required out
 3. **Summaries ‘Write/Export Summary.tsv’** - Save results twice: first with the default parameters, and again setting K=100.
 
 * *Required Files:*
-* `canopus_structure_summary.tsv`
-* `formula_identifications.tsv`
-* `structure_identifications_top-100.tsv`
+`canopus_structure_summary.tsv`
+`formula_identifications.tsv`
+`structure_identifications_top-100.tsv`
 
 * *Optional Files:*
-* `denovo_structure_identifications_top-100.tsv`
+`denovo_structure_identifications_top-100.tsv`
 
 *![Sirius](Images/sirius.png)*
 
