@@ -1,4 +1,4 @@
-# app.R --- MAPS Shiny Application (Full Pipeline, Production-Grade)
+# app.R --- MAPS Shiny Application v1.0.1
 
 # ---------------------------------------------------------------------------
 # USER DEFAULTS
@@ -272,3 +272,4 @@ server <- function(input, output, session) {
 }
 
 shinyApp(ui, server)
+
