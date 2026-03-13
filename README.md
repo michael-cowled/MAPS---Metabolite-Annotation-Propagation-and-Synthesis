@@ -123,7 +123,7 @@ Run the processed data through the following tools and generate the required out
 ### SIRIUS 6
 
 * Run the "Write/Export Summary.tsv" function **twice**:
-1. **Standard Run:** Default settings, with the **Zodiac** module turned on.
+1. **Standard Run:** Default settings, with the **Zodiac** module turned on. [Optional: Turn on MSNovelist]
 2. **Summaries ‘Write/Export Summary.tsv’** - Save results twice: first with the default parameters, and again setting K=100.
 
 * *Required Files:*
@@ -240,6 +240,7 @@ Adjust these based on your instrumentation resolution. Default values are optimi
 * **Generate & save plots:** Generates basic visualizations comparing annotation counts and compound classes.
 * **PubChem standardization:** Highly recommended. Standardizes names to PubChem entries to reduce redundancy across different tools.
 * **Sublevel prioritizations:** Enable if using the detailed Level 1/2 subclass matching from the provided MZmine batch.
+* **MSNovelist:** Turned off by default. Enable if used MSNovelist module in SIRIUS.
 
 ---
 
