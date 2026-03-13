@@ -132,6 +132,9 @@ Run the processed data through the following tools and generate the required out
 * `formula_identifications.tsv`
 * `structure_identifications_top-100.tsv`
 
+* *Optional Files:*
+* `denovo_structure_identifications_top-100.tsv`
+
 *![Sirius](Images/sirius.png)*
 
 *Figure 3: Ensure that the Zodiac module is selected when running SIRIUS.*
