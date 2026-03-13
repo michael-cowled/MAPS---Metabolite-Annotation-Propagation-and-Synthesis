@@ -1,4 +1,4 @@
-# app.R --- MAPS Shiny Application v1.02
+# app.R --- MAPS Shiny Application v1.0.2
 
 # ---------------------------------------------------------------------------
 # USER DEFAULTS
