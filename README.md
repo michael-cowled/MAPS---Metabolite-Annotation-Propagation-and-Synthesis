@@ -20,6 +20,7 @@ The preprint can be found here: [https://chemrxiv.org/doc/7c712023-ff74-475e-a17
 4. Fixed a bug where Level 1 annotations with 0 fragments were not being incorporated at all due to MZmine classifying these differently.
 5. Fixed a bug where selecting only MZmine level 2 annotations without level 1 subclasses or vice versa would result in an error.
 6. Fixed a bug where the data_annotations.csv file was sometimes not recognised.
+7. Fixed a bug where it was not possible to run MAPS without access to a Unimelb proprietary storage drive.
 
 ---
 
