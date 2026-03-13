@@ -12,12 +12,14 @@ The preprint can be found here: [https://chemrxiv.org/doc/7c712023-ff74-475e-a17
 
 1. The plots tab appears blank.
    **Temporary Fix: Plots will still be generated in R Studio and automatically saved to the designated processed folder.**
-4. Frag0 annotations are currently not being incorporated.
-   **Temporary Fix: Change the method column from 'simple_compound_db_annotation' to 'spectral_library_annotation'. Will be implemented in the next update.**
-5. Selecting MZmine level 2 annotations without level 1 subclasses comes into an error.
-   **Temporary Fix: Selecting or deselecting both options still work. If selecting both, make sure all five files are in the mzmine subfolder (i.e. data_annotations_frag0.csv, lv2-annotations.csv, etc.)**
-6. Sometimes the data_annotations.csv file is not recognised.
-   **Temporary Fix: You can rename to data_annotations_frag6.csv to fix. Will be implemented in the next update.**
+
+### What's New in v1.0.2?
+1. Now supports MSNovelist annotations. No need to do anything different when saving, just save to the sirius subfolder as normal, and check the MSNovelist option (off by default) in MAPS.
+2. A log of the paramaters selected is now saved during the MAPS analysis.
+3. Standardisation failures now terminate MAPS, ensuring you don't propagate unstandardised annotations (if that was your intention).
+4. Fixed a bug where Level 1 annotations with 0 fragments were not being incorporated at all due to MZmine classifying these differently.
+5. Fixed a bug where selecting only MZmine level 2 annotations without level 1 subclasses or vice versa would result in an error.
+6. Fixed a bug where the data_annotations.csv file was sometimes not recognised.
 
 ---
 
