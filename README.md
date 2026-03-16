@@ -13,15 +13,6 @@ The preprint can be found here: [https://chemrxiv.org/doc/7c712023-ff74-475e-a17
 1. The plots tab appears blank.
    **Temporary Fix: Plots will still be generated in R Studio and automatically saved to the designated processed folder.**
 
-### What's New in v1.0.2?
-1. Now supports MSNovelist annotations. No need to do anything different when saving, just save to the sirius subfolder as normal, and check the MSNovelist option (off by default) in MAPS.
-2. A log of the paramaters selected is now saved during the MAPS analysis.
-3. Standardisation failures now terminate MAPS, ensuring you don't propagate unstandardised annotations (if that was your intention).
-4. Fixed a bug where Level 1 annotations with 0 fragments were not being incorporated at all due to MZmine classifying these differently.
-5. Fixed a bug where selecting only MZmine level 2 annotations without level 1 subclasses or vice versa would result in an error.
-6. Fixed a bug where the data_annotations.csv file was sometimes not recognised.
-7. Fixed a bug where it was not possible to run MAPS without access to a Unimelb proprietary storage drive.
-
 ### What's New in v1.0.3?
 1. Fixed a bug causing MAPS to crash when there were no propagated features.
 2. Fixed a bug where columns imported from SIRIUS files were incorrect if using a different version of SIRIUS.
