@@ -24,7 +24,8 @@ The preprint can be found here: [https://chemrxiv.org/doc/7c712023-ff74-475e-a17
 
 ### What's New in v1.0.3?
 1. Fixed a bug where columns imported from SIRIUS files were incorrect if using a different version of SIRIUS.
-2. Added classyfire Superclass columns.
+2. For futureproofing, column indexing was replaced by names rather than numbers for ms2query and gnps.
+3. Added classyfire Superclass columns.
 
 ---
 
