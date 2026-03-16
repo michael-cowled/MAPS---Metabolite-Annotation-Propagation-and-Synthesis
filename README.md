@@ -23,10 +23,11 @@ The preprint can be found here: [https://chemrxiv.org/doc/7c712023-ff74-475e-a17
 7. Fixed a bug where it was not possible to run MAPS without access to a Unimelb proprietary storage drive.
 
 ### What's New in v1.0.3?
-1. Fixed a bug where columns imported from SIRIUS files were incorrect if using a different version of SIRIUS.
-2. For futureproofing, column indexing was replaced by names rather than numbers for ms2query and gnps.
-3. Added classyfire Superclass columns.
-4. Added a save of the cid_cache csv file just prior to pulling standardised names from the database in the event that there is a connection error or other fatal error, making subsequent rerunning much faster.
+1. Fixed a bug causing MAPS to crash when there were no propagated features.
+2. Fixed a bug where columns imported from SIRIUS files were incorrect if using a different version of SIRIUS.
+3. For futureproofing, column indexing was replaced by names rather than numbers for ms2query and gnps.
+4. Added classyfire Superclass columns.
+5. Added a save of the cid_cache csv file just prior to pulling standardised names from the database in the event that there is a connection error or other fatal error, making subsequent rerunning much faster.
 
 ---
 
