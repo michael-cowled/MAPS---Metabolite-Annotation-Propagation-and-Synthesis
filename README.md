@@ -22,6 +22,10 @@ The preprint can be found here: [https://chemrxiv.org/doc/7c712023-ff74-475e-a17
 6. Fixed a bug where the data_annotations.csv file was sometimes not recognised.
 7. Fixed a bug where it was not possible to run MAPS without access to a Unimelb proprietary storage drive.
 
+### What's New in v1.0.3?
+1. Fixed a bug where columns imported from SIRIUS files were incorrect if using a different version of SIRIUS.
+2. Added classyfire Superclass columns.
+
 ---
 
 ## Table of Contents
