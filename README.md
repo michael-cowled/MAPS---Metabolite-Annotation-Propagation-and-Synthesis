@@ -17,7 +17,8 @@ The preprint can be found here: [https://chemrxiv.org/doc/7c712023-ff74-475e-a17
 
 ### What's New in v1.0.4?
 1. Reprioritised annotations for sources at levels 3 and 4. The order of priority is now: GNPS in silico > CSI:FingerID > MS2Query analogues > MSNovelist > Canopus
-2. Fixed a bug where MS2Query analogues were being assigned as annotation.type = NA and confidence.level = NA.
+2. The speed of PubChem standardizationg for CSI:FingerID annotations significantly increased due to retrieval of CID from processed files.
+3. Fixed a bug where MS2Query analogues were being assigned as annotation.type = NA and confidence.level = NA.
 
 ---
 
