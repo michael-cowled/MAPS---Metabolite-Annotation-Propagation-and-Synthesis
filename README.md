@@ -12,7 +12,7 @@ The preprint can be found here: [https://chemrxiv.org/doc/7c712023-ff74-475e-a17
 
 1. The plots tab appears blank.
    **Temporary Fix: Plots will still be generated in R Studio and automatically saved to the designated processed folder.**
-2. If using MSNovelist, the score for this is often present for Propagated analogues, even though these are meaningless here.
+2. The confidence score associated with propagated analogues is not correct and belongs to any previous annotation (often MSNovelist) that was overwritten.
 3. MS2Query analogues are not being assigned properly.
 
 ### What's New in v1.0.4?
