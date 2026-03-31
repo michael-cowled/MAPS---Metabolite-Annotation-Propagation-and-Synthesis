@@ -15,10 +15,13 @@ The preprint can be found here: [https://chemrxiv.org/doc/7c712023-ff74-475e-a17
 2. The confidence score associated with propagated analogues is not correct and belongs to any previous annotation (often MSNovelist) that was overwritten.
 3. MS2Query analogues are not being assigned properly.
 
-### What's New in v1.0.4?
-1. Reprioritised annotations for sources at levels 3 and 4. The order of priority is now: GNPS in silico > CSI:FingerID > MS2Query analogues > MSNovelist > Canopus
-2. The speed of PubChem standardizationg for CSI:FingerID annotations significantly increased due to retrieval of CID from processed files.
-3. Fixed a bug where MS2Query analogues were being assigned as annotation.type = NA and confidence.level = NA.
+### What's New in v1.0.5?
+1. Fixed a bug where propagated annotations had an incongruent confidence score associated. This now uses the cosine score of the propagated feature to the known compound. 
+2. Removed Propagated.NPC.Superclass which is no longer used.
+3. Fixed a bug where MS2Query analogues (level 3) were not being included in the final annotation list.
+4. The same modification table used to assign propagated analogue modifications is now used for MS2Query analogues.
+5. Fixed a bug where compound names containing square brackets would be incorrectly tidied, leading to a failure in the PubChem standardization.
+6. PubChem standardization using compound name has been improved.
 
 ---
 
