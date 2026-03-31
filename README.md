@@ -12,8 +12,6 @@ The preprint can be found here: [https://chemrxiv.org/doc/7c712023-ff74-475e-a17
 
 1. The plots tab appears blank.
    **Temporary Fix: Plots will still be generated in R Studio and automatically saved to the designated processed folder.**
-2. The confidence score associated with propagated analogues is not correct and belongs to any previous annotation (often MSNovelist) that was overwritten.
-3. MS2Query analogues are not being assigned properly.
 
 ### What's New in v1.0.5?
 1. Fixed a bug where propagated annotations had an incongruent confidence score associated. This now uses the cosine score of the propagated feature to the known compound. 
