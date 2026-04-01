@@ -6,9 +6,9 @@
 DEFAULT_DATASET_ID <- ""
 DEFAULT_GNPS_TASK  <- ""
 DEFAULT_FOLDER     <- ""
-DEFAULT_CACHE      <- "~/MAPS/cid_cache.csv"
-DEFAULT_LIPIDS     <- "Y:/MA_BPA_Microbiome/Databases/PubChem/lipids_expanded.tsv"
-DEFAULT_CID_DB     <- "Y:/MA_BPA_Microbiome/Databases/PubChem/PubChem_Indexed.sqlite"
+DEFAULT_CACHE      <- ""
+DEFAULT_LIPIDS     <- ""
+DEFAULT_CID_DB     <- ""
 
 # ---------------------------------------------------------------------------
 # Dependency Management (Sequential: CRAN first, then GitHub)
