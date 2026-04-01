@@ -14,6 +14,7 @@ The preprint can be found here: [https://chemrxiv.org/doc/7c712023-ff74-475e-a17
    **Temporary Fix: Plots will still be generated in R Studio and automatically saved to the designated processed folder.**
 
 ### What's New in v1.0.6?
+_NOTE: v1.0.6. of the R Shiny App is required to be used instead of previous versions._
 1. Added an API based version of compound name standardisation as an alternative to creating a local version of PubChem. Also acts as a backup standardisation in the event that the local database is not up to date with the newest CIDs. To enable this mode, click the following checkboxes in the app:
 PubChem standardisation = TRUE, Local PubChem DB Lookup = FALSE, API PubChem Enrichment = TRUE.
 2. Added an option for a quick cache based standardisation. This option does not ping the PubChem API to retrieve CID (typically pass 1 in addition to the cache retrieval which is not turned off here). Pass 2 is local pubchem DB retrieval, typically turned off. And Pass 3 is API retrieval of standardised names given a cache or API-retrieved CID in Pass 1. To enable this mode, click the following checkboxes in the app:
