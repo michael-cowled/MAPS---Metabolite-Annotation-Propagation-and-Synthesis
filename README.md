@@ -13,14 +13,13 @@ The preprint can be found here: [https://chemrxiv.org/doc/7c712023-ff74-475e-a17
 1. The plots tab appears blank.
    **Temporary Fix: Plots will still be generated in R Studio and automatically saved to the designated processed folder.**
 
-### What's New in v1.0.5?
-1. Fixed a bug where propagated annotations had an incongruent confidence score associated. This now uses the cosine score of the propagated feature to the known compound. 
-2. Removed Propagated.NPC.Superclass which is no longer used.
-3. Fixed a bug where MS2Query analogues (level 3) were not being included in the final annotation list.
-4. The same modification table used to assign propagated analogue modifications is now used for MS2Query analogues.
-5. Fixed a bug where compound names containing square brackets would be incorrectly tidied, leading to a failure in the PubChem standardization.
-6. PubChem standardization using compound name has been improved.
-7. Fixed a bug that caused the app to crash if no ion identities were identified when processing in MZmine.
+### What's New in v1.0.6?
+1. Added an API based version of compound name standardisation as an alternative to creating a local version of PubChem. Also acts as a backup standardisation in the event that the local database is not up to date with the newest CIDs. To enable this mode, click the following checkboxes in the app:
+PubChem standardisation = TRUE, Local PubChem DB Lookup = FALSE, API PubChem Enrichment = TRUE.
+2. Added an option for a quick cache based standardisation. This option does not ping the PubChem API to retrieve CID (typically pass 1 in addition to the cache retrieval which is not turned off here). Pass 2 is local pubchem DB retrieval, typically turned off. And Pass 3 is API retrieval of standardised names given a cache or API-retrieved CID in Pass 1. To enable this mode, click the following checkboxes in the app:
+PubChem standardisation = TRUE, Local PubChem DB Lookup = TRUE, API PubChem Enrichment = FALSE.
+3. Note: The standard method of performing complete standardisation involves setting all to TRUE.
+4. A partial standardisation based on the logic of #2 has now been implemented for MS2Query analogues and MSNovelist annotations (i.e. retrieving a quick cache-derived standardisation without going through a complete list of analogues).
 
 ---
 
