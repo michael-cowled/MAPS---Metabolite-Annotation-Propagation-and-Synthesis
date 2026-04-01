@@ -20,6 +20,7 @@ The preprint can be found here: [https://chemrxiv.org/doc/7c712023-ff74-475e-a17
 4. The same modification table used to assign propagated analogue modifications is now used for MS2Query analogues.
 5. Fixed a bug where compound names containing square brackets would be incorrectly tidied, leading to a failure in the PubChem standardization.
 6. PubChem standardization using compound name has been improved.
+7. Fixed a bug that caused the app to crash if no ion identities were identified when processing in MZmine.
 
 ---
 
