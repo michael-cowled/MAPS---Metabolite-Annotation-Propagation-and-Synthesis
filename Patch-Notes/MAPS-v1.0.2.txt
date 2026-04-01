@@ -1,6 +1,6 @@
 What's New in v1.0.2 MAPS.Package?
 
-Shiny App: Use v1.02+ for use.
+Shiny App: Use v1.02 for use.
 
 Now supports MSNovelist annotations. No need to do anything different when saving, just save to the sirius subfolder as normal, and check the MSNovelist option (off by default) in MAPS.
 A log of the paramaters selected is now saved during the MAPS analysis.
