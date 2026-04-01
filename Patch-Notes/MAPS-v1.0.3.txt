@@ -1,6 +1,6 @@
 What's New in v1.0.3 MAPS.Package?
 
-Shiny App: Use v1.02+ for use.
+Shiny App: Use v1.02 for use.
 
 1. Fixed a bug causing MAPS to crash when there were no propagated features.
 2. Fixed a bug where columns imported from SIRIUS files were incorrect if using a different version of SIRIUS.
