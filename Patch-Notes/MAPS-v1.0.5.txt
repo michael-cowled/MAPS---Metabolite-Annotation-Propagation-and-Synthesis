@@ -1,0 +1,11 @@
+What's New in v1.0.5 MAPS.Package?
+
+Shiny App: Use v1.02 for use.
+
+1. Fixed a bug where propagated annotations had an incongruent confidence score associated. This now uses the cosine score of the propagated feature to the known compound. 
+2. Removed Propagated.NPC.Superclass which is no longer used.
+3. Fixed a bug where MS2Query analogues (level 3) were not being included in the final annotation list.
+4. The same modification table used to assign propagated analogue modifications is now used for MS2Query analogues.
+5. Fixed a bug where compound names containing square brackets would be incorrectly tidied, leading to a failure in the PubChem standardization.
+6. PubChem standardization using compound name has been improved.
+7. Fixed a bug that caused the app to crash if no ion identities were identified when processing in MZmine.
