@@ -218,6 +218,7 @@ python build_pubchem_db.py
 ```text
 **IMPORTANT:** Use forward slashes `/` for all folder or file directories to be compatible.
 Alternatively, you can edit the USER DEFAULTS within the R script for the app.
+**IMPORTANT:** Using the Onedrive version of the Documents folder e.g. C:/Users/mcowled/Documents can run into issues, so better to use the standard documents folder, often represented by "~/".
 ```
 
 * **Dataset ID:** An arbitrary name for your project/dataset.
