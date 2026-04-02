@@ -270,7 +270,20 @@ MAPS assigns confidence levels based on the strength of the match:
 
 MAPS assigns annotations according to a prioritisation system within each confidence level, with annotations derived from higher ranking annotation tools removed from the pool of candidates in lower ranking tools.
 
-1. 
+1. Level 1 in MZmine: RT + m/z + 6 matching MS/MS fragments
+2. Level 1 in MZmine: RT + m/z + 4 matching MS/MS fragments
+3. Level 1 in MZmine: RT + m/z + 2 matching MS/MS fragments
+4. Level 1 in MZmine: RT + m/z + 0 matching MS/MS fragments
+5. Level 2 in MZmine: m/z + 6 matching MS/MS fragments
+6. Level 2 in GNPS: Spectral match to Gold or Silver quality spectrum
+7. Level 2 in MS2Query: Spectral match in MS2Query (m/z is an exact match)
+8. Level 2 in GNPS: Spectral match to Bronze quality spectrum
+9. Level 3 in GNPS: Spectral match to In silico library spectrum
+10. Level 3 in SIRIUS: Spectral match to CSI:FingerID spectrum
+11. Level 3 in MS2Query: Spectral match in MS2Query (but m/z is not exact, i.e. an analog)
+12. Level 3 in SIRIUS (optional): De novo prediction using MSNovelist.
+13. Level 4 in SIRIUS: Compound classsification in CANOPUS
+14. Level 5 in SIRIUS (or unassigned): Formulae assigned in ZODIAC.
 
 ### Primary Output: `final-annotation-df.csv`
 
