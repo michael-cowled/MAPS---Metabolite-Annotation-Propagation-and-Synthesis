@@ -244,7 +244,10 @@ Adjust these based on your instrumentation resolution. Default values are optimi
 
 * **Generate & save plots:** Generates basic visualizations comparing annotation counts and compound classes.
 * **PubChem standardization:** Highly recommended. Standardizes names to PubChem entries to reduce redundancy across different tools.
-* **Sublevel prioritizations:** Enable if using the detailed Level 1/2 subclass matching from the provided MZmine batch.
+* **Local PubChem DB Lookup:** Turn off if wanting to perform standardization without a local database. Turning this on is much quicker than the API call and retrieves additional compound metadata such as formulae and monoisotopic mass.
+* **API PubChem Enrichment:** Turn off if wanting to perform a cache-only standardisation (offline mode). Turning on is the standard approach as it will help retrieve CID from PubChem in the absense of a recording in the cache. It will also retrieve compound name from PubChem if absent from the local DB or if this feature is turned off.
+* **Use Level 1 subclasses:** Enable if using the detailed Level 1 subclass matching from the provided MZmine batch.
+* **Use MZmine Level 2 annotations:** Enable is matching using spectral libaries in MZmine.
 * **MSNovelist:** Turned off by default. Enable if used MSNovelist module in SIRIUS.
 
 ---
@@ -262,6 +265,12 @@ MAPS assigns confidence levels based on the strength of the match:
 * **Level 3:** Analogue (via spectral matching in MS2Query or propagation of a Level 1 or 2 compound), or an *in silico* spectral library match (CSI:FingerID).
 * **Level 4:** Compound class assignment.
 * **Level 5:** Formula or HRMS (High-Resolution Mass Spectrometry) only.
+
+## Annotation Confidence Levels
+
+MAPS assigns annotations according to a prioritisation system within each confidence level, with annotations derived from higher ranking annotation tools removed from the pool of candidates in lower ranking tools.
+
+1. 
 
 ### Primary Output: `final-annotation-df.csv`
 
