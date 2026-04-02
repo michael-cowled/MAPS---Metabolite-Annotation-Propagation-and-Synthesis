@@ -283,7 +283,8 @@ MAPS assigns annotations according to a prioritisation system within each confid
 11. Level 3 in MS2Query: Spectral match in MS2Query (but m/z is not exact, i.e. an analog)
 12. Level 3 in SIRIUS (optional): De novo prediction using MSNovelist.
 13. Level 4 in SIRIUS: Compound classsification in CANOPUS
-14. Level 5 in SIRIUS (or unassigned): Formulae assigned in ZODIAC.
+14. Level 5 in SIRIUS: Formulae assigned in ZODIAC.
+15. Level 5: Unassigned.
 
 ### Primary Output: `final-annotation-df.csv`
 
